@@ -33,6 +33,52 @@
   --color-red-900: #59343b;
 }
 
+html {
+  font-size: 62.5%;
+}
+
+@layer base {
+  body {
+    letter-spacing: -2.5%;
+  }
+
+  label,
+  input {
+    display: block;
+  }
+
+  input {
+    outline: none;
+    background-color: transparent;
+  }
+}
+
+@layer utilities {
+  .lol-icon-original {
+    background-image: url('/images/lol_icon_original.png');
+    background-repeat: no-repeat;
+  }
+  #__next {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .layout-container {
+    background: var(--color-primary-500);
+  }
+  .content-wrapper {
+    width: 108rem;
+    margin: auto;
+  }
+  .hidden-logo {
+    clip: rect(0px, 0px, 0px, 0px);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+  }
+}
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

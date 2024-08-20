@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import ReactQueryProviders from '@/hook/query/useReactQuery';
+import Header from '@/components/common/header/Header';
 
 const AppleSDGOdicNeo = localFont({
   src: [
@@ -25,8 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={AppleSDGOdicNeo.className}>
-      <body>
+      <body className="text-color-gray-900">
         <div id="__next">
+          <Header />
           <ReactQueryProviders>{children}</ReactQueryProviders>
         </div>
       </body>
