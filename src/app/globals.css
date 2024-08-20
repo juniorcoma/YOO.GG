@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary-100: #ecf2ff;
+  --color-primary-200: #d5e3ff;
+  --color-primary-300: #b3cdff;
+  --color-primary-400: #81acff;
+  --color-primary-500: #5383e8;
+  --color-primary-600: #4171d6;
+  --color-primary-700: #2f5ec0;
+  --color-primary-800: #2f436e;
+  --color-primary-900: #28344e;
+  --color-gray-00: #fff;
+  --color-gray-100: #f7f7f9;
+  --color-gray-200: #ebeef1;
+  --color-gray-300: #c3cbd1;
+  --color-gray-400: #9aa4af;
+  --color-gray-500: #758592;
+  --color-gray-600: #57646f;
+  --color-gray-700: #44515c;
+  --color-gray-800: #34414d;
+  --color-gray-900: #202d37;
+  --color-red-100: #fff1f3;
+  --color-red-200: #ffd8d9;
+  --color-red-300: #ffbac3;
+  --color-red-400: #ff6c81;
+  --color-red-500: #e84057;
+  --color-red-600: #d31a45;
+  --color-red-700: #b61337;
+  --color-red-800: #703c47;
+  --color-red-900: #59343b;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
