@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="layout-container">
-      <div className="content-wrapper">
+    <div className="layout-container home">
+      <div className="content-wrapper ">
         <h1 className="hidden-logo">YOO.GG</h1>
         <div className="mt-[6.4rem] mb-[4.8rem]">
           <Image
@@ -18,8 +18,11 @@ export default function Home() {
         <div className="w-[80rem] m-auto">
           <SummonerSearchForm />
         </div>
-        <div className="flex flex-col py-[6.4rem]">
-          <div></div>
+        <div className="flex flex-col py-[6.4rem] gap-[3.2rem]">
+          <div className="flex gap-[3.2rem] h-[30rem]">
+            <div className="content-box w-[33rem]"></div>
+            <div className="content-box flex-1"></div>
+          </div>
           <div></div>
         </div>
       </div>

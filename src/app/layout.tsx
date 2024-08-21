@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import ReactQueryProviders from '@/hook/query/useReactQuery';
 import Header from '@/components/common/header/Header';
+import Footer from '@/components/common/footer/Footer';
 
 const AppleSDGOdicNeo = localFont({
   src: [
@@ -30,6 +31,7 @@ export default function RootLayout({
         <div id="__next">
           <Header />
           <ReactQueryProviders>{children}</ReactQueryProviders>
+          <Footer />
         </div>
       </body>
     </html>
