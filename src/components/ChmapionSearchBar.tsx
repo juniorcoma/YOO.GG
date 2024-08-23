@@ -48,7 +48,7 @@ export default function ChampionSearchBar({ championData }: ChampionSearchBarPro
                 {matchList.map((champ: any) => (
                   <li key={champ.key}>
                     <Link
-                      href={'/'}
+                      href={`/champions/${champ.id}/info`}
                       className="px-[1.2rem] py-[0.8rem] border-b border-color-gray-300 flex gap-[1.6rem] items-center hover:bg-color-gray-100"
                     >
                       <Image

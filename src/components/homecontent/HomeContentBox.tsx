@@ -1,7 +1,7 @@
 interface HomeContentBoxProps {
   children: React.ReactNode;
   titleText: string;
-  css: string;
+  css?: string;
 }
 
 export default function HomeContentBox({ children, titleText, css }: HomeContentBoxProps) {

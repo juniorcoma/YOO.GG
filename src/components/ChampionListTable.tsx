@@ -44,7 +44,7 @@ export default function ChampionListTable({ championData, currentPosition }: Cha
           >
             <td className="py-[1.2rem] pl-[1.6rem] text-color-gray-400">{index + 1}</td>
             <td>
-              <Link href={`/champions/${champ.id.toLowerCase()}/info`} className="flex gap-[0.8rem] items-center">
+              <Link href={`/champions/${champ.id}/info`} className="flex gap-[0.8rem] items-center">
                 <div className="overflow-hidden rounded-[0.4rem]">
                   <Image
                     src={`${STATIC_DATA_HOST.CHAMPION_SQUARE_IMG}${champ.image.full}`}
