@@ -79,7 +79,7 @@ function filterPositionChampion(
   else return championData.filter((champ: any) => champ.position === currentPosition);
 }
 
-function PositionIconRender({ position }: { position: ChampPositionType }) {
+export function PositionIconRender({ position }: { position: ChampPositionType }) {
   switch (position) {
     case 'top':
       return <PositionTop />;

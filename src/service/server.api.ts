@@ -15,3 +15,11 @@ export async function getRotationsChampion() {
 
   return resultData;
 }
+
+export async function getChampionDetailData(champname: string) {
+  const { data: champDetailData } = await backendRequest.get(
+    `${SERVER_REQUEST_HOST.CHAMPION_DETAIL_DATA}/${champname}`,
+  );
+
+  return champDetailData;
+}

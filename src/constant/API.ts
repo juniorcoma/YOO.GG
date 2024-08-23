@@ -50,5 +50,6 @@ export const STATIC_DATA_HOST = {
 
 export const SERVER_REQUEST_HOST = {
   CHAMPION_DATA: '/api/v1/riot/lol/champion',
+  CHAMPION_DETAIL_DATA: '/api/v1/riot/lol/champion/detail',
   ROTATIONS_INFO: '/api/v1/riot/lol/rotations',
 };
