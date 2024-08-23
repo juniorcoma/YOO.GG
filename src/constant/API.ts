@@ -47,3 +47,8 @@ export const STATIC_DATA_HOST = {
   CHAMPION_PASSIVE_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/passive/`,
   CHAMPION_ABILITY_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/spell/`,
 };
+
+export const SERVER_REQUEST_HOST = {
+  CHAMPION_DATA: '/api/v1/riot/lol/champion',
+  ROTATIONS_INFO: '/api/v1/riot/lol/rotations',
+};

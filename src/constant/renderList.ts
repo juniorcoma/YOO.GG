@@ -34,3 +34,36 @@ export const FOOTER_SNS_RENDER_LIST = [
     size: 28,
   },
 ];
+
+export const POSITION_BTN_RENDER_LIST = [
+  {
+    id: 1,
+    text: '전체',
+    setValue: 'all',
+  },
+  {
+    id: 2,
+    text: '탑',
+    setValue: 'top',
+  },
+  {
+    id: 3,
+    text: '정글',
+    setValue: 'jungle',
+  },
+  {
+    id: 4,
+    text: '미드',
+    setValue: 'mid',
+  },
+  {
+    id: 5,
+    text: '바텀',
+    setValue: 'bottom',
+  },
+  {
+    id: 6,
+    text: '서포터',
+    setValue: 'support',
+  },
+];

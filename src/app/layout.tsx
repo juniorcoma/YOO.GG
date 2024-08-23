@@ -4,6 +4,7 @@ import './globals.css';
 import ReactQueryProviders from '@/hook/query/useReactQuery';
 import Header from '@/components/common/header/Header';
 import Footer from '@/components/common/footer/Footer';
+import BackgroundProvider from '@/hook/BackgroundProvider';
 
 const AppleSDGOdicNeo = localFont({
   src: [
@@ -28,11 +29,13 @@ export default function RootLayout({
   return (
     <html lang="ko" className={AppleSDGOdicNeo.className}>
       <body className="text-color-gray-900">
-        <div id="__next">
-          <Header />
-          <ReactQueryProviders>{children}</ReactQueryProviders>
-          <Footer />
-        </div>
+        <BackgroundProvider>
+          <div id="__next">
+            <Header />
+            <ReactQueryProviders>{children}</ReactQueryProviders>
+            <Footer />
+          </div>
+        </BackgroundProvider>
       </body>
     </html>
   );

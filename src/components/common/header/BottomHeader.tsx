@@ -1,6 +1,8 @@
 'use client';
 
+import SubSummonerSearchForm from '@/components/summonersearchform/SubSummonerSearchForm';
 import { BOTTOM_NAV_RENDER_LIST } from '@/constant/renderList';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -10,7 +12,14 @@ export default function BottomHeader() {
   return (
     <div className="bg-color-primary-500 border-b border-color-primary-600">
       <div className="w-full max-w-[108rem] m-auto flex flex-col">
-        <div className={`${pathName === '/' && 'hidden'}`}></div>
+        <div className={`${pathName === '/' && 'hidden'} py-[0.8rem] flex gap-[1.6rem]`}>
+          <div className="relative w-[13rem] h-[3.2rem]">
+            <Image src={'/images/yoogg_sub_img.png'} fill alt="YOO.GG sub image" />
+          </div>
+          <div className="flex-1">
+            <SubSummonerSearchForm />
+          </div>
+        </div>
         <Navbar pathName={pathName} />
       </div>
     </div>

@@ -1,3 +1,5 @@
+import HomeContentBox from '@/components/homecontent/HomeContentBox';
+import RotationsList from '@/components/homecontent/RotationsList';
 import SummonerSearchForm from '@/components/summonersearchform/SummonerSearchForm';
 import Image from 'next/image';
 
@@ -21,7 +23,9 @@ export default function Home() {
         <div className="flex flex-col py-[6.4rem] gap-[3.2rem]">
           <div className="flex gap-[3.2rem] h-[30rem]">
             <div className="content-box w-[33rem]"></div>
-            <div className="content-box flex-1"></div>
+            <HomeContentBox titleText="로테이션 챔피언" css="flex-1">
+              <RotationsList />
+            </HomeContentBox>
           </div>
           <div></div>
         </div>

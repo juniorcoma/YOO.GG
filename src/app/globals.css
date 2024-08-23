@@ -75,6 +75,43 @@ html {
     margin: auto;
     margin-top: 4.8rem;
   }
+  .content-header {
+    background-color: var(--color-gray-00);
+  }
+  .content-header > div {
+    width: 108rem;
+    margin: auto;
+    padding: 3.2rem 0 6.4rem;
+  }
+  .champion-search-box {
+    width: 48.6rem;
+    height: 4.8rem;
+    border: 1px solid var(--color-primary-500);
+    border-radius: 4px;
+  }
+  .position-btn {
+    padding: 1.2rem 1.6rem;
+    min-width: 11.2rem;
+    font-size: 1.6rem;
+    border: 1px solid var(--color-gray-400);
+    line-height: 1;
+  }
+  .position-btn:not(:first-of-type) {
+    border-left-width: 0;
+  }
+  .position-btn:first-of-type {
+    border-top-left-radius: 0.4rem;
+    border-bottom-left-radius: 0.4rem;
+  }
+  .position-btn:last-of-type {
+    border-top-right-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+  }
+  .position-btn.current-position {
+    background: var(--color-primary-500);
+    color: #fff;
+    border: 0;
+  }
 }
 
 @layer utilities {
@@ -117,6 +154,51 @@ html {
   }
   .layout-container.home {
     background-color: var(--color-primary-500);
+  }
+  .layout-container.other {
+    background-color: var(--color-gray-200);
+  }
+  .champ-name {
+    color: #fff;
+    position: absolute;
+    padding: 0 1.2rem;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6.4rem;
+    height: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .search-label {
+    color: transparent;
+    position: absolute;
+    background: url('/icon/search_icon.svg') center center / contain no-repeat;
+    width: 2.4rem;
+    height: 2.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1.6rem;
+  }
+
+  .search-popup {
+    width: 40rem;
+    max-height: 20rem;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    left: 0;
+    margin-top: 0.4rem;
+    overflow-y: auto;
+  }
+
+  .champ-table th {
+    padding: 0.8rem;
   }
 }
 
