@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default async function RotationsList() {
   const rotationsData = await getRotationsChampion();
-  console.log(rotationsData);
+
   return (
     <ul className="px-[1.6rem] py-[1.2rem] flex flex-wrap gap-[1.2rem]">
       {rotationsData.map((champ: any) => (
