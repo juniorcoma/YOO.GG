@@ -19,7 +19,7 @@ export default function ChampionListTable({ championData, currentPosition }: Cha
     return filterPositionChampion(championData, currentPosition);
   }, [championData, currentPosition]);
   return (
-    <table className="w-full champ-table">
+    <table className="table">
       <colgroup>
         <col width={50} />
         <col width="*" />
