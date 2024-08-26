@@ -46,10 +46,14 @@ export const STATIC_DATA_HOST = {
   CHAMPION_SQUARE_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/champion/`,
   CHAMPION_PASSIVE_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/passive/`,
   CHAMPION_ABILITY_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/spell/`,
+  OTHER_CHAMPION_DATA:
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/',
+  SKILL_VIDEO_HOST: ' https://d28xe8vt774jo5.cloudfront.net/',
 };
 
 export const SERVER_REQUEST_HOST = {
   CHAMPION_DATA: '/api/v1/riot/lol/champion',
   CHAMPION_DETAIL_DATA: '/api/v1/riot/lol/champion/detail',
   ROTATIONS_INFO: '/api/v1/riot/lol/rotations',
+  CHAMPION_OTHER_DATA: '/api/v1/riot/lol/champion/other',
 };
