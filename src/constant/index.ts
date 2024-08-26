@@ -1,4 +1,4 @@
-import { ChampPositionDataType } from '@/types';
+import { ChampPositionDataType, MatchingStatArrType, SpellKeyType } from '@/types';
 
 export const CHAMPION_POSITION_DATA: ChampPositionDataType = {
   Aatrox: 'top',
@@ -174,4 +174,51 @@ export const CHAMPION_POSITION_DATA: ChampPositionDataType = {
 export const EMOTES_ICON_IMG_URL = {
   blitzcrank:
     'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/loadouts/summoneremotes/champions/blitzcrank/blitzcrank_sad_confused_inventory.png',
+};
+
+export const SPELL_KEY: SpellKeyType[] = ['P', 'Q', 'W', 'E', 'R'];
+
+export const MATCHING_STAT_ARR: MatchingStatArrType[] = [
+  {
+    name: '체력',
+    value: 'hp',
+    level: 'hpperlevel',
+  },
+  {
+    name: '공격력',
+    value: 'attackdamage',
+    level: 'attackdamageperlevel',
+  },
+  {
+    name: '방어력',
+    value: 'armor',
+    level: 'armorperlevel',
+  },
+  {
+    name: '마법저항력',
+    value: 'spellblock',
+    level: 'spellblockperlevel',
+  },
+  {
+    name: '체력재생',
+    value: 'hpregen',
+    level: 'hpregenperlevel',
+  },
+  {
+    name: '공격사거리',
+    value: 'attackrange',
+  },
+  {
+    name: '이동속도',
+    value: 'movespeed',
+  },
+];
+
+export const CHAMPION_TAG_INFO = {
+  Marksman: '원거리 딜러',
+  Assassin: '암살자',
+  Fighter: '전사',
+  Mage: '마법사',
+  Tank: '탱커',
+  Support: '서포터',
 };

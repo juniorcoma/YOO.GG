@@ -1,6 +1,7 @@
 import { RotationsDataType } from '@/types/response';
 import { backendRequest } from './axios';
 import { SERVER_REQUEST_HOST } from '@/constant/API';
+import { SpellKeyType } from '@/types';
 
 export async function getRotationsChampion() {
   const { data: champData } = await backendRequest.get(`${SERVER_REQUEST_HOST.CHAMPION_DATA}`);
@@ -22,4 +23,11 @@ export async function getChampionDetailData(champname: string) {
   );
 
   return champDetailData;
+}
+
+export async function getChampionOtherData(champkey: string, skillKey: SpellKeyType) {
+  const { data } = await backendRequest.get(
+    `${SERVER_REQUEST_HOST.CHAMPION_OTHER_DATA}/${champkey}?skillkey=${skillKey}`,
+  );
+  return data;
 }

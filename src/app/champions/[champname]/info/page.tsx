@@ -1,7 +1,9 @@
 import ChampionProfile from '@/components/ChampionProfile';
 import ChampionSkillBox from '@/components/ChampionSkillBox';
+import ChampionSkinControlContainer from '@/components/ChampionSkinControlContainer';
 import ChampionStatContainer from '@/components/ChampionStatContainer';
-import HomeContentBox from '@/components/homecontent/HomeContentBox';
+import ChampionStatTable from '@/components/ChampionStatTable';
+import ContentBox from '@/components/ContentBox';
 
 import { CHAMPION_POSITION_DATA } from '@/constant';
 import { getChampionDetailData } from '@/service/server.api';
@@ -19,6 +21,7 @@ export default async function ChampInfoPage({ params }: { params: { champname: s
               name={champDetailData.name}
               title={champDetailData.title}
               position={CHAMPION_POSITION_DATA[champDetailData.id]}
+              tags={champDetailData.tags}
             />
             <ChampionStatContainer info={champDetailData.info} />
           </div>
@@ -26,26 +29,36 @@ export default async function ChampInfoPage({ params }: { params: { champname: s
       </div>
       <main className="w-[108rem] pt-[3.2rem] m-auto flex gap-[1.6rem]">
         <div className="flex-1 flex flex-col gap-[1.6rem]">
-          <HomeContentBox titleText="스킬정보">
-            <ChampionSkillBox passive={champDetailData.passive} skill={champDetailData.spells} />
-          </HomeContentBox>
-          <HomeContentBox titleText="스킬정보">
-            <div>gd</div>
-          </HomeContentBox>
-          <HomeContentBox titleText="스킬정보">
-            <div>gd</div>
-          </HomeContentBox>
-          <HomeContentBox titleText="스킬정보">
-            <div>gd</div>
-          </HomeContentBox>
+          <ContentBox
+            titleText={`${champDetailData.name} 스킬 정보`}
+            SubTitleComponent={<div className="text-[1.2rem] text-color-gray-500">자세히 볼려면 스킬 클릭하세요!</div>}
+          >
+            <ChampionSkillBox
+              skill={[champDetailData.passive, ...champDetailData.spells]}
+              champKey={champDetailData.key}
+            />
+          </ContentBox>
+          <ContentBox
+            titleText={`${champDetailData.name} 기본 스탯 정보`}
+            SubTitleComponent={
+              <span className="text-[1.2rem] text-color-primary-500">메커니즘 : {champDetailData.partype}</span>
+            }
+          >
+            <ChampionStatTable stat={champDetailData.stats} partype={champDetailData.partype} />
+          </ContentBox>
+          <ChampionSkinControlContainer
+            titleName={champDetailData.name}
+            name={params.champname}
+            skinRenderList={champDetailData.skins}
+          />
         </div>
         <div className="w-[39.1rem] flex flex-col gap-[1.6rem]">
-          <HomeContentBox titleText="스토리">
+          <ContentBox titleText="스토리">
             <div className="px-[1.6rem] pt-[1.6rem] pb-[2.4rem] text-[1.6rem]">
               <p>{champDetailData.lore}</p>
             </div>
-          </HomeContentBox>
-          <HomeContentBox titleText="챔피언 TIP">
+          </ContentBox>
+          <ContentBox titleText="챔피언 TIP">
             <div className="px-[1.6rem] pt-[1.6rem] pb-[2.4rem] text-[1.6rem]">
               <p className="text-color-primary-500 mb-[1.2rem]">아군일 때</p>
               {champDetailData.allytips.map((tip: string[], index: number) => (
@@ -60,7 +73,7 @@ export default async function ChampInfoPage({ params }: { params: { champname: s
                 </p>
               ))}
             </div>
-          </HomeContentBox>
+          </ContentBox>
         </div>
       </main>
     </>

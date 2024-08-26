@@ -5,6 +5,8 @@ import ReactQueryProviders from '@/hook/query/useReactQuery';
 import Header from '@/components/common/header/Header';
 import Footer from '@/components/common/footer/Footer';
 import BackgroundProvider from '@/hook/BackgroundProvider';
+import { ModalsProvider } from '@/hook/ModalProvider';
+import ModalContainer from '@/components/ModalContainer';
 
 const AppleSDGOdicNeo = localFont({
   src: [
@@ -32,7 +34,12 @@ export default function RootLayout({
         <BackgroundProvider>
           <div id="__next">
             <Header />
-            <ReactQueryProviders>{children}</ReactQueryProviders>
+            <ReactQueryProviders>
+              <ModalsProvider>
+                <ModalContainer />
+                {children}
+              </ModalsProvider>
+            </ReactQueryProviders>
             <Footer />
           </div>
         </BackgroundProvider>

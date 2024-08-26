@@ -1,7 +1,8 @@
 import ChampionListContainer from '@/components/ChampionListContainer';
 import ChampionSearchBar from '@/components/ChmapionSearchBar';
+import ContentBox from '@/components/ContentBox';
 import FavoriteChampionBox from '@/components/FavoriteChampionBox';
-import HomeContentBox from '@/components/homecontent/HomeContentBox';
+
 import { CHAMPION_POSITION_DATA } from '@/constant';
 import { SERVER_REQUEST_HOST } from '@/constant/API';
 import { backendRequest } from '@/service/axios';
@@ -29,9 +30,9 @@ export default async function ChmapionListPage() {
         </div>
       </div>
       <div className="w-[108rem] pt-[3.2rem] m-auto flex gap-[1.6rem]">
-        <HomeContentBox titleText="즐겨찾기" css="w-[36rem]">
+        <ContentBox titleText="즐겨찾기" css="w-[36rem]">
           <FavoriteChampionBox />
-        </HomeContentBox>
+        </ContentBox>
         <ChampionListContainer championData={positionChampData} />
       </div>
     </>
