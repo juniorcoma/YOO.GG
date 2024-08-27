@@ -3,7 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function useSubmitFormEvent(summonerName: string) {
+export default function useSubmitFormEvent(
+  summonerName: string,
+  setValue: React.Dispatch<React.SetStateAction<string>>,
+) {
   const router = useRouter();
   const sliceString = summonerName.split('#').join('-');
 
@@ -20,6 +23,7 @@ export default function useSubmitFormEvent(summonerName: string) {
 
     const updateSearchArr = [...recentlySearchArr, sliceString];
     localStorage.setItem('recentlySearch', JSON.stringify(updateSearchArr));
+    setValue('');
     router.push(`/summoner/kr/${sliceString}`);
   };
 

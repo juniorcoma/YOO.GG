@@ -9,7 +9,7 @@ export default function SubSummonerSearchForm() {
     setInputValue(e.target.value);
   };
 
-  const { handleSubmitEvent } = useSubmitFormEvent(inputValue);
+  const { handleSubmitEvent } = useSubmitFormEvent(inputValue, setInputValue);
   return (
     <form onSubmit={handleSubmitEvent} className="flex rounded-[0.4rem] overflow-hidden h-[3.2rem]">
       <div className="py-[0.8rem] pl-[1.2rem] pr-[2.8rem] bg-color-primary-200 text-[1.4rem] flex justify-center items-center">
@@ -25,7 +25,12 @@ export default function SubSummonerSearchForm() {
           <span>플레이어 이름 +</span>
           <span className="bg-color-gray-200 rounded-[0.2rem]">#KR1</span>
         </label>
-        <input className="text-[1.4rem] px-[1.6rem] flex-1" value={inputValue} onChange={handleOnChange} />
+        <input
+          className="text-[1.4rem] px-[1.6rem] flex-1"
+          value={inputValue}
+          onChange={handleOnChange}
+          id="summoner-search"
+        />
 
         <button type="submit" className="px-[1.2rem]">
           <ButtonSvg />

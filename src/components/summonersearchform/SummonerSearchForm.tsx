@@ -10,7 +10,7 @@ export default function SummonerSearchForm() {
     setInputValue(e.target.value);
   };
 
-  const { handleSubmitEvent } = useSubmitFormEvent(inputValue);
+  const { handleSubmitEvent } = useSubmitFormEvent(inputValue, setInputValue);
   return (
     <form
       onSubmit={handleSubmitEvent}
@@ -21,19 +21,19 @@ export default function SummonerSearchForm() {
         <div className="text-color-gray-400 w-[19.4rem]">Korea</div>
       </div>
       <div className="relative flex-1">
-        <label className="mb-[0.4rem]" htmlFor="summoner-search">
+        <label className="mb-[0.4rem]" htmlFor="summoner-search-main">
           검색
         </label>
         <input
           type="text"
-          id="summoner-search"
           value={inputValue}
           onChange={handleOnChange}
           className="text-[1.4rem] w-full"
+          id="summoner-search-main"
         />
         <label
-          htmlFor="summoner-search"
-          className={`${inputValue && 'hidden'} absolute flex bottom-[7.5%] text-color-gray-400 text-[1.4rem]`}
+          htmlFor="summoner-search-main"
+          className={`${inputValue ? 'hidden' : ''} absolute flex bottom-[7.5%] text-color-gray-400 text-[1.4rem] z-20`}
         >
           <span>플레이어 이름 +</span>
           <span className="bg-color-gray-200 rounded-[0.2rem]">#KR1</span>
