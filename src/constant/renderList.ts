@@ -67,3 +67,26 @@ export const POSITION_BTN_RENDER_LIST = [
     setValue: 'support',
   },
 ];
+
+export const GAME_TYPE_RENDER_LIST = [
+  {
+    id: 1,
+    text: '전체',
+    query: 'TOTAL',
+  },
+  {
+    id: 2,
+    text: '솔로랭크',
+    query: 'SOLORANKED',
+  },
+  {
+    id: 3,
+    text: '자유랭크',
+    query: 'FLEXRANKED',
+  },
+  {
+    id: 4,
+    text: '무작위 총력전',
+    query: 'ARAM',
+  },
+];
