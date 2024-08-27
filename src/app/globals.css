@@ -227,6 +227,11 @@ html {
     aspect-ratio: 1.62/1;
     position: relative;
   }
+
+  .profile-img-box {
+    position: relative;
+    height: fit-content;
+  }
 }
 
 @layer utilities {
