@@ -27,13 +27,13 @@ export const RIOT_PLATFORM_HOST = {
 export const RIOT_REQUEST_ENDPOINT = {
   ACCOUNT: '/riot/account/v1/accounts/by-riot-id/', // {gamename}/{tagid}
   ACCOUNT_DETAIL: '/lol/summoner/v4/summoners/by-puuid/', // {puuid}
-  CHAMP_MASTERY: '/lol/champion-mastery/v4/champion-masteries/by-puuid/', // {puuid}/top
   CHAMP_ROTATIONS: '/lol/platform/v3/champion-rotations',
   SUMMONER_LEAGUE: '/lol/league/v4/entries/by-summoner/', // {summonerid}
   MATCH_ID_LIST: '/lol/match/v5/matches/by-puuid/', // {puuid}/ids
   MATCH_DETAIL_INFO: '/lol/match/v5/matches/', // {matchId}
   SPECTATOR: '/lol/spectator/v5/active-games/by-summoner/', // {puuid}
   RANK: '/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I',
+  CHAMPION_MASTERY: '/lol/champion-mastery/v4/champion-masteries/by-puuid/', // {puuid}/top
 };
 
 const VERSION = '14.16.1';
