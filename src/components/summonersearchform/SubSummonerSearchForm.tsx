@@ -1,5 +1,6 @@
 'use client';
 import ButtonSvg from '@/assets/icons/form_submit.svg';
+import useSubmitFormEvent from '@/hook/useSubmitForm';
 import { ChangeEvent, useState } from 'react';
 export default function SubSummonerSearchForm() {
   const [inputValue, setInputValue] = useState('');
@@ -7,8 +8,10 @@ export default function SubSummonerSearchForm() {
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
+
+  const { handleSubmitEvent } = useSubmitFormEvent(inputValue);
   return (
-    <form className="flex rounded-[0.4rem] overflow-hidden h-[3.2rem]">
+    <form onSubmit={handleSubmitEvent} className="flex rounded-[0.4rem] overflow-hidden h-[3.2rem]">
       <div className="py-[0.8rem] pl-[1.2rem] pr-[2.8rem] bg-color-primary-200 text-[1.4rem] flex justify-center items-center">
         <strong className="text-color-primary-600">KR</strong>
       </div>
