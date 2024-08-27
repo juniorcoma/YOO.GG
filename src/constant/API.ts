@@ -56,4 +56,7 @@ export const SERVER_REQUEST_HOST = {
   CHAMPION_DETAIL_DATA: '/api/v1/riot/lol/champion/detail',
   ROTATIONS_INFO: '/api/v1/riot/lol/rotations',
   CHAMPION_OTHER_DATA: '/api/v1/riot/lol/champion/other',
+  SUMMONER_INFO: '/api/v1/riot/lol/account/',
+  CHAMPION_MASTERY: '/api/v1/riot/lol/champion/mastery',
+  SUMMONER_LEAGUE: '/api/v1/riot/lol/summoner/league',
 };
