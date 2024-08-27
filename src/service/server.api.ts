@@ -31,3 +31,20 @@ export async function getChampionOtherData(champkey: string, skillKey: SpellKeyT
   );
   return data;
 }
+
+export async function getSummonerInfoData(summoner: string) {
+  const [name, tag] = summoner.split('-');
+
+  const { data } = await backendRequest.get(`${SERVER_REQUEST_HOST.SUMMONER_INFO}${name}/${tag}`);
+  return data;
+}
+
+export async function getSummonerChampMastery(puuid: string) {
+  const { data } = await backendRequest.get(`${SERVER_REQUEST_HOST.CHAMPION_MASTERY}/${puuid}`);
+  return data;
+}
+
+export async function getSummonerLeagueInfo(summonerId: string) {
+  const { data } = await backendRequest.get(`${SERVER_REQUEST_HOST.SUMMONER_LEAGUE}/${summonerId}`);
+  return data;
+}
