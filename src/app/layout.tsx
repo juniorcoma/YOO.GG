@@ -7,6 +7,7 @@ import Footer from '@/components/common/footer/Footer';
 import BackgroundProvider from '@/hook/BackgroundProvider';
 import { ModalsProvider } from '@/hook/ModalProvider';
 import ModalContainer from '@/components/ModalContainer';
+import ProgressProviders from '@/components/ProgressBarProvider';
 
 const AppleSDGOdicNeo = localFont({
   src: [
@@ -32,16 +33,18 @@ export default function RootLayout({
     <html lang="ko" className={AppleSDGOdicNeo.className}>
       <body className="text-color-gray-900">
         <BackgroundProvider>
-          <div id="__next">
-            <Header />
-            <ReactQueryProviders>
-              <ModalsProvider>
-                <ModalContainer />
-                {children}
-              </ModalsProvider>
-            </ReactQueryProviders>
-            <Footer />
-          </div>
+          <ProgressProviders>
+            <div id="__next">
+              <Header />
+              <ReactQueryProviders>
+                <ModalsProvider>
+                  <ModalContainer />
+                  {children}
+                </ModalsProvider>
+              </ReactQueryProviders>
+              <Footer />
+            </div>
+          </ProgressProviders>
         </BackgroundProvider>
         <div id="portal"></div>
       </body>
