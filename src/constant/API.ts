@@ -49,6 +49,8 @@ export const STATIC_DATA_HOST = {
   OTHER_CHAMPION_DATA:
     'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/',
   SKILL_VIDEO_HOST: ' https://d28xe8vt774jo5.cloudfront.net/',
+  PROFILE_ICON_IMG: 'https://ddragon.leagueoflegends.com/cdn/14.16.1/img/profileicon/',
+  TIER_IMG: 'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-shared-components/global/default/',
 };
 
 export const SERVER_REQUEST_HOST = {
