@@ -222,3 +222,16 @@ export const CHAMPION_TAG_INFO = {
   Tank: '탱커',
   Support: '서포터',
 };
+
+export const GAME_TYPE_QUEUEID = {
+  SOLORANKED: 420,
+  FLEXRANKED: 440,
+  ARAM: 450,
+};
+
+export const QUEUEID_KR_TYPE: { [key: number]: string } = {
+  450: '무작위 총력전',
+  490: '빠른 대전',
+  420: '솔랭',
+  440: '자랭',
+};

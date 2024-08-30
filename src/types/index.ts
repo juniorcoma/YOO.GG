@@ -36,3 +36,5 @@ export interface MatchingStatArrType {
 }
 
 export type ChampTagType = 'Marksman' | 'Assassin' | 'Fighter' | 'Mage' | 'Tank' | 'Support';
+
+export type GameType = 'TOTAL' | 'SOLORANKED' | 'FLEXRANKED' | 'ARAM';

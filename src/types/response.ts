@@ -374,7 +374,7 @@ interface MissionsDtoType {
 
 interface PerksDtoType {
   statPerks: PerkStatsDtoType;
-  styles: PerkStyleDtoType;
+  styles: PerkStyleDtoType[];
 }
 
 interface PerkStatsDtoType {
@@ -383,7 +383,7 @@ interface PerkStatsDtoType {
   offense: number;
 }
 
-interface PerkStyleDtoType {
+export interface PerkStyleDtoType {
   description: string;
   selections: PerkStyleSelectionDtoType[];
   style: number;

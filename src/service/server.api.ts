@@ -48,3 +48,18 @@ export async function getSummonerLeagueInfo(summonerId: string) {
   const { data } = await backendRequest.get(`${SERVER_REQUEST_HOST.SUMMONER_LEAGUE}/${summonerId}`);
   return data;
 }
+
+export async function getSummonerRecordList({
+  pageParam = 0,
+  puuid,
+  type,
+}: {
+  pageParam: number;
+  puuid: string;
+  type: string;
+}) {
+  const { data } = await backendRequest.get(
+    `${SERVER_REQUEST_HOST.SUMMONER_RECORD_LIST}/${puuid}?start=${pageParam * 20}&type=${type}`,
+  );
+  return data;
+}
