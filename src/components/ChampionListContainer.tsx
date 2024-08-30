@@ -4,10 +4,11 @@ import { useState } from 'react';
 import ChampionListTable from './ChampionListTable';
 
 interface ChampionListContainerProps {
-  championData: any;
+  championsData: any;
+  version: string;
 }
 
-export default function ChampionListContainer({ championData }: ChampionListContainerProps) {
+export default function ChampionListContainer({ championsData, version }: ChampionListContainerProps) {
   const [currentPosition, setCurrentPosition] = useState<'all' | 'top' | 'jungle' | 'mid' | 'bottom' | 'support'>(
     'all',
   );
@@ -26,7 +27,7 @@ export default function ChampionListContainer({ championData }: ChampionListCont
         ))}
       </nav>
       <div>
-        <ChampionListTable championData={championData} currentPosition={currentPosition} />
+        <ChampionListTable championsData={championsData} currentPosition={currentPosition} version={version} />
       </div>
     </main>
   );

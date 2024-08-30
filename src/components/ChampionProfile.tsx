@@ -3,6 +3,8 @@ import { ChampPositionType, ChampTagType } from '@/types';
 import Image from 'next/image';
 import { PositionIconRender } from './ChampionListTable';
 import { CHAMPION_TAG_INFO } from '@/constant';
+import { getVersionsData } from '@/service/requestJsonData.api';
+import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 
 interface ChampionProfileProps {
   img: string;
@@ -12,12 +14,13 @@ interface ChampionProfileProps {
   tags: ChampTagType[];
 }
 
-export default function ChampionProfile({ img, name, position, title, tags }: ChampionProfileProps) {
+export default async function ChampionProfile({ img, name, position, title, tags }: ChampionProfileProps) {
+  const [latestVersion] = await getVersionsData();
   return (
     <div className="flex gap-[1.2rem]">
       <div className="w-[12.8rem] h-[12.8rem] relative rounded-[1.2rem] overflow-hidden">
         <Image
-          src={`${STATIC_DATA_HOST.CHAMPION_SQUARE_IMG}${img}`}
+          src={`${imgSrcVersionLoader(latestVersion, 'CHAMPION_SQUARE')}${img}`}
           fill
           alt={`${name} 이미지`}
           className="scale-110"

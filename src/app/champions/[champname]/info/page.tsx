@@ -6,11 +6,13 @@ import ChampionStatTable from '@/components/ChampionStatTable';
 import ContentBox from '@/components/ContentBox';
 
 import { CHAMPION_POSITION_DATA } from '@/constant';
-import { getChampionDetailData } from '@/service/server.api';
+import { getChampionData, getCommunityChampionData, getVersionsData } from '@/service/requestJsonData.api';
 
 export default async function ChampInfoPage({ params }: { params: { champname: string } }) {
-  const champDetailData = await getChampionDetailData(params.champname);
-  console.log(champDetailData);
+  const { champname } = params;
+  const champDetailData = await getChampionData(champname);
+  const { passive, spells } = await getCommunityChampionData(champDetailData.key);
+  const [latestVersion] = await getVersionsData();
   return (
     <>
       <div className="content-header">
@@ -35,7 +37,8 @@ export default async function ChampInfoPage({ params }: { params: { champname: s
           >
             <ChampionSkillBox
               skill={[champDetailData.passive, ...champDetailData.spells]}
-              champKey={champDetailData.key}
+              communitySkillData={[passive, ...spells]}
+              version={latestVersion}
             />
           </ContentBox>
           <ContentBox

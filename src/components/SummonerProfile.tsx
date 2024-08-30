@@ -1,6 +1,7 @@
-import { STATIC_DATA_HOST } from '@/constant/API';
 import Image from 'next/image';
 import ChampionMasteryContainer from './ChampionMasteryContainer';
+import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
+import { getVersionsData } from '@/service/requestJsonData.api';
 
 interface SummonerProfileProps {
   summonerData: {
@@ -13,16 +14,16 @@ interface SummonerProfileProps {
     revisionDate: number;
     summonerLevel: number;
   };
-  champData: any;
 }
 
-export default async function SummonerProfile({ summonerData, champData }: SummonerProfileProps) {
+export default async function SummonerProfile({ summonerData }: SummonerProfileProps) {
+  const [lastestVersion] = await getVersionsData();
   return (
     <div className="flex justify-between">
       <div className="flex gap-[1.6rem]">
         <div className="profile-img-box">
           <Image
-            src={`${STATIC_DATA_HOST.PROFILE_ICON_IMG}${summonerData.profileIconId}.png`}
+            src={`${imgSrcVersionLoader(lastestVersion, 'PROFILE')}${summonerData.profileIconId}.png`}
             width={128}
             height={128}
             alt="프로필 이미지"
@@ -37,7 +38,7 @@ export default async function SummonerProfile({ summonerData, champData }: Summo
           <span className="text-[2.4rem] text-color-gray-500">#{summonerData.tagLine}</span>
         </div>
       </div>
-      <ChampionMasteryContainer puuid={summonerData.puuid} champData={champData} />
+      <ChampionMasteryContainer puuid={summonerData.puuid} />
     </div>
   );
 }

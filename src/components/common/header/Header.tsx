@@ -2,12 +2,14 @@ import Link from 'next/link';
 import ContentSelectBox from './ContentSelecetBox';
 import Logo from '@/assets/icons/yoogg_logo.svg';
 import BottomHeader from './BottomHeader';
+import { getVersionsData } from '@/service/requestJsonData.api';
 
-export default function Header() {
+export default async function Header() {
+  const [latestVersion] = await getVersionsData();
   return (
     <header className="w-full flex flex-col">
       <TopHeader />
-      <BottomHeader />
+      <BottomHeader version={latestVersion} />
     </header>
   );
 }

@@ -1,4 +1,3 @@
-import { STATIC_DATA_HOST } from '@/constant/API';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
@@ -8,16 +7,18 @@ import PositionMid from '@/assets/icons/position_mid.svg';
 import PositionJungle from '@/assets/icons/position_jungle.svg';
 import PositionSupport from '@/assets/icons/position_support.svg';
 import { ChampPositionType } from '@/types';
+import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 
 interface ChampionListTableProps {
-  championData: any;
+  championsData: any;
   currentPosition: 'all' | 'top' | 'jungle' | 'mid' | 'bottom' | 'support';
+  version: string;
 }
 
-export default function ChampionListTable({ championData, currentPosition }: ChampionListTableProps) {
+export default function ChampionListTable({ championsData, currentPosition, version }: ChampionListTableProps) {
   const tableRenderData = useMemo(() => {
-    return filterPositionChampion(championData, currentPosition);
-  }, [championData, currentPosition]);
+    return filterPositionChampion(championsData, currentPosition);
+  }, [championsData, currentPosition]);
   return (
     <table className="table">
       <colgroup>
@@ -47,7 +48,7 @@ export default function ChampionListTable({ championData, currentPosition }: Cha
               <Link href={`/champions/${champ.id}/info`} className="flex gap-[0.8rem] items-center">
                 <div className="overflow-hidden rounded-[0.4rem]">
                   <Image
-                    src={`${STATIC_DATA_HOST.CHAMPION_SQUARE_IMG}${champ.image.full}`}
+                    src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${champ.image.full}`}
                     width={32}
                     height={32}
                     alt={`${champ.name} 이미지`}

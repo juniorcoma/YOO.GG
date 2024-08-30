@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import ContentBox from './ContentBox';
-import { STATIC_DATA_HOST } from '@/constant/API';
+import { DDRAGON_IMG_URL, STATIC_DATA_HOST } from '@/constant/API';
 import { useRef, useState } from 'react';
 import useModal from '@/hook/useModal';
 import FullSkinContainer from './FullSkinContainer';
@@ -56,7 +56,7 @@ export default function ChampionSkinControlContainer({
                 <span>자세히 보기</span>
               </button>
               <Image
-                src={`${STATIC_DATA_HOST.CHAMPION_LOADING_IMG}${name}_${skin.num}.jpg`}
+                src={`${DDRAGON_IMG_URL.CHAMPION_LOADING}${name}_${skin.num}.jpg`}
                 fill
                 alt={`${skin.name} 이미지`}
                 className="rounded-[0.8rem] scale-105"

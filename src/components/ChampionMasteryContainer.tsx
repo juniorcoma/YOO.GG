@@ -1,25 +1,24 @@
-import { STATIC_DATA_HOST } from '@/constant/API';
-import { getSummonerChampMastery } from '@/service/server.api';
+import { DDRAGON_IMG_URL } from '@/constant/API';
+import { getChampionMasteryData, getChampionsData } from '@/service/requestJsonData.api';
 import Image from 'next/image';
 
 interface ChampionMasteryContainerProps {
   puuid: string;
-  champData: any;
 }
 
-export default async function ChampionMasteryContainer({ puuid, champData }: ChampionMasteryContainerProps) {
-  const championMasteryData = await getSummonerChampMastery(puuid);
-
+export default async function ChampionMasteryContainer({ puuid }: ChampionMasteryContainerProps) {
+  const championMasteryData = await getChampionMasteryData(puuid);
+  const championsData: any = await getChampionsData(true);
   return (
     <ul className="flex gap-[3.2rem]">
       {championMasteryData.map((item: any) => {
-        const matchChampData = champData.find((champ: any) => item.championId === Number(champ.key));
+        const matchChampData = championsData.find((champ: any) => item.championId === Number(champ.key));
 
         return (
           <li key={item.championId} className="flex flex-col gap-[0.4rem]">
             <div className="relative w-[6.8rem] h-[12rem] overflow-hidden rounded-[0.4rem]">
               <Image
-                src={`${STATIC_DATA_HOST.CHAMPION_LOADING_IMG}${matchChampData.id}_0.jpg`}
+                src={`${DDRAGON_IMG_URL.CHAMPION_LOADING}${matchChampData.id}_0.jpg`}
                 fill
                 alt={`${matchChampData.name} 로딩 이미지`}
                 className="scale-110"

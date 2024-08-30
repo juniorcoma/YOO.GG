@@ -1,19 +1,18 @@
 import SummonerRecordListContainer from '@/components/summoner/SummonerRecordListContainer';
 import SummonerLeagueContainer from '@/components/SummonerLeagueContainer';
-import { SERVER_REQUEST_HOST } from '@/constant/API';
-import { backendRequest } from '@/service/axios';
-import { getSummonerInfoData } from '@/service/server.api';
+
+import { getChampionsData, getSummonerData, getVersionsData } from '@/service/requestJsonData.api';
 
 export default async function SummonerPage({ params }: { params: { summoner: string } }) {
-  const decodedStr = decodeURIComponent(params.summoner);
-  const summonerData = await getSummonerInfoData(decodedStr);
-  const { data: championData } = await backendRequest.get(`${SERVER_REQUEST_HOST.CHAMPION_DATA}`);
-
+  const [name, tag] = decodeURIComponent(params.summoner).split('-');
+  const { id, puuid } = await getSummonerData(name, tag);
+  const championsData = await getChampionsData(true);
+  const [latestVersion] = await getVersionsData();
   return (
     <>
-      <SummonerLeagueContainer summonerId={summonerData.id} />
-      <div className="flex-1">
-        <SummonerRecordListContainer puuid={summonerData.puuid} championData={championData} />
+      <SummonerLeagueContainer summonerId={id} />
+      <div className="flex-1 min-h-[60rem]">
+        <SummonerRecordListContainer puuid={puuid} championsData={championsData} version={latestVersion} />
       </div>
     </>
   );

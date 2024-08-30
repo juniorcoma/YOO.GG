@@ -1,5 +1,3 @@
-const VERSION = '14.17.1';
-
 export const RIOT_REGIONAL_HOST = {
   AMERICAS: 'https://americas.api.riotgames.com',
   ASIA: 'https://asia.api.riotgames.com',
@@ -38,34 +36,46 @@ export const RIOT_REQUEST_ENDPOINT = {
   CHAMPION_MASTERY: '/lol/champion-mastery/v4/champion-masteries/by-puuid/', // {puuid}/top
 };
 
-export const STATIC_DATA_HOST = {
-  CHAMPION_DATA: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/data/ko_KR/champion.json`,
-  CHAMPION_DETAIL_DATA: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/data/ko_KR/champion/`,
-  CHAMPION_SPLASH_IMG: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/`,
-  CHAMPION_LOADING_IMG: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/`,
-  CHAMPION_SQUARE_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/champion/`,
-  CHAMPION_PASSIVE_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/passive/`,
-  CHAMPION_ABILITY_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/spell/`,
-  OTHER_CHAMPION_DATA:
-    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/',
-  SKILL_VIDEO_HOST: ' https://d28xe8vt774jo5.cloudfront.net/',
-  PROFILE_ICON_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/profileicon/`,
-  TIER_IMG: 'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-shared-components/global/default/',
-  SUMMONER_SPELLS_DATA: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/data/ko_KR/summoner.json`,
-  SUMMONER_SPELL_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/spell/`,
-  RUNES_DATA: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/data/ko_KR/runesReforged.json`,
-  RUNES_IMG: 'https://ddragon.leagueoflegends.com/cdn/img/',
-  ITEMS_DATA: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/data/ko_KR/item.json`,
-  ITEM_IMG: `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/item/`,
+export const REQUEST_DATA_HOST = {
+  DDRAGON: 'https://ddragon.leagueoflegends.com/',
+  COMMUNITY_DRAGON: 'https://raw.communitydragon.org/',
+  SKILL_VIDEO: 'https://d28xe8vt774jo5.cloudfront.net/',
+  SERVER: `http://localhost:3000/api/v1/riot/lol/`,
 };
 
-export const SERVER_REQUEST_HOST = {
-  CHAMPION_DATA: '/api/v1/riot/lol/champion',
-  CHAMPION_DETAIL_DATA: '/api/v1/riot/lol/champion/detail',
-  ROTATIONS_INFO: '/api/v1/riot/lol/rotations',
-  CHAMPION_OTHER_DATA: '/api/v1/riot/lol/champion/other',
-  SUMMONER_INFO: '/api/v1/riot/lol/account/',
-  CHAMPION_MASTERY: '/api/v1/riot/lol/champion/mastery',
-  SUMMONER_LEAGUE: '/api/v1/riot/lol/summoner/league',
-  SUMMONER_RECORD_LIST: '/api/v1/riot/lol/match',
+export const DDRAGON_DATA_URL = {
+  VERSION: `${REQUEST_DATA_HOST.DDRAGON}api/versions.json`,
+  CHAMPIONS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/champion.json`,
+  CHAMPION: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/champion/{CHAMPNAME}.json`,
+  SUMMONER_SPELLS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/summoner.json`,
+  RUNES: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/runesReforged.json`,
+  ITEMS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/item.json`,
+};
+
+export const DDRAGON_IMG_URL = {
+  CHAMPION_SPLASH: `${REQUEST_DATA_HOST.DDRAGON}cdn/img/champion/splash/`,
+  CHAMPION_LOADING: `${REQUEST_DATA_HOST.DDRAGON}cdn/img/champion/loading/`,
+  CHAMPION_SQUARE: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/img/champion/`,
+  CHAMPION_PASSIVE: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/img/passive/`,
+  CHAMPION_ABILITY: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/img/spell/`,
+  PROFILE: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/img/profileicon/`,
+  SPELL: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/img/spell/`,
+  RUNE: `${REQUEST_DATA_HOST.DDRAGON}cdn/img/`,
+  ITEM: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/img/item/`,
+};
+
+export const COMMUNITY_DRAGON_DATA_URL = {
+  CHAMPION: `${REQUEST_DATA_HOST.COMMUNITY_DRAGON}latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/{CHAMPID}.json`,
+};
+
+export const COMMUNITY_DRAGON_IMG_URL = {
+  TIER: `${REQUEST_DATA_HOST.COMMUNITY_DRAGON}latest/plugins/rcp-fe-lol-shared-components/global/default/`,
+};
+
+export const SERVER_REQUEST_URL = {
+  ROTATIONS: `${REQUEST_DATA_HOST.SERVER}rotations`,
+  SUMMONER: `${REQUEST_DATA_HOST.SERVER}account/`,
+  CHAMPION_MASTERY: `${REQUEST_DATA_HOST.SERVER}champion/mastery/`,
+  SUMMONER_LEAGUE: `${REQUEST_DATA_HOST.SERVER}summoner/league/`,
+  SUMMONER_RECORD_DATA: `${REQUEST_DATA_HOST.SERVER}match/`,
 };

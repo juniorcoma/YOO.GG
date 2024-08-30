@@ -4,17 +4,17 @@ import ContentBox from '@/components/ContentBox';
 import FavoriteChampionBox from '@/components/FavoriteChampionBox';
 
 import { CHAMPION_POSITION_DATA } from '@/constant';
-import { SERVER_REQUEST_HOST } from '@/constant/API';
-import { backendRequest } from '@/service/axios';
+
+import { getChampionsData, getVersionsData } from '@/service/requestJsonData.api';
 
 export default async function ChmapionListPage() {
-  const { data: championData } = await backendRequest.get(`${SERVER_REQUEST_HOST.CHAMPION_DATA}`);
-
-  const positionChampData = championData.map((champ: any) => ({
+  const championsData: any = await getChampionsData(true);
+  const positionChampData = championsData.map((champ: any) => ({
     ...champ,
     position: CHAMPION_POSITION_DATA[champ.id],
   }));
 
+  const [latestVersion] = await getVersionsData();
   return (
     <>
       <div className="content-header">
@@ -26,14 +26,14 @@ export default async function ChmapionListPage() {
               <br /> 협곡 챔피언 분석으로 챔피언의 새로운 점을 알아보세요!
             </p>
           </div>
-          <ChampionSearchBar championData={championData} />
+          <ChampionSearchBar championsData={positionChampData} version={latestVersion} />
         </div>
       </div>
       <div className="w-[108rem] pt-[3.2rem] m-auto flex gap-[1.6rem]">
         <ContentBox titleText="즐겨찾기" css="w-[36rem]">
           <FavoriteChampionBox />
         </ContentBox>
-        <ChampionListContainer championData={positionChampData} />
+        <ChampionListContainer championsData={positionChampData} version={latestVersion} />
       </div>
     </>
   );

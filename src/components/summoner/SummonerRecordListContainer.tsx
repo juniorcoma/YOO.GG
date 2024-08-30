@@ -17,10 +17,15 @@ import Image from 'next/image';
 
 interface SummonerRecordListContainerProps {
   puuid: string;
-  championData: any;
+  championsData: any;
+  version: string;
 }
 
-export default function SummonerRecordListContainer({ puuid, championData }: SummonerRecordListContainerProps) {
+export default function SummonerRecordListContainer({
+  puuid,
+  championsData,
+  version,
+}: SummonerRecordListContainerProps) {
   const searchParams = useSearchParams();
   const type = (searchParams.get('queue_type') as GameType | undefined) || 'TOTAL';
   const { data, fetchNextPage, isPending, isFetching } = useGetSummonerRecordList(puuid, type);
@@ -29,6 +34,7 @@ export default function SummonerRecordListContainer({ puuid, championData }: Sum
   if (!data) return <div>데이터 없다</div>;
   const recordList: MatchDtoType[] = data.pages.flat();
   const filterSummonerData = filterMatchData(recordList, puuid) as ParticipantDtoType[];
+
   if (!filterSummonerData.length)
     return (
       <ContentBox titleText="최근 게임">
@@ -57,7 +63,7 @@ export default function SummonerRecordListContainer({ puuid, championData }: Sum
           </div>
           <div>
             <div className="mb-[1.6rem]">많이 플레이한 챔피언 TOP 3 ({recordList.length}게임)</div>
-            <PlayChampionList filterData={filterSummonerData} championData={championData} />
+            <PlayChampionList filterData={filterSummonerData} championData={championsData} version={version} />
           </div>
         </div>
       </ContentBox>
@@ -72,10 +78,17 @@ export default function SummonerRecordListContainer({ puuid, championData }: Sum
                 gameDuration: recordList[index].info.gameDuration,
               }}
             />
-            <SummonerRecordCard.DetailInfo participant={record} />
+            <SummonerRecordCard.DetailInfo
+              participant={record}
+              version={version}
+              gameVersion={recordList[index].info.gameVersion}
+              championsData={championsData}
+            />
             <SummonerRecordCard.ParticipantsList
               participants={recordList[index].info.participants}
               puuid={record.puuid}
+              version={version}
+              championsData={championsData}
             />
           </SummonerRecordCard.CardLayer>
         ))}

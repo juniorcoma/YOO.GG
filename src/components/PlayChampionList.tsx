@@ -1,14 +1,15 @@
-import { STATIC_DATA_HOST } from '@/constant/API';
 import { ParticipantDtoType } from '@/types/response';
 import descPlayChampionList from '@/utils/descPlayChampionList';
+import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import Image from 'next/image';
 
 interface PlayChampionListProps {
   filterData: ParticipantDtoType[];
   championData: any;
+  version: string;
 }
 
-export default function PlayChampionList({ filterData, championData }: PlayChampionListProps) {
+export default function PlayChampionList({ filterData, championData, version }: PlayChampionListProps) {
   const descPlayChampList = descPlayChampionList(filterData, championData);
   console.log(descPlayChampList);
   return (
@@ -17,18 +18,17 @@ export default function PlayChampionList({ filterData, championData }: PlayChamp
         <li key={list[0]} className="flex gap-[0.8rem] items-center text-[1.4rem] text-color-gray-500">
           <div className="w-[2.8rem] h-[2.8rem] relative overflow-hidden rounded-[50%]">
             <Image
-              src={`${STATIC_DATA_HOST.CHAMPION_SQUARE_IMG}${list[1].name}.png`}
+              src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${list[1].name}.png`}
               fill
               alt={`${list[1].name} 이미지`}
               className="scale-110"
             />
           </div>
           <div>
-            {list[1].win}승 {list[1].lose}패{' '}
+            {list[1].win}승 {list[1].lose}패{'  '}
             <span className="text-color-primary-500">
-              {' '}
               {Math.floor((list[1].win / (list[1].win + list[1].lose)) * 100)}%
-            </span>{' '}
+            </span>
           </div>
         </li>
       ))}

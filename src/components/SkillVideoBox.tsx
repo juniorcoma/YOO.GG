@@ -1,20 +1,16 @@
-import { STATIC_DATA_HOST } from '@/constant/API';
-import useGetChampionOtherData from '@/hook/query/useGetChampionOtherData';
+import { REQUEST_DATA_HOST } from '@/constant/API';
 import useOutsideClick from '@/hook/useOutsideClick';
 import { SpellKeyType } from '@/types';
-import { useEffect, useRef } from 'react';
 
 interface SkillVideoBoxProps {
-  champKey: string;
   skill: any;
   skillkey: SpellKeyType;
   close: any;
+  communitySkillData: any;
 }
 
-export default function SkillVideoBox({ champKey, skill, skillkey, close }: SkillVideoBoxProps) {
-  const { data, isLoading } = useGetChampionOtherData(champKey, skillkey);
+export default function SkillVideoBox({ skill, skillkey, close, communitySkillData }: SkillVideoBoxProps) {
   const ref = useOutsideClick<HTMLDivElement>();
-  if (isLoading) return <div> 로딩중</div>;
 
   return (
     <div className="video-box" ref={ref}>
@@ -28,7 +24,7 @@ export default function SkillVideoBox({ champKey, skill, skillkey, close }: Skil
         <p>스킬범위 : {skill.rangeBurn ? skill.rangeBurn : '없음'}</p>
       </div>
       <video
-        src={`${data && STATIC_DATA_HOST.SKILL_VIDEO_HOST}${data.abilityVideoPath}`}
+        src={`${REQUEST_DATA_HOST.SKILL_VIDEO}${communitySkillData.abilityVideoPath}`}
         controls
         autoPlay
         muted

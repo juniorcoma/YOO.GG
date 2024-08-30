@@ -1,8 +1,9 @@
 import { QUEUEID_KR_TYPE } from '@/constant';
-import { STATIC_DATA_HOST } from '@/constant/API';
+import { DDRAGON_DATA_URL, DDRAGON_IMG_URL, STATIC_DATA_HOST } from '@/constant/API';
 import { ParticipantDtoType, PerkStyleDtoType } from '@/types/response';
 import { calculateGameCreation, calculateGameDuration } from '@/utils/calculateRecordTime';
 import devideParticipants from '@/utils/devideParticipants';
+import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -48,28 +49,43 @@ function KeySummary({
   );
 }
 
-function DetailInfo({ participant }: { participant: ParticipantDtoType }) {
+function DetailInfo({
+  participant,
+  version,
+  gameVersion,
+  championsData,
+}: {
+  participant: ParticipantDtoType;
+  version: string;
+  gameVersion: string;
+  championsData: any;
+}) {
   const { item0, item1, item2, item3, item4, item5, item6 } = participant;
+  const championData = championsData.find((champion: any) => participant.championId === Number(champion.key));
+
   return (
     <div className="flex flex-col gap-[0.8rem] flex-1">
       <div className="flex gap-[1.2rem]">
         <div className="flex gap-[0.4rem] h-[5.8rem] items-center">
           <Link
-            href={`/champions/${participant.championName}/info`}
+            href={`/champions/${championData.id}/info`}
             className="h-[4.8rem] w-[4.8rem] rounded-[50%] overflow-hidden relative block"
           >
             <Image
-              src={`${STATIC_DATA_HOST.CHAMPION_SQUARE_IMG}${participant.championName}.png`}
+              src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.id}.png`}
               fill
               alt={`${participant.championName} 이미지`}
             />
           </Link>
           <div className="flex gap-[0.2rem]">
             <div className="flex flex-col gap-[0.2rem]">
-              <SummonerSpellImgRender summonerSpells={[participant.summoner1Id, participant.summoner2Id]} />
+              <SummonerSpellImgRender
+                summonerSpells={[participant.summoner1Id, participant.summoner2Id]}
+                version={version}
+              />
             </div>
             <div className="flex flex-col gap-[0.2rem]">
-              <SummonerRunesImgRender summonerRunes={participant.perks.styles} />
+              <SummonerRunesImgRender summonerRunes={participant.perks.styles} gameVersion={gameVersion} />
             </div>
           </div>
         </div>
@@ -93,32 +109,38 @@ function DetailInfo({ participant }: { participant: ParticipantDtoType }) {
         </div>
       </div>
       <div className="flex gap-[1.6rem]">
-        <ItemImgRender isWin={participant.win} itemsArr={[item0, item1, item2, item3, item4, item5, item6]} />
+        <ItemImgRender
+          isWin={participant.win}
+          itemsArr={[item0, item1, item2, item3, item4, item5, item6]}
+          version={version}
+        />
       </div>
     </div>
   );
 }
 
-function SummonerSpellImgRender({ summonerSpells }: { summonerSpells: [number, number] }) {
+function SummonerSpellImgRender({ summonerSpells, version }: { summonerSpells: [number, number]; version: string }) {
   const { data } = useSuspenseQuery({
-    queryKey: ['summonerSpells'],
+    queryKey: ['summonerSpells', version],
     queryFn: async () => {
-      const { data } = await axios.get(`${STATIC_DATA_HOST.SUMMONER_SPELLS_DATA}`);
+      const requestUrl = DDRAGON_DATA_URL.SUMMONER_SPELLS.replace('{VERSION}', version);
+      const { data } = await axios.get(requestUrl);
       return data;
     },
     select: ({ data }) => {
-      const dataArr = Object.values(data);
-      return summonerSpells.map(id => dataArr.find((spell: any) => id === Number(spell.key)));
+      return Object.values(data);
     },
     staleTime: Infinity,
   });
 
+  const renderImgList = summonerSpells.map(id => data.find((spell: any) => id === Number(spell.key)));
+
   return (
     <>
-      {data.map((spell: any) => (
+      {renderImgList.map((spell: any) => (
         <Image
           key={spell.key}
-          src={`${STATIC_DATA_HOST.SUMMONER_SPELL_IMG}${spell.image.full}`}
+          src={`${imgSrcVersionLoader(version, 'SPELL')}${spell.image.full}`}
           width={22}
           height={22}
           alt={`${spell.name} 스펠 이미지`}
@@ -129,11 +151,19 @@ function SummonerSpellImgRender({ summonerSpells }: { summonerSpells: [number, n
   );
 }
 
-function SummonerRunesImgRender({ summonerRunes }: { summonerRunes: PerkStyleDtoType[] }) {
+function SummonerRunesImgRender({
+  summonerRunes,
+  gameVersion,
+}: {
+  summonerRunes: PerkStyleDtoType[];
+  gameVersion: string;
+}) {
+  const dataVersion = gameVersion.split('.').slice(0, 2).join('.');
   const { data } = useSuspenseQuery({
-    queryKey: ['summonerRunes'],
+    queryKey: ['summonerRunes', dataVersion],
     queryFn: async () => {
-      const { data } = await axios.get(`${STATIC_DATA_HOST.RUNES_DATA}`);
+      const requestUrl = DDRAGON_DATA_URL.RUNES.replace('{VERSION}', `${dataVersion}.1`);
+      const { data } = await axios.get(requestUrl);
       return data;
     },
 
@@ -156,7 +186,7 @@ function SummonerRunesImgRender({ summonerRunes }: { summonerRunes: PerkStyleDto
         return (
           <Image
             key={rune}
-            src={`${STATIC_DATA_HOST.RUNES_IMG}${rune}`}
+            src={`${DDRAGON_IMG_URL.RUNE}${rune}`}
             width={22}
             height={22}
             alt={`룬 이미지`}
@@ -168,11 +198,20 @@ function SummonerRunesImgRender({ summonerRunes }: { summonerRunes: PerkStyleDto
   );
 }
 
-function ItemImgRender({ isWin, itemsArr }: { isWin: boolean; itemsArr: (number | undefined)[] }) {
+function ItemImgRender({
+  isWin,
+  itemsArr,
+  version,
+}: {
+  isWin: boolean;
+  itemsArr: (number | undefined)[];
+  version: string;
+}) {
   const { data: itemsData } = useSuspenseQuery({
-    queryKey: ['item'],
+    queryKey: ['items', version],
     queryFn: async () => {
-      const { data } = await axios.get(`${STATIC_DATA_HOST.ITEMS_DATA}`);
+      const reqeustUrl = DDRAGON_DATA_URL.ITEMS.replace('{VERSION}', version);
+      const { data } = await axios.get(reqeustUrl);
       return data;
     },
 
@@ -201,7 +240,7 @@ function ItemImgRender({ isWin, itemsArr }: { isWin: boolean; itemsArr: (number 
         return (
           <Image
             key={item.name}
-            src={`${STATIC_DATA_HOST.ITEM_IMG}${item.image.full}`}
+            src={`${imgSrcVersionLoader(version, 'ITEM')}${item.image.full}`}
             width={22}
             height={22}
             alt={`${item.name}`}
@@ -213,17 +252,28 @@ function ItemImgRender({ isWin, itemsArr }: { isWin: boolean; itemsArr: (number 
   );
 }
 
-function ParticipantsList({ participants, puuid }: { participants: ParticipantDtoType[]; puuid: string }) {
+function ParticipantsList({
+  participants,
+  puuid,
+  version,
+  championsData,
+}: {
+  participants: ParticipantDtoType[];
+  puuid: string;
+  version: string;
+  championsData: any;
+}) {
   const { team1, team2 } = devideParticipants(participants);
   return (
     <div className="flex gap-[0.4rem] text-[1.2rem] text-color-gray-500">
       <div className="participant-list">
         {team1.map(team => {
+          const championData = championsData.find((champion: any) => team.championId === Number(champion.key));
           return (
             <div className="flex gap-[0.2rem] items-center" key={team.puuid}>
               <div className="w-[1.6rem] h-[1.6rem] relative overflow-hidden rounded-[0.4rem]">
                 <Image
-                  src={`${STATIC_DATA_HOST.CHAMPION_SQUARE_IMG}${team.championName}.png`}
+                  src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.id}.png`}
                   fill
                   alt={`${team.championName} image`}
                   className="scale-110"
@@ -242,11 +292,12 @@ function ParticipantsList({ participants, puuid }: { participants: ParticipantDt
       </div>
       <div className="participant-list">
         {team2.map(team => {
+          const championData = championsData.find((champion: any) => team.championId === Number(champion.key));
           return (
             <div className="flex gap-[0.2rem] items-center" key={team.puuid}>
               <div className="w-[1.6rem] h-[1.6rem] relative overflow-hidden rounded-[0.4rem]">
                 <Image
-                  src={`${STATIC_DATA_HOST.CHAMPION_SQUARE_IMG}${team.championName}.png`}
+                  src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.id}.png`}
                   fill
                   alt={`${team.championName} image`}
                   className="scale-110"

@@ -1,21 +1,23 @@
 'use client';
 
 import { STATIC_DATA_HOST } from '@/constant/API';
+import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 interface ChampionSearchBarProps {
-  championData: any;
+  championsData: any;
+  version: string;
 }
-export default function ChampionSearchBar({ championData }: ChampionSearchBarProps) {
+export default function ChampionSearchBar({ championsData, version }: ChampionSearchBarProps) {
   const [value, setValue] = useState('');
   const [matchList, setMatchList] = useState([]);
 
   useEffect(() => {
     if (value !== '') {
       const regexp = new RegExp(`^${value}`);
-      const matchChamp = championData.filter((champ: any) => regexp.test(champ.name));
+      const matchChamp = championsData.filter((champ: any) => regexp.test(champ.name));
 
       setMatchList(matchChamp);
     }
@@ -52,7 +54,7 @@ export default function ChampionSearchBar({ championData }: ChampionSearchBarPro
                       className="px-[1.2rem] py-[0.8rem] border-b border-color-gray-300 flex gap-[1.6rem] items-center hover:bg-color-gray-100"
                     >
                       <Image
-                        src={`${STATIC_DATA_HOST.CHAMPION_SQUARE_IMG}${champ.image.full}`}
+                        src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${champ.image.full}`}
                         width={36}
                         height={36}
                         alt={`${champ.name} 이미지`}
@@ -60,6 +62,7 @@ export default function ChampionSearchBar({ championData }: ChampionSearchBarPro
                       />
                       <span className="text-[1.4rem] font-bold">{champ.name}</span>
                       <span className="text-color-gray-500 ml-[1.6rem]">{champ.title}</span>
+                      <span className="text-color-gray-500 ml-[1.6rem]">{champ.position}</span>
                     </Link>
                   </li>
                 ))}

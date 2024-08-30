@@ -1,18 +1,19 @@
 'use client';
 
 import { SPELL_KEY } from '@/constant';
-import { STATIC_DATA_HOST } from '@/constant/API';
 import useModal from '@/hook/useModal';
 import Image from 'next/image';
 import SkillVideoBox from './SkillVideoBox';
 import { SpellKeyType } from '@/types';
+import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 
 interface ChampionSkillBoxProps {
   skill: any[];
-  champKey: string;
+  communitySkillData: any[];
+  version: string;
 }
 
-export default function ChampionSkillBox({ skill, champKey }: ChampionSkillBoxProps) {
+export default function ChampionSkillBox({ skill, communitySkillData, version }: ChampionSkillBoxProps) {
   const { openModal, closeModal } = useModal();
 
   return (
@@ -26,15 +27,22 @@ export default function ChampionSkillBox({ skill, champKey }: ChampionSkillBoxPr
             onClick={() =>
               openModal({
                 component: SkillVideoBox,
-                props: { champKey, skill, skillkey: SPELL_KEY[index].toLowerCase() as SpellKeyType, close: closeModal },
+                props: {
+                  communitySkillData: communitySkillData[index],
+                  skill,
+                  skillkey: SPELL_KEY[index].toLowerCase() as SpellKeyType,
+                  close: closeModal,
+                },
               })
             }
           >
             <span className="text-[2.0rem]">{SPELL_KEY[index]}</span>
             <Image
-              src={`${index ? STATIC_DATA_HOST.CHAMPION_ABILITY_IMG : STATIC_DATA_HOST.CHAMPION_PASSIVE_IMG}${
-                skill.image.full
-              }`}
+              src={`${
+                index
+                  ? imgSrcVersionLoader(version, 'CHAMPION_ABILITY')
+                  : imgSrcVersionLoader(version, 'CHAMPION_PASSIVE')
+              }${skill.image.full}`}
               width={32}
               height={32}
               className="rounded-[0.4rem]"

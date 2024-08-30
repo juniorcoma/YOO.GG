@@ -1,7 +1,7 @@
 import { GAME_TYPE_QUEUEID } from '@/constant';
 import { RIOT_REGIONAL_HOST, RIOT_REQUEST_ENDPOINT } from '@/constant/API';
-import { GAME_TYPE_RENDER_LIST } from '@/constant/renderList';
 import { riotRequest } from '@/service/axios';
+import { getVersionsData } from '@/service/requestJsonData.api';
 import { GameType } from '@/types';
 import { MatchDtoType } from '@/types/response';
 import { AxiosError } from 'axios';
@@ -21,9 +21,17 @@ export async function GET(request: Request, context: { params: Params }) {
   const { puuid } = context.params;
   const start = searchParams.get('start') || '0';
   const type = (searchParams.get('type') as GameType | undefined) || 'TOTAL';
+
+  const versionsData = await getVersionsData();
+  const filterVersionsData = versionsData.slice(0, 5).map((version: string) => {
+    return version.split('.').slice(0, 2).join('.');
+  });
+
   try {
+    let dataArr;
     if (type === 'TOTAL') {
-      return filterResponseData(puuid, start);
+      const data = await filterResponseData(puuid, start);
+      dataArr = data.slice();
     } else {
       const queueId = GAME_TYPE_QUEUEID[type];
       const { data } = await riotRequest.get(
@@ -38,9 +46,13 @@ export async function GET(request: Request, context: { params: Params }) {
         matchData.push(data);
         await requestDelay(100);
       }
-
-      return NextResponse.json(matchData, { status: 200 });
+      dataArr = matchData.slice();
     }
+    const responseData = dataArr.filter(data => {
+      const gameVersion = data.info.gameVersion.split('.').slice(0, 2).join('.');
+      return filterVersionsData.includes(gameVersion);
+    });
+    return NextResponse.json(responseData, { status: 200 });
   } catch (error) {
     if (error instanceof AxiosError) {
       return NextResponse.json({ error: error.message, status: error.status }, { status: error.status });
@@ -65,5 +77,5 @@ async function filterResponseData(puuid: string, start: string) {
     }
     await requestDelay(100);
   }
-  return NextResponse.json(matchData, { status: 200 });
+  return matchData;
 }
