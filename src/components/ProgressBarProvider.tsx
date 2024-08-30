@@ -6,7 +6,7 @@ export default function ProgressProviders({ children }: { children: React.ReactN
   return (
     <>
       {children}
-      <ProgressBar color="#FFA100" options={{ showSpinner: false }} shallowRouting />
+      <ProgressBar color="#FFA100" height="4px" options={{ showSpinner: false }} shallowRouting />
     </>
   );
 }
