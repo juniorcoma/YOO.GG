@@ -1,4 +1,4 @@
-import { STATIC_DATA_HOST } from '@/constant/API';
+import { DDRAGON_IMG_URL } from '@/constant/API';
 import useOutsideClick from '@/hook/useOutsideClick';
 import Image from 'next/image';
 
@@ -13,7 +13,7 @@ export default function FullSkinContainer({ champName, skinNum, skinName }: Full
   return (
     <div className="full-img-box" ref={ref}>
       <Image
-        src={`${STATIC_DATA_HOST.CHAMPION_SPLASH_IMG}${champName}_${skinNum}.jpg`}
+        src={`${DDRAGON_IMG_URL.CHAMPION_SPLASH}${champName}_${skinNum}.jpg`}
         fill
         alt={`${skinName} 이미지`}
         className="rounded-[1.2rem]"
