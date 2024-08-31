@@ -41,6 +41,7 @@ export const REQUEST_DATA_HOST = {
   COMMUNITY_DRAGON: 'https://raw.communitydragon.org/',
   SKILL_VIDEO: 'https://d28xe8vt774jo5.cloudfront.net/',
   SERVER: `http://localhost:3000/api/v1/riot/lol/`,
+  YOUTUBE_VIDEO: 'https://www.youtube.com/embed/',
 };
 
 export const DDRAGON_DATA_URL = {
@@ -78,4 +79,17 @@ export const SERVER_REQUEST_URL = {
   CHAMPION_MASTERY: `${REQUEST_DATA_HOST.SERVER}champion/mastery/`,
   SUMMONER_LEAGUE: `${REQUEST_DATA_HOST.SERVER}summoner/league/`,
   SUMMONER_RECORD_DATA: `${REQUEST_DATA_HOST.SERVER}match/`,
+};
+
+export const LOL_WORLDS_MUSIC = {
+  '2014': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}fmI_Ndrxy14?si=a70sCe1dpbDZuW3Y`,
+  '2015': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}4Twd965VzX4?si=ne3swgq9cgtOvFaX`,
+  '2016': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}Zasx9hjo4WY?si=XjbWnEZfjTCng0aM`,
+  '2017': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}r6zIGXun57U?si=GWyA5gtDYK-MfO0t`,
+  '2018': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}fB8TyLTD7EE?si=7e0eBiKG_t_SpJwj`,
+  '2019': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}i1IKnWDecwA?si=W4epMXGdoaqN_qFO`,
+  '2020': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}KbNL9ZyB49c?si=DHPhoTtyyGO9beWY`,
+  '2021': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}1Z6CHioIn3s?si=2Ead09EDTjDxuhRg`,
+  '2022': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}HYsz1hP0BFo?si=NorTip1v2aaiZEJo`,
+  '2023': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}C3GouGa0noM?si=GKZqfI7HYu8sw3Ot`,
 };

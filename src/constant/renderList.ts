@@ -90,3 +90,21 @@ export const GAME_TYPE_RENDER_LIST = [
     query: 'ARAM',
   },
 ];
+
+export const LOL_WORLDS_RENDER_LIST: {
+  id: number;
+  year: '2014' | '2015' | '2016' | '2017' | '2018' | '2019' | '2020' | '2021' | '2022' | '2023';
+}[] = Array.from({ length: 10 }, (_, index) => ({
+  id: index + 1,
+  year: (2014 + index).toString() as
+    | '2014'
+    | '2015'
+    | '2016'
+    | '2017'
+    | '2018'
+    | '2019'
+    | '2020'
+    | '2021'
+    | '2022'
+    | '2023',
+}));
