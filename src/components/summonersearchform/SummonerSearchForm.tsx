@@ -21,7 +21,7 @@ export default function SummonerSearchForm() {
         <div className="text-color-gray-400 w-[19.4rem]">Korea</div>
       </div>
       <div className="relative flex-1">
-        <label className="mb-[0.4rem]" htmlFor="summoner-search-main">
+        <label className="mb-[0.4rem] cursor-pointer" htmlFor="summoner-search-main">
           검색
         </label>
         <input
@@ -33,7 +33,9 @@ export default function SummonerSearchForm() {
         />
         <label
           htmlFor="summoner-search-main"
-          className={`${inputValue ? 'hidden' : ''} absolute flex bottom-[7.5%] text-color-gray-400 text-[1.4rem] z-20`}
+          className={`${
+            inputValue ? 'hidden' : ''
+          } absolute flex bottom-[7.5%] text-color-gray-400 text-[1.4rem] z-20 cursor-text`}
         >
           <span>플레이어 이름 +</span>
           <span className="bg-color-gray-200 rounded-[0.2rem]">#KR1</span>
