@@ -40,7 +40,7 @@ export const REQUEST_DATA_HOST = {
   DDRAGON: 'https://ddragon.leagueoflegends.com/',
   COMMUNITY_DRAGON: 'https://raw.communitydragon.org/',
   SKILL_VIDEO: 'https://d28xe8vt774jo5.cloudfront.net/',
-  SERVER: `https://yoo-gg-git-main-parks-projects-c6ee1581.vercel.app/api/v1/riot/lol/`,
+  SERVER: `https://yoo-gg.vercel.app/api/v1/riot/lol/`,
   YOUTUBE_VIDEO: 'https://www.youtube.com/embed/',
 };
 
