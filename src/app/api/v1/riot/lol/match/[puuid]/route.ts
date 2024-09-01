@@ -34,16 +34,26 @@ export async function GET(request: Request, context: { params: Params }) {
       dataArr = data.slice();
     } else {
       const queueId = GAME_TYPE_QUEUEID[type];
-      const { data } = await riotRequest.get(
-        `${RIOT_REGIONAL_HOST.ASIA}${RIOT_REQUEST_ENDPOINT.MATCH_ID_LIST}${puuid}/ids?count=20&start=${start}&queue=${queueId}`,
-      );
+      const url = `${RIOT_REGIONAL_HOST.ASIA}${RIOT_REQUEST_ENDPOINT.MATCH_ID_LIST}${puuid}/ids?count=20&start=${start}&queue=${queueId}`;
+      console.log('Fetching match data from:', url);
+
+      const response = await riotRequest.get(url);
+      console.log('Response Status:', response.status);
+      console.log('Response Headers:', response.headers);
+      console.log('Response Data:', response.data);
+
       const matchData: MatchDtoType[] = [];
 
-      for (const matchId of data) {
-        const { data } = await riotRequest.get(
-          `${RIOT_REGIONAL_HOST.ASIA}${RIOT_REQUEST_ENDPOINT.MATCH_DETAIL_INFO}${matchId}`,
-        );
-        matchData.push(data);
+      for (const matchId of response.data) {
+        const matchUrl = `${RIOT_REGIONAL_HOST.ASIA}${RIOT_REQUEST_ENDPOINT.MATCH_DETAIL_INFO}${matchId}`;
+        console.log('Fetching match details from:', matchUrl);
+
+        const matchResponse = await riotRequest.get(matchUrl);
+        console.log('Match Response Status:', matchResponse.status);
+        console.log('Match Response Headers:', matchResponse.headers);
+        console.log('Match Response Data:', matchResponse.data);
+
+        matchData.push(matchResponse.data);
         await requestDelay(100);
       }
       dataArr = matchData.slice();
@@ -54,12 +64,14 @@ export async function GET(request: Request, context: { params: Params }) {
     });
     return NextResponse.json(responseData, { status: 200 });
   } catch (error) {
+    console.error('Error in GET function:', error);
     if (error instanceof AxiosError) {
       return NextResponse.json({ error: error.message, status: error.status }, { status: error.status });
+    } else {
+      return NextResponse.json({ error: 'Internal Server Error', status: 500 }, { status: 500 });
     }
   }
 }
-
 async function filterResponseData(puuid: string, start: string) {
   const matchData: MatchDtoType[] = [];
   const queueId = [450, 490, 420, 440];
@@ -78,4 +90,18 @@ async function filterResponseData(puuid: string, start: string) {
     await requestDelay(100);
   }
   return matchData;
+}
+
+async function fetchMatchData(url: string) {
+  try {
+    const response = await riotRequest.get(url);
+    console.log('Response Status:', response.status);
+    console.log('Response Headers:', response.headers);
+    console.log('Response Data:', response.data);
+
+    return response.data; // 응답 데이터는 이미 JSON 형식으로 파싱됨
+  } catch (error) {
+    console.error(`Error fetching data from ${url}:`, error);
+    throw error;
+  }
 }
