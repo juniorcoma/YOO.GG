@@ -1,5 +1,4 @@
 import ContentBox from '@/components/ContentBox';
-import LolMusicList from '@/components/LolMusicList';
 import LolMusicListContainer from '@/components/LolMusicListContainer';
 import RotationsList from '@/components/RotationsList';
 import SummonerSearchForm from '@/components/summonersearchform/SummonerSearchForm';
@@ -27,7 +26,7 @@ export default function Home() {
           <div className="flex gap-[3.2rem] h-[30rem]">
             <LolMusicListContainer />
             <ContentBox titleText="로테이션 챔피언" css="flex-1">
-              <RotationsList />
+              {/* <RotationsList /> */}sss
             </ContentBox>
           </div>
           <div></div>
