@@ -239,6 +239,16 @@ html {
     justify-content: center;
     align-items: center;
   }
+
+  .content-controller {
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    color: var(--color-gray-500);
+  }
+  .content-controller:hover {
+    background-color: var(--color-primary-500);
+    color: var(--color-gray-00);
+  }
 }
 
 @layer utilities {
@@ -393,6 +403,16 @@ html {
   .loader svg path,
   .loader svg rect {
     fill: var(--color-primary-600);
+  }
+
+  .content-controller.active {
+    background-color: var(--color-primary-500);
+    color: var(--color-gray-00);
+  }
+
+  .hidden-scroll {
+    -ms-overflow-style: none; /* 익스플로러, 앳지 */
+    scrollbar-width: none; /* 파이어폭스 */
   }
 }
 

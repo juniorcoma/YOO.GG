@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import ContentBox from './ContentBox';
-import { DDRAGON_IMG_URL, STATIC_DATA_HOST } from '@/constant/API';
+import { DDRAGON_IMG_URL } from '@/constant/API';
 import { useRef, useState } from 'react';
 import useModal from '@/hook/useModal';
 import FullSkinContainer from './FullSkinContainer';

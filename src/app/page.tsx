@@ -1,7 +1,9 @@
 import ContentBox from '@/components/ContentBox';
+import LolMusicList from '@/components/LolMusicList';
+import LolMusicListContainer from '@/components/LolMusicListContainer';
 import RotationsList from '@/components/RotationsList';
 import SummonerSearchForm from '@/components/summonersearchform/SummonerSearchForm';
-import WorldsMusicList from '@/components/WorldsMusicList';
+
 import Image from 'next/image';
 
 export default function Home() {
@@ -23,9 +25,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col py-[6.4rem] gap-[3.2rem]">
           <div className="flex gap-[3.2rem] h-[30rem]">
-            <ContentBox titleText="LOL MUSIC" css="w-[33rem]">
-              <WorldsMusicList />
-            </ContentBox>
+            <LolMusicListContainer />
             <ContentBox titleText="로테이션 챔피언" css="flex-1">
               <RotationsList />
             </ContentBox>

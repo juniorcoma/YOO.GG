@@ -108,3 +108,10 @@ export const LOL_WORLDS_RENDER_LIST: {
     | '2022'
     | '2023',
 }));
+export const LOL_CINEMATIC_RENDER_LIST: {
+  id: number;
+  year: '2019' | '2020' | '2021' | '2022' | '2023' | '2024';
+}[] = Array.from({ length: 6 }, (_, index) => ({
+  id: index + 1,
+  year: (2019 + index).toString() as '2019' | '2020' | '2021' | '2022' | '2023' | '2024',
+}));
