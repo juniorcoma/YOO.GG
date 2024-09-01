@@ -1,4 +1,3 @@
-import { STATIC_DATA_HOST } from '@/constant/API';
 import { ChampPositionType, ChampTagType } from '@/types';
 import Image from 'next/image';
 import { PositionIconRender } from './ChampionListTable';

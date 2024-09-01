@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export default function FavoriteChampionBox() {
-  const [favoriteChamp, setFavoriteChamp] = useState(localStorage.getItem('favorite'));
+  const [favoriteChamp, setFavoriteChamp] = useState();
   if (!favoriteChamp)
     return (
       <div className="min-h-[32.4rem] flex justify-center items-center">

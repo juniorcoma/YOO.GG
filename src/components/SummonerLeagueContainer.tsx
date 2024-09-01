@@ -1,6 +1,6 @@
 import ContentBox from './ContentBox';
 import Image from 'next/image';
-import { COMMUNITY_DRAGON_IMG_URL, STATIC_DATA_HOST } from '@/constant/API';
+import { COMMUNITY_DRAGON_IMG_URL } from '@/constant/API';
 import { LeagueDataType } from '@/types/response';
 import { getSummonerLeagueData } from '@/service/requestJsonData.api';
 

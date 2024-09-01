@@ -1,5 +1,5 @@
 import { QUEUEID_KR_TYPE } from '@/constant';
-import { DDRAGON_DATA_URL, DDRAGON_IMG_URL, STATIC_DATA_HOST } from '@/constant/API';
+import { DDRAGON_DATA_URL, DDRAGON_IMG_URL } from '@/constant/API';
 import { ParticipantDtoType, PerkStyleDtoType } from '@/types/response';
 import { calculateGameCreation, calculateGameDuration } from '@/utils/calculateRecordTime';
 import devideParticipants from '@/utils/devideParticipants';

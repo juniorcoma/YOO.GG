@@ -1,6 +1,5 @@
 'use client';
 
-import { STATIC_DATA_HOST } from '@/constant/API';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,7 +24,7 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
     if (value === '') {
       setMatchList([]);
     }
-  }, [value]);
+  }, [championsData, value]);
 
   return (
     <form className="champion-search-box">
