@@ -1,10 +1,15 @@
+import ContentBox from '@/components/ContentBox';
+import LolMusicList from '@/components/LolMusicList';
+import LolMusicListContainer from '@/components/LolMusicListContainer';
+import RotationsList from '@/components/RotationsList';
 import SummonerSearchForm from '@/components/summonersearchform/SummonerSearchForm';
+
 import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="layout-container">
-      <div className="content-wrapper">
+    <div className="layout-container home">
+      <div className="content-wrapper ">
         <h1 className="hidden-logo">YOO.GG</h1>
         <div className="mt-[6.4rem] mb-[4.8rem]">
           <Image
@@ -18,8 +23,13 @@ export default function Home() {
         <div className="w-[80rem] m-auto">
           <SummonerSearchForm />
         </div>
-        <div className="flex flex-col py-[6.4rem]">
-          <div></div>
+        <div className="flex flex-col py-[6.4rem] gap-[3.2rem]">
+          <div className="flex gap-[3.2rem] h-[30rem]">
+            <LolMusicListContainer />
+            <ContentBox titleText="로테이션 챔피언" css="flex-1">
+              <RotationsList />
+            </ContentBox>
+          </div>
           <div></div>
         </div>
       </div>
