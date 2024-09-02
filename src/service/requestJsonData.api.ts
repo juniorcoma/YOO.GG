@@ -85,7 +85,7 @@ export async function getRotationsChampionsData() {
   });
   const rotationsData: RotationsDataType = await rotationsResponse.json();
 
-  return rotationsData.freeChampionIds;
+  return rotationsData;
 }
 
 export async function getSummonerData(name: string, tag: string) {
