@@ -8,6 +8,16 @@ import ContentBox from '@/components/ContentBox';
 import { CHAMPION_POSITION_DATA } from '@/constant';
 import { getChampionData, getCommunityChampionData, getVersionsData } from '@/service/requestJsonData.api';
 
+export async function generateMetadata({ params }: { params: { champname: string } }) {
+  const { champname } = params;
+  const champDetailData = await getChampionData(champname);
+  return {
+    title: {
+      absolute: `챔피언 정보-${champDetailData.name}`,
+    },
+  };
+}
+
 export default async function ChampInfoPage({ params }: { params: { champname: string } }) {
   const { champname } = params;
   const champDetailData = await getChampionData(champname);

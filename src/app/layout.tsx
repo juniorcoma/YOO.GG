@@ -21,7 +21,10 @@ const AppleSDGOdicNeo = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'YOO.GG',
+  title: {
+    template: '%s | YOO.GG',
+    default: 'YOO.GG',
+  },
   description: '리그오브레전드의 모든 챔피언의 최신 정보와 소환사의 전적을 검색하여 승률을 올려보세요!',
 };
 
