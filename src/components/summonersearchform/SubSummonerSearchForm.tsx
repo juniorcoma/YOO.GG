@@ -1,15 +1,9 @@
 'use client';
 import ButtonSvg from '@/assets/icons/form_submit.svg';
-import useSubmitFormEvent from '@/hook/useSubmitForm';
-import { ChangeEvent, useState } from 'react';
+import useSearchFormEvent from '@/hook/useSearchFormEvent';
+
 export default function SubSummonerSearchForm() {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const { handleSubmitEvent } = useSubmitFormEvent(inputValue, setInputValue);
+  const { inputValue, handleChangeEvent, handleSubmitEvent } = useSearchFormEvent();
   return (
     <form onSubmit={handleSubmitEvent} className="flex rounded-[0.4rem] overflow-hidden h-[3.2rem]">
       <div className="py-[0.8rem] pl-[1.2rem] pr-[2.8rem] bg-color-primary-200 text-[1.4rem] flex justify-center items-center">
@@ -28,7 +22,7 @@ export default function SubSummonerSearchForm() {
         <input
           className="text-[1.4rem] px-[1.6rem] flex-1"
           value={inputValue}
-          onChange={handleOnChange}
+          onChange={handleChangeEvent}
           id="summoner-search"
         />
 
