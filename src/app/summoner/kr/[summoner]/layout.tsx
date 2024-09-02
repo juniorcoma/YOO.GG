@@ -3,8 +3,6 @@ import SummonerProfile from '@/components/SummonerProfile';
 
 import { getSummonerData } from '@/service/requestJsonData.api';
 
-import React from 'react';
-
 export default async function SummonerLayout({
   children,
   params,

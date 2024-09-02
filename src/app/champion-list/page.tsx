@@ -6,6 +6,11 @@ import FavoriteChampionBox from '@/components/FavoriteChampionBox';
 import { CHAMPION_POSITION_DATA } from '@/constant';
 
 import { getChampionsData, getVersionsData } from '@/service/requestJsonData.api';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '챔피언 리스트',
+};
 
 export default async function ChmapionListPage() {
   const championsData: any = await getChampionsData(true);
