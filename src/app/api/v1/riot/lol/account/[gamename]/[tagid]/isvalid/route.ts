@@ -11,11 +11,11 @@ interface Params {
 export async function GET(request: Request, context: { params: Params }) {
   const { gamename, tagid } = context.params;
   try {
-    await riotRequest.get<AccountType>(
+    const { data } = await riotRequest.get<AccountType>(
       `${RIOT_REGIONAL_HOST.ASIA}${RIOT_REQUEST_ENDPOINT.ACCOUNT}${gamename}/${tagid}`,
     );
 
-    return NextResponse.json(true);
+    return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(false);
   }
