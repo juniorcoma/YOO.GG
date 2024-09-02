@@ -26,10 +26,9 @@ export default function Home() {
           <div className="flex gap-[3.2rem] h-[30rem]">
             <LolMusicListContainer />
             <ContentBox titleText="로테이션 챔피언" css="flex-1">
-              {/* <RotationsList /> */}sss
+              <RotationsList />
             </ContentBox>
           </div>
-          <div></div>
         </div>
       </div>
     </div>

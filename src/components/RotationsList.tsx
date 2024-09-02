@@ -8,7 +8,7 @@ export default async function RotationsList() {
   const championsData: any = await getChampionsData(true);
   const rotationsData = await getRotationsChampionsData();
   const [latestVersion] = await getVersionsData();
-  const renderItemArr = rotationsData.map(ids => {
+  const renderItemArr = rotationsData.freeChampionIds.map(ids => {
     return championsData.find((champion: any) => ids === Number(champion.key));
   });
   return (
