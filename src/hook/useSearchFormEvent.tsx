@@ -23,7 +23,7 @@ export default function useSearchFormEvent() {
       saveLocalstorage('recentlySearch', `${gameName}-${tagLine}`);
       router.push(`/summoner/kr/${gameName}-${tagLine}`);
     } else {
-      alert('꺼져');
+      alert('소환사를 찾을 수 없습니다');
     }
   };
 
