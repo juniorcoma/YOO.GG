@@ -14,12 +14,14 @@ export default function useSearchFormEvent() {
 
   const handleSubmitEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const [gameName, tagId] = inputValue.split('#');
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}account/${gameName}/${tagId}/isvalid`);
+    const [valueName, valueTagId] = inputValue.split('#');
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}account/${valueName}/${valueTagId}/isvalid`);
+    const { gameName, tagLine } = data;
+
     if (data) {
       setInputValue('');
-      saveLocalstorage('recentlySearch', `${gameName}-${tagId}`);
-      router.push(`/summoner/kr/${gameName}-${tagId}`);
+      saveLocalstorage('recentlySearch', `${gameName}-${tagLine}`);
+      router.push(`/summoner/kr/${gameName}-${tagLine}`);
     } else {
       alert('꺼져');
     }
