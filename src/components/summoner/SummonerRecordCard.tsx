@@ -10,12 +10,9 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function CardLayer({ children, isWin, key }: { children: React.ReactNode; isWin: boolean; key: string }) {
+function CardLayer({ children, isWin }: { children: React.ReactNode; isWin: boolean }) {
   return (
-    <div
-      key={key}
-      className={`${isWin ? 'bg-color-primary-100' : 'bg-color-red-100'} rounded-[0.8rem] overflow-hidden flex`}
-    >
+    <div className={`${isWin ? 'bg-color-primary-100' : 'bg-color-red-100'} rounded-[0.8rem] overflow-hidden flex`}>
       <div className={`w-[0.8rem] ${isWin ? 'bg-color-primary-500' : 'bg-color-red-500'}`} />
       <div className="flex py-[0.8rem] pl-[1.2rem] pr-[0.4rem] flex-1 gap-[1.2rem]">{children}</div>
       <button className={`w-[4.7rem] ${isWin ? 'bg-color-primary-200' : 'bg-color-red-200'}`} type="button"></button>
