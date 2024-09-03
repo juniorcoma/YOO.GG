@@ -34,10 +34,10 @@ export default function SummonerSearchForm() {
             htmlFor="summoner-search-main"
             className={`${
               inputValue ? 'hidden' : ''
-            } absolute flex bottom-[7.5%] text-color-gray-400 text-[1.4rem] z-20 cursor-text`}
+            } absolute flex bottom-[7.5%] text-color-gray-400 text-[1.4rem] z-20 cursor-text items-center gap-[0.4rem]`}
           >
             <span>플레이어 이름 +</span>
-            <span className="bg-color-gray-200 rounded-[0.2rem]">#KR1</span>
+            <span className="bg-color-gray-200 rounded-[0.2rem] py-[0.2rem] px-[0.4rem]">#KR1</span>
           </label>
         </div>
         <button type="submit" className="px-[1.6rem]">
