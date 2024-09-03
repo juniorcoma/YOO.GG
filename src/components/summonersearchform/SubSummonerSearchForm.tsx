@@ -18,10 +18,10 @@ export default function SubSummonerSearchForm() {
             htmlFor="summoner-search"
             className={`${
               inputValue && 'hidden'
-            } absolute flex bottom-[50%] translate-y-[50%] left-[1.6rem] text-color-gray-400 text-[1.4rem] cursor-text`}
+            } absolute flex bottom-[50%] translate-y-[50%] left-[1.6rem] text-color-gray-400 text-[1.4rem] cursor-text gap-[0.4rem]`}
           >
             <span>플레이어 이름 +</span>
-            <span className="bg-color-gray-200 rounded-[0.2rem]">#KR1</span>
+            <span className="bg-color-gray-200 rounded-[0.4rem] px-[0.4rem] py-[0.1rem]">#KR1</span>
           </label>
           <input
             className="text-[1.4rem] px-[1.6rem] flex-1"
