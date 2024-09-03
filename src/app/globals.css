@@ -449,6 +449,30 @@ html {
     -ms-overflow-style: none; /* 익스플로러, 앳지 */
     scrollbar-width: none; /* 파이어폭스 */
   }
+
+  .hidden-header {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10000;
+    background-color: var(--color-primary-100);
+    transition: 0.5s;
+    transform: translateY(-100%);
+  }
+  .hidden-header.view {
+    transform: translateY(0);
+  }
+  .hidden-header > div:first-child {
+    width: 80rem;
+    margin: auto;
+    padding: 0.8rem 0;
+  }
+
+  .bottom-line {
+    height: 0.1rem;
+    background: linear-gradient(90deg, #5177f0, #a46dc5 33.5%, #fb5a90 67.5%, #ff3478);
+  }
 }
 
 /* @media (prefers-color-scheme: dark) {

@@ -5,6 +5,9 @@ import { BOTTOM_NAV_RENDER_LIST } from '@/constant/renderList';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import HiddenHeader from './HiddenHeader';
+import useIntersectionObservRef from '@/hook/useIntersectionObservRef';
+import { useState } from 'react';
 
 interface BottomHeaderProps {
   version: string;
@@ -12,21 +15,34 @@ interface BottomHeaderProps {
 
 export default function BottomHeader({ version }: BottomHeaderProps) {
   const pathName = usePathname();
+  const [isViewHidden, setIsViewHidden] = useState(false);
+
+  const observRef = useIntersectionObservRef<HTMLDivElement>({
+    callback: () => {
+      setIsViewHidden(false);
+    },
+    onNotIntersecting: () => {
+      setIsViewHidden(true);
+    },
+  });
 
   return (
-    <div className="bg-color-primary-500 border-b border-color-primary-600">
-      <div className="w-full max-w-[108rem] m-auto flex flex-col">
-        <div className={`${pathName === '/' && 'hidden'} py-[0.8rem] flex gap-[1.6rem]`}>
-          <div className="relative w-[13rem] h-[3.2rem]">
-            <Image src={'/images/yoogg_sub_img.png'} fill alt="YOO.GG sub image" />
+    <>
+      <HiddenHeader open={isViewHidden} path={pathName} />
+      <div className="bg-color-primary-500 border-b border-color-primary-600" ref={observRef}>
+        <div className="w-full max-w-[108rem] m-auto flex flex-col">
+          <div className={`${pathName === '/' && 'hidden'} py-[0.8rem] flex gap-[1.6rem]`}>
+            <div className="relative w-[13rem] h-[3.2rem]">
+              <Image src={'/images/yoogg_sub_img.png'} fill alt="YOO.GG sub image" />
+            </div>
+            <div className="flex-1">
+              <SubSummonerSearchForm />
+            </div>
           </div>
-          <div className="flex-1">
-            <SubSummonerSearchForm />
-          </div>
+          <Navbar pathName={pathName} version={version} />
         </div>
-        <Navbar pathName={pathName} version={version} />
       </div>
-    </div>
+    </>
   );
 }
 
