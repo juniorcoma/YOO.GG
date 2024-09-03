@@ -405,6 +405,13 @@ html {
     text-overflow: ellipsis;
   }
 
+  .name {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .skeleton {
     background-color: #f2f2f2;
     position: relative;
