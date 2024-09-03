@@ -4,8 +4,10 @@ import { PositionIconRender } from './ChampionListTable';
 import { CHAMPION_TAG_INFO } from '@/constant';
 import { getVersionsData } from '@/service/requestJsonData.api';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
+import FavoriteBtn from './FavoriteBtn';
 
 interface ChampionProfileProps {
+  id: string;
   img: string;
   name: string;
   position: ChampPositionType;
@@ -13,7 +15,7 @@ interface ChampionProfileProps {
   tags: ChampTagType[];
 }
 
-export default async function ChampionProfile({ img, name, position, title, tags }: ChampionProfileProps) {
+export default async function ChampionProfile({ id, img, name, position, title, tags }: ChampionProfileProps) {
   const [latestVersion] = await getVersionsData();
   return (
     <div className="flex gap-[1.2rem]">
@@ -27,7 +29,10 @@ export default async function ChampionProfile({ img, name, position, title, tags
         />
       </div>
       <div className="flex flex-col gap-[0.8rem] pt-[0.4rem]">
-        <h1 className="text-[2.8rem] font-bold">{name}</h1>
+        <div className="flex items-center gap-[1.6rem] leading-[1]">
+          <h1 className="text-[2.8rem] font-bold">{name}</h1>
+          <FavoriteBtn champId={id} />
+        </div>
         <p className="text-[2rem] leading-[1.2]">{title}</p>
         <div className="flex gap-[0.8rem] items-center text-[1.6rem]">
           <PositionIconRender position={position} />

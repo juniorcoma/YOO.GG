@@ -29,6 +29,7 @@ export default async function ChampInfoPage({ params }: { params: { champname: s
         <div>
           <div className="flex justify-between items-center">
             <ChampionProfile
+              id={champDetailData.key}
               img={champDetailData.image.full}
               name={champDetailData.name}
               title={champDetailData.title}
