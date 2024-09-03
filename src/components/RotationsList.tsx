@@ -12,7 +12,7 @@ export default async function RotationsList() {
     return championsData.find((champion: any) => ids === Number(champion.key));
   });
   return (
-    <ul className="px-[1.6rem] py-[1.2rem] flex flex-wrap gap-[1.2rem]">
+    <ul className="px-[1.6rem] py-[1.2rem] flex flex-wrap gap-[1.2rem] justify-center">
       {renderItemArr.map((champ: any) => (
         <li key={champ.key} className="relative ">
           <Link href={`/champions/${champ.id}/info`}>
