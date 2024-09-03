@@ -20,7 +20,7 @@ export default function Home() {
           />
         </div>
         <div className="w-[80rem] m-auto">
-          <SummonerSearchForm />
+          <SummonerSearchForm inputId="main-home-search-input" />
         </div>
         <div className="flex flex-col py-[6.4rem] gap-[3.2rem]">
           <div className="flex gap-[3.2rem] h-[30rem]">
