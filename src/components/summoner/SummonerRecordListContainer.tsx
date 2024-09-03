@@ -28,7 +28,8 @@ export default function SummonerRecordListContainer({
 }: SummonerRecordListContainerProps) {
   const searchParams = useSearchParams();
   const type = (searchParams.get('queue_type') as GameType | undefined) || 'TOTAL';
-  const { data, fetchNextPage, isPending, isFetching } = useGetSummonerRecordList(puuid, type);
+  const { data, fetchNextPage, isPending, isFetchingNextPage, hasNextPage } = useGetSummonerRecordList(puuid, type);
+
   if (isPending) return <SsummonerRecordListContainer />;
 
   if (!data) return <div>데이터 없다</div>;
@@ -47,6 +48,7 @@ export default function SummonerRecordListContainer({
       </ContentBox>
     );
   const summaryData = totalRecordSummary(filterSummonerData);
+
   return (
     <>
       <ContentBox titleText="최근 게임" css="mb-[2.4rem]">
@@ -69,43 +71,54 @@ export default function SummonerRecordListContainer({
       </ContentBox>
       <div className="flex flex-col gap-[0.8rem] mb-[1.6rem]">
         {filterSummonerData.map((record, index) => (
-          <SummonerRecordCard.CardLayer isWin={record.win} key={record.puuid}>
-            <SummonerRecordCard.KeySummary
-              isWin={record.win}
-              queueId={Number(recordList[index].info.queueId)}
-              tiemInfo={{
-                gameCreation: recordList[index].info.gameCreation,
-                gameDuration: recordList[index].info.gameDuration,
-              }}
-            />
-            <SummonerRecordCard.DetailInfo
-              participant={record}
-              version={version}
-              gameVersion={recordList[index].info.gameVersion}
-              championsData={championsData}
-            />
-            <SummonerRecordCard.ParticipantsList
-              participants={recordList[index].info.participants}
-              puuid={record.puuid}
-              version={version}
-              championsData={championsData}
-            />
-          </SummonerRecordCard.CardLayer>
+          <div key={index}>
+            <SummonerRecordCard.CardLayer isWin={record.win}>
+              <SummonerRecordCard.KeySummary
+                isWin={record.win}
+                queueId={Number(recordList[index].info.queueId)}
+                tiemInfo={{
+                  gameCreation: recordList[index].info.gameCreation,
+                  gameDuration: recordList[index].info.gameDuration,
+                }}
+              />
+              <SummonerRecordCard.DetailInfo
+                participant={record}
+                version={version}
+                gameVersion={recordList[index].info.gameVersion}
+                championsData={championsData}
+              />
+              <SummonerRecordCard.ParticipantsList
+                participants={recordList[index].info.participants}
+                puuid={record.puuid}
+                version={version}
+                championsData={championsData}
+              />
+            </SummonerRecordCard.CardLayer>
+          </div>
         ))}
       </div>
-      <button
-        className="h-[5rem] text-[1.6rem] bg-color-gray-00 border border-color-gray-300 w-full rounded-[0.4rem]"
-        onClick={() => fetchNextPage()}
-        disabled={isFetching}
-      >
-        {isFetching ? (
-          <div className="loader">
-            <Loading />
-          </div>
-        ) : (
-          '더보기'
-        )}
-      </button>
+      {hasNextPage ? (
+        <button
+          className={`h-[5rem] text-[1.6rem] bg-color-gray-00 border border-color-gray-300 w-full rounded-[0.4rem]`}
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
+        >
+          {isFetchingNextPage ? (
+            <div className="loader">
+              <Loading />
+            </div>
+          ) : (
+            '더보기'
+          )}
+        </button>
+      ) : (
+        <div className="text-[1.6rem] text-center">
+          마지막 전적입니다. <br />
+          <span className="text-[1.4rem] text-color-gray-400">
+            (YOO.GG는 LOL최신 버전에서 이전5버전까지 제공합니다 )
+          </span>
+        </div>
+      )}
     </>
   );
 }
