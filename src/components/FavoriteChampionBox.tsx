@@ -33,7 +33,7 @@ export default function FavoriteChampionBox({ championsData, version }: Favorite
     );
 
   return (
-    <ul className="min-h-[32.4rem] px-[1.6rem] py-[1.2rem] flex gap-[0.8rem] flex-wrap">
+    <ul className="px-[1.6rem] py-[1.2rem] flex gap-[0.8rem] flex-wrap">
       {favoriteChamp.map((item: any) => {
         const championData = championsData.find((champ: any) => champ.key === item);
         return (

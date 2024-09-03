@@ -1,3 +1,5 @@
+import { LOL_CINEMATIC_INFO, LOL_WORLDS_INFO } from '.';
+
 export const BOTTOM_NAV_RENDER_LIST = [
   {
     id: 1,
@@ -94,6 +96,10 @@ export const GAME_TYPE_RENDER_LIST = [
 export const LOL_WORLDS_RENDER_LIST: {
   id: number;
   year: '2014' | '2015' | '2016' | '2017' | '2018' | '2019' | '2020' | '2021' | '2022' | '2023';
+  info: {
+    title: string;
+    artist: string;
+  };
 }[] = Array.from({ length: 10 }, (_, index) => ({
   id: index + 1,
   year: (2014 + index).toString() as
@@ -107,11 +113,14 @@ export const LOL_WORLDS_RENDER_LIST: {
     | '2021'
     | '2022'
     | '2023',
+  info: LOL_WORLDS_INFO[index],
 }));
 export const LOL_CINEMATIC_RENDER_LIST: {
   id: number;
   year: '2019' | '2020' | '2021' | '2022' | '2023' | '2024';
+  title: string;
 }[] = Array.from({ length: 6 }, (_, index) => ({
   id: index + 1,
   year: (2019 + index).toString() as '2019' | '2020' | '2021' | '2022' | '2023' | '2024',
+  title: LOL_CINEMATIC_INFO[index],
 }));

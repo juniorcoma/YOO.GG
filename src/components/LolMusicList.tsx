@@ -12,28 +12,33 @@ interface LolMusicListProps {
 export default function LolMusicList({ contentType }: LolMusicListProps) {
   const { openModal } = useModal();
   return (
-    <div className="p-[1.6rem] h-[24rem] overflow-auto hidden-scroll">
-      <ul className="flex flex-wrap text-[1.4rem]">
+    <div className="h-[24rem] overflow-auto hidden-scroll pb-[1.6rem]">
+      <ul className="flex flex-wrap text-[1.4rem] flex-col">
         {contentType === 'worlds'
           ? LOL_WORLDS_RENDER_LIST.map(item => (
-              <li key={item.id} className="w-[25%] aspect-square">
+              <li key={item.id} className="hover:bg-color-primary-100 h-[4rem]">
                 <button
                   onClick={() => openModal({ component: Video, props: { videoSrc: LOL_WORLDS_MUSIC[item.year] } })}
-                  className="flex justify-center items-center h-full w-full hover:text-color-primary-500 hover:bg-color-primary-200 rounded-[50%]"
+                  className="flex py-[0.8rem] px-[1.6rem] items-center w-full justify-between"
                   type="button"
                 >
-                  <span>{item.year}</span>
+                  <div>
+                    <span className="text-color-gray-400">{item.year}</span>
+                    <span className="ml-[0.8rem] text-[1.6rem] font-bold">{item.info.title}</span>
+                  </div>
+                  <span className="artist">{item.info.artist}</span>
                 </button>
               </li>
             ))
           : LOL_CINEMATIC_RENDER_LIST.map(item => (
-              <li key={item.id} className="w-[25%] aspect-square">
+              <li key={item.id} className="hover:bg-color-primary-100 h-[4rem]">
                 <button
                   onClick={() => openModal({ component: Video, props: { videoSrc: LOL_CINEMATIC_MUSIC[item.year] } })}
-                  className="flex justify-center items-center h-full w-full hover:text-color-primary-500 hover:bg-color-primary-200 rounded-[50%]"
+                  className="flex py-[0.8rem] px-[1.6rem] items-center w-full"
                   type="button"
                 >
-                  <span>{item.year}</span>
+                  <span className="text-color-gray-400">{item.year}</span>
+                  <span className="ml-[0.8rem] text-[1.6rem] font-bold">{item.title}</span>
                 </button>
               </li>
             ))}

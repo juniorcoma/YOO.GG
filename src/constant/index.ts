@@ -235,3 +235,48 @@ export const QUEUEID_KR_TYPE: { [key: number]: string } = {
   420: '솔랭',
   440: '자랭',
 };
+
+export const LOL_WORLDS_INFO = [
+  {
+    title: 'Warriors',
+    artist: 'Imagine Dragons',
+  },
+  {
+    title: 'Worlds Collide',
+    artist: 'Nicki Tylor',
+  },
+  {
+    title: 'Ignite',
+    artist: 'Zedd',
+  },
+  {
+    title: 'Legends Never Die',
+    artist: 'Against The Current',
+  },
+  {
+    title: 'RISE',
+    artist: 'The Glitch Mob, Mako, and The Word Alive',
+  },
+  {
+    title: 'Phoenix',
+    artist: 'Cailin Russo and Chrissy Costanza',
+  },
+  {
+    title: 'Take Over',
+    artist: 'A Day To Remember, MAX, HENRY',
+  },
+  {
+    title: 'Burn It All Down',
+    artist: 'PVRIS',
+  },
+  {
+    title: 'Star Walkin',
+    artist: 'Lil Nas X',
+  },
+  {
+    title: 'GODS',
+    artist: 'NewJeans',
+  },
+];
+
+export const LOL_CINEMATIC_INFO = ['Awaken', 'Warriors', '대몰락', 'The Call', '영겁의 귀로', 'STILL HERE'];

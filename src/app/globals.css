@@ -270,6 +270,13 @@ html {
     align-items: center;
     border-radius: 0.4rem;
   }
+
+  .artist {
+    width: 30%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 @layer utilities {
