@@ -4,7 +4,11 @@ import useSearchFormEvent from '@/hook/useSearchFormEvent';
 import RecentlySearchList from './RecentlySearchList';
 import { useRef } from 'react';
 
-export default function SummonerSearchForm() {
+interface SummonerSearchFormProps {
+  inputId: string;
+}
+
+export default function SummonerSearchForm({ inputId }: SummonerSearchFormProps) {
   const { inputValue, handleChangeEvent, handleSubmitEvent } = useSearchFormEvent();
   const inputRef = useRef<HTMLInputElement>(null);
   return (
@@ -26,12 +30,12 @@ export default function SummonerSearchForm() {
             value={inputValue}
             onChange={handleChangeEvent}
             className="text-[1.4rem] w-full"
-            id="summoner-search-main"
+            id={inputId}
             ref={inputRef}
             autoComplete="off"
           />
           <label
-            htmlFor="summoner-search-main"
+            htmlFor={inputId}
             className={`${
               inputValue ? 'hidden' : ''
             } absolute flex bottom-[7.5%] text-color-gray-400 text-[1.4rem] z-20 cursor-text items-center gap-[0.4rem]`}
