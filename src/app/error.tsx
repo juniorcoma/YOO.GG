@@ -22,9 +22,12 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
         <button
           className="text-[1.6rem] text-color-gray-00 bg-color-primary-500 py-[0.8rem] w-[39.3rem] rounded-[0.4rem]"
           type="button"
-          onClick={() => router.refresh()}
+          onClick={() => {
+            reset();
+            router.refresh();
+          }}
         >
-          재시도
+          홈으로 돌아가기
         </button>
       </div>
     </div>
