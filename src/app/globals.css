@@ -261,6 +261,15 @@ html {
     padding-bottom: 1.6rem;
     z-index: 500;
   }
+
+  .favorite-btn {
+    width: 3.6rem;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.4rem;
+  }
 }
 
 @layer utilities {
@@ -391,6 +400,13 @@ html {
   .participant-list span {
     display: inline-block;
     width: 6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .name {
+    width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

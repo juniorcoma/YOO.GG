@@ -11,7 +11,7 @@ interface PlayChampionListProps {
 
 export default function PlayChampionList({ filterData, championData, version }: PlayChampionListProps) {
   const descPlayChampList = descPlayChampionList(filterData, championData);
-  console.log(descPlayChampList);
+
   return (
     <ul className="flex flex-col gap-[0.8rem]">
       {descPlayChampList.map(list => (

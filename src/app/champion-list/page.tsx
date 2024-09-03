@@ -36,7 +36,7 @@ export default async function ChmapionListPage() {
       </div>
       <div className="w-[108rem] pt-[3.2rem] m-auto flex gap-[1.6rem]">
         <ContentBox titleText="즐겨찾기" css="w-[36rem]">
-          <FavoriteChampionBox />
+          <FavoriteChampionBox championsData={positionChampData} version={latestVersion} />
         </ContentBox>
         <ChampionListContainer championsData={positionChampData} version={latestVersion} />
       </div>
