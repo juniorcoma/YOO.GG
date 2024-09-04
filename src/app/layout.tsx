@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://yoo-gg.vercel.app/opengraph_img.png',
+        url: 'https://yoo-gg.vercel.app/images/opengraph_img.png',
         width: 800,
         height: 600,
       },
