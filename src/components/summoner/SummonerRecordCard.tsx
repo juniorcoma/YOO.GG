@@ -1,6 +1,6 @@
 import { QUEUEID_KR_TYPE } from '@/constant';
 import { DDRAGON_DATA_URL, DDRAGON_IMG_URL } from '@/constant/API';
-import { ParticipantDtoType, PerkStyleDtoType } from '@/types/response';
+import { ParticipantDtoType, PerksDtoType, PerkStyleDtoType } from '@/types/response';
 import { calculateGameCreation, calculateGameDuration } from '@/utils/calculateRecordTime';
 import devideParticipants from '@/utils/devideParticipants';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
@@ -9,14 +9,43 @@ import axios from 'axios';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import SummonerCardBtnIcon from './SummonerCardBtnIcon';
+import { useState } from 'react';
+import RecordDetailContainer from './RecordDetailContainer';
 
-function CardLayer({ children, isWin }: { children: React.ReactNode; isWin: boolean }) {
+function CardLayer({
+  children,
+  isWin,
+  gameVersion,
+  perks,
+  runesDataArr,
+}: {
+  children: React.ReactNode;
+  isWin: boolean;
+  gameVersion: string;
+  perks: PerksDtoType;
+  runesDataArr: any;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className={`${isWin ? 'bg-color-primary-100' : 'bg-color-red-100'} rounded-[0.8rem] overflow-hidden flex`}>
-      <div className={`w-[0.8rem] ${isWin ? 'bg-color-primary-500' : 'bg-color-red-500'}`} />
-      <div className="flex py-[0.8rem] pl-[1.2rem] pr-[0.4rem] flex-1 gap-[1.2rem]">{children}</div>
-      <button className={`w-[4.7rem] ${isWin ? 'bg-color-primary-200' : 'bg-color-red-200'}`} type="button"></button>
-    </div>
+    <>
+      <div className={`${isWin ? 'bg-color-primary-100' : 'bg-color-red-100'} rounded-[0.8rem] overflow-hidden flex`}>
+        <div className={`w-[0.8rem] ${isWin ? 'bg-color-primary-500' : 'bg-color-red-500'}`} />
+        <div className="flex py-[0.8rem] pl-[1.2rem] pr-[0.4rem] flex-1 gap-[1.2rem]">{children}</div>
+        <button
+          className={`w-[4.7rem] py-[1.2rem] ${
+            isWin ? 'bg-color-primary-200' : 'bg-color-red-200'
+          } flex justify-center items-end`}
+          type="button"
+          onClick={() => setIsOpen(prev => !prev)}
+        >
+          <span className={isOpen ? 'arrow rotate' : 'arrow'}>
+            <SummonerCardBtnIcon iswin={isWin} />
+          </span>
+        </button>
+      </div>
+      <RecordDetailContainer isOpen={isOpen} gameVersion={gameVersion} perks={perks} runesDataArr={runesDataArr} />
+    </>
   );
 }
 
@@ -170,7 +199,7 @@ function SummonerRunesImgRender({
   const runeImgUrlList = summonerRunes.map((rune, index) => {
     const matchRuneStyle = data.find((data: any) => data.id === rune.style);
     if (index === 0) {
-      const mainRune = matchRuneStyle.slots[0].runes.find((data: any) => data.id === rune.selections[0].perk);
+      const mainRune = matchRuneStyle.slots[0].runes?.find((data: any) => data.id === rune.selections[0].perk);
       return mainRune?.icon || null;
     }
     return matchRuneStyle?.icon || null;

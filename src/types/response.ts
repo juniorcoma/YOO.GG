@@ -372,7 +372,7 @@ interface MissionsDtoType {
   playerScore11: number;
 }
 
-interface PerksDtoType {
+export interface PerksDtoType {
   statPerks: PerkStatsDtoType;
   styles: PerkStyleDtoType[];
 }
