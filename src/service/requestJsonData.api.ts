@@ -80,9 +80,7 @@ export async function getCommunityChampionData(id: string) {
 }
 
 export async function getRotationsChampionsData() {
-  const rotationsResponse = await fetch(`${SERVER_REQUEST_URL.ROTATIONS}`, {
-    next: { revalidate: 1000 * 60 * 5, tags: ['rotations'] },
-  });
+  const rotationsResponse = await fetch(`${SERVER_REQUEST_URL.ROTATIONS}`);
   const rotationsData: RotationsDataType = await rotationsResponse.json();
 
   return rotationsData;
