@@ -47,6 +47,7 @@ export default function ChampionSkillBox({ skill, communitySkillData, version }:
               height={32}
               className="rounded-[0.4rem]"
               alt={''}
+              unoptimized
             />
             <span className="text-[1.4rem]">{skill.name}</span>
           </button>

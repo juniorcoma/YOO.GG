@@ -47,12 +47,13 @@ export default function ChampionListTable({ championsData, currentPosition, vers
             <td>
               <Link href={`/champions/${champ.id}/info`} className="flex gap-[0.8rem] items-center">
                 <div className="overflow-hidden rounded-[0.4rem]">
-                  <img
+                  <Image
                     src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${champ.image.full}`}
                     width={32}
                     height={32}
                     alt={`${champ.name} 이미지`}
                     className="scale-110"
+                    unoptimized
                   />
                 </div>
                 <strong>{champ.name}</strong>

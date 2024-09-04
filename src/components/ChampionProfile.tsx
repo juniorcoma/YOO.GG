@@ -22,10 +22,8 @@ export default async function ChampionProfile({ id, img, name, position, title, 
       <div className="w-[12.8rem] h-[12.8rem] relative rounded-[1.2rem] overflow-hidden">
         <Image
           src={`${imgSrcVersionLoader(latestVersion, 'CHAMPION_SQUARE')}${img}`}
-          fill
           alt={`${name} 이미지`}
           className="scale-110"
-          quality={100}
         />
       </div>
       <div className="flex flex-col gap-[0.8rem] pt-[0.4rem]">
