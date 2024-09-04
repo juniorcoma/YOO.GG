@@ -42,7 +42,7 @@ export default function FavoriteChampionBox({ championsData, version }: Favorite
               href={`/champions/${championData.id}/info`}
               className="flex flex-col gap-[0.4rem] text-[1.2rem] justify-center w-[4.8rem]"
             >
-              <Image
+              <img
                 src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.image.full}`}
                 width={48}
                 height={48}

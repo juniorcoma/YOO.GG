@@ -13,7 +13,7 @@ export default function Footer() {
         <section className="flex justify-between">
           <strong className="pb-[1.6rem]">
             <Link href="/">
-              <Image
+              <img
                 src={pathName === '/' ? '/images/yoogg_logo_img1.png' : '/images/yoogg_logo_img2.png'}
                 alt="YOO.GG"
                 width={140}
@@ -56,7 +56,7 @@ export default function Footer() {
                 }`}
                 target="_blank"
               >
-                <Image src={item.imgPath} alt={item.alt} width={item.size} height={item.size} unoptimized />
+                <img src={item.imgPath} alt={item.alt} width={item.size} height={item.size} />
               </a>
             ))}
           </nav>
