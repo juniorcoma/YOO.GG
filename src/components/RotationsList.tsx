@@ -16,7 +16,7 @@ export default async function RotationsList() {
       {renderItemArr.map((champ: any) => (
         <li key={champ.key} className="relative ">
           <Link href={`/champions/${champ.id}/info`}>
-            <Image
+            <img
               src={`${imgSrcVersionLoader(latestVersion, 'CHAMPION_SQUARE')}${champ.image.full}`}
               width={64}
               height={64}
