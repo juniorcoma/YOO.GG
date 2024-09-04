@@ -76,6 +76,7 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
                         height={36}
                         alt={`${champ.name} 이미지`}
                         className="rounded-[50%]"
+                        unoptimized
                       />
                       <span className="text-[1.4rem] font-bold">{champ.name}</span>
                       <span className="text-color-gray-500 ml-[1.6rem]">{champ.title}</span>

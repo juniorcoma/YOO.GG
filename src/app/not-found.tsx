@@ -15,7 +15,7 @@ export default function NotFound() {
             <NotFoundBtn target="back">이전 페이지</NotFoundBtn>
             <NotFoundBtn target="home">홈</NotFoundBtn>
           </div>
-          <Image src={`/images/not_found_img.png`} width={380} height={380} alt="404 이미지" />
+          <Image src={`/images/not_found_img.png`} width={380} height={380} alt="404 이미지" unoptimized />
         </div>
       </div>
     </div>

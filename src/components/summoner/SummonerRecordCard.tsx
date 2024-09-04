@@ -325,6 +325,7 @@ function ParticipantsList({
             <div className="flex gap-[0.2rem] items-center" key={team.puuid}>
               <div className="w-[1.6rem] h-[1.6rem] relative overflow-hidden rounded-[0.4rem]">
                 <Image
+                  unoptimized
                   src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.id}.png`}
                   fill
                   alt={`${team.championName} image`}

@@ -37,6 +37,7 @@ function SummonerTierBox({ data }: SummonerTierBoxProps) {
           width={70}
           height={70}
           alt={`${data?.tier} 이미지`}
+          unoptimized
         />
       </div>
       {data ? (
