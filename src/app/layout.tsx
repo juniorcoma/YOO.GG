@@ -23,9 +23,25 @@ const AppleSDGOdicNeo = localFont({
 export const metadata: Metadata = {
   title: {
     template: '%s | YOO.GG',
-    default: 'YOO.GG',
+    default: '롤 정보 사이트 YOO.GG',
   },
-  description: '리그오브레전드의 모든 챔피언의 최신 정보와 소환사의 전적을 검색하여 승률을 올려보세요!',
+  description:
+    '리그오브레전드 전적검색과 다양한 정보를 만날 수 있는 YOO.GG, YOO.GG에서 롤 전적 검색과 챔피언 정보를 확인해보세요. 소환사의 협곡, 칼바람의 나락에 관한 전적 데이터를 만나볼 수 있습니다. 라이엇 아이디와 태그를 함께 검색해 보세요!',
+  openGraph: {
+    title: '롤 정보 사이트 YOO.GG',
+    description:
+      '리그오브레전드 전적검색과 다양한 정보를 만날 수 있는 YOO.GG, YOO.GG에서 롤 전적 검색과 챔피언 정보를 확인해보세요. 소환사의 협곡, 칼바람의 나락에 관한 전적 데이터를 만나볼 수 있습니다. 라이엇 아이디와 태그를 함께 검색해 보세요!',
+    url: 'https://yoo-gg.vercel.app',
+    siteName: 'YOO.GG',
+    type: 'website',
+    images: [
+      {
+        url: 'https://yoo-gg.vercel.app/opengraph_img.png',
+        width: 800,
+        height: 600,
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({
