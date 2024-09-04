@@ -264,7 +264,8 @@ function ItemImgRender({
             ></span>
           );
         return (
-          <Image
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             key={item.name}
             src={`${imgSrcVersionLoader(version, 'ITEM')}${item.image.full}`}
             width={22}
@@ -298,9 +299,8 @@ function ParticipantsList({
           return (
             <div className="flex gap-[0.2rem] items-center" key={team.puuid}>
               <div className="w-[1.6rem] h-[1.6rem] relative overflow-hidden rounded-[0.4rem]">
-                <Image
+                <img
                   src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.id}.png`}
-                  fill
                   alt={`${team.championName} image`}
                   className="scale-110"
                 />
