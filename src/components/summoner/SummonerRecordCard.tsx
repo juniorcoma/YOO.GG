@@ -97,9 +97,8 @@ function DetailInfo({
             href={`/champions/${championData.id}/info`}
             className="h-[4.8rem] w-[4.8rem] rounded-[50%] overflow-hidden relative block"
           >
-            <Image
+            <img
               src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.id}.png`}
-              fill
               alt={`${participant.championName} 이미지`}
             />
           </Link>
@@ -164,7 +163,7 @@ function SummonerSpellImgRender({ summonerSpells, version }: { summonerSpells: [
   return (
     <>
       {renderImgList.map((spell: any) => (
-        <Image
+        <img
           key={spell.key}
           src={`${imgSrcVersionLoader(version, 'SPELL')}${spell.image.full}`}
           width={22}
@@ -210,7 +209,7 @@ function SummonerRunesImgRender({
       {runeImgUrlList.map((rune: string, index) => {
         if (!rune) return <span key={index} className="w-[2.2rem] h-[2.2rem]"></span>;
         return (
-          <Image
+          <img
             key={rune}
             src={`${DDRAGON_IMG_URL.RUNE}${rune}`}
             width={22}

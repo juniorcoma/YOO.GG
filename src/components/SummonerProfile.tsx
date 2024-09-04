@@ -22,7 +22,7 @@ export default async function SummonerProfile({ summonerData }: SummonerProfileP
     <div className="flex justify-between">
       <div className="flex gap-[1.6rem]">
         <div className="profile-img-box">
-          <Image
+          <img
             src={`${imgSrcVersionLoader(lastestVersion, 'PROFILE')}${summonerData.profileIconId}.png`}
             width={128}
             height={128}

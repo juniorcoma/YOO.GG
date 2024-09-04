@@ -12,12 +12,10 @@ export default function FullSkinContainer({ champName, skinNum, skinName }: Full
   const ref = useOutsideClick<HTMLDivElement>();
   return (
     <div className="full-img-box" ref={ref}>
-      <Image
+      <img
         src={`${DDRAGON_IMG_URL.CHAMPION_SPLASH}${champName}_${skinNum}.jpg`}
-        fill
         alt={`${skinName} 이미지`}
         className="rounded-[1.2rem]"
-        quality={100}
       />
       <em
         className="text-[3.2rem] z-50 text-color-gray-00 absolute

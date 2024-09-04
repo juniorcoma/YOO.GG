@@ -55,9 +55,8 @@ export default function ChampionSkinControlContainer({
               <button type="button" className="full-img-btn" onClick={() => handleFullImgEvent(skin.name, skin.num)}>
                 <span>자세히 보기</span>
               </button>
-              <Image
+              <img
                 src={`${DDRAGON_IMG_URL.CHAMPION_LOADING}${name}_${skin.num}.jpg`}
-                fill
                 alt={`${skin.name} 이미지`}
                 className="rounded-[0.8rem] scale-105"
               />

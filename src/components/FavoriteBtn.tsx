@@ -38,7 +38,7 @@ export default function FavoriteBtn({ champId }: FavoriteBtnProps) {
       onClick={handleClick}
       className={`favorite-btn ${isFavorite ? 'bg-color-primary-500' : 'bg-[#d9d9d9]'}`}
     >
-      <Image src={'/images/favorite_img.png'} width={24} height={24} alt="즐겨찾기" />
+      <img src={'/images/favorite_img.png'} width={24} height={24} alt="즐겨찾기" />
     </button>
   );
 }

@@ -20,7 +20,7 @@ export default async function ChampionProfile({ id, img, name, position, title, 
   return (
     <div className="flex gap-[1.2rem]">
       <div className="w-[12.8rem] h-[12.8rem] relative rounded-[1.2rem] overflow-hidden">
-        <Image
+        <img
           src={`${imgSrcVersionLoader(latestVersion, 'CHAMPION_SQUARE')}${img}`}
           alt={`${name} 이미지`}
           className="scale-110"

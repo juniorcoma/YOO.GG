@@ -33,7 +33,7 @@ export default function BottomHeader({ version }: BottomHeaderProps) {
         <div className="w-full max-w-[108rem] m-auto flex flex-col">
           <div className={`${pathName === '/' && 'hidden'} py-[0.8rem] flex gap-[1.6rem]`}>
             <div className="relative w-[13rem] h-[3.2rem]">
-              <Image src={'/images/yoogg_sub_img.png'} fill alt="YOO.GG sub image" />
+              <img src={'/images/yoogg_sub_img.png'} alt="YOO.GG sub image" />
             </div>
             <div className="flex-1">
               <SubSummonerSearchForm />

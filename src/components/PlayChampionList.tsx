@@ -17,9 +17,8 @@ export default function PlayChampionList({ filterData, championData, version }: 
       {descPlayChampList.map(list => (
         <li key={list[0]} className="flex gap-[0.8rem] items-center text-[1.4rem] text-color-gray-500">
           <div className="w-[2.8rem] h-[2.8rem] relative overflow-hidden rounded-[50%]">
-            <Image
+            <img
               src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${list[1].name}.png`}
-              fill
               alt={`${list[1].name} 이미지`}
               className="scale-110"
             />

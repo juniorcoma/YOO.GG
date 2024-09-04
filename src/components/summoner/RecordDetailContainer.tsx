@@ -31,12 +31,7 @@ export default function RecordDetailContainer({
           <div className="flex flex-col items-center gap-[0.8rem]">
             <span className="text-[1.2rem] text-color-gray-500">메인 룬</span>
             <div className="rounded-[50%] bg-color-gray-200 p-[0.4rem]">
-              <Image
-                src={`${DDRAGON_IMG_URL.RUNE}${primaryStyle.icon}`}
-                width={32}
-                height={32}
-                alt={primaryStyle.name}
-              />
+              <img src={`${DDRAGON_IMG_URL.RUNE}${primaryStyle.icon}`} width={32} height={32} alt={primaryStyle.name} />
             </div>
             <span className="text-[1.4rem] font-bold">{primaryStyle.name}</span>
           </div>
@@ -50,7 +45,7 @@ export default function RecordDetailContainer({
                       rune.check && styleIndex === 0 ? 'bg-color-primary-300' : ''
                     }`}
                   >
-                    <Image
+                    <img
                       src={`${DDRAGON_IMG_URL.RUNE}${rune.icon}`}
                       width={32}
                       height={32}
@@ -67,7 +62,7 @@ export default function RecordDetailContainer({
           <div className="flex flex-col items-center gap-[0.8rem]">
             <span className="text-[1.2rem] text-color-gray-500">서브 룬</span>
             <div className="rounded-[50%] bg-color-gray-200 p-[0.4rem]">
-              <Image src={`${DDRAGON_IMG_URL.RUNE}${subStyle.icon}`} width={32} height={32} alt={primaryStyle.name} />
+              <img src={`${DDRAGON_IMG_URL.RUNE}${subStyle.icon}`} width={32} height={32} alt={primaryStyle.name} />
             </div>
             <span className="text-[1.4rem] font-bold">{subStyle.name}</span>
           </div>
@@ -76,7 +71,7 @@ export default function RecordDetailContainer({
               <div key={styleIndex} className="flex gap-[1.6rem]">
                 {style.map((rune: any, index: number) => (
                   <div key={index}>
-                    <Image
+                    <img
                       src={`${DDRAGON_IMG_URL.RUNE}${rune.icon}`}
                       width={32}
                       height={32}
