@@ -56,7 +56,7 @@ export default function Footer() {
                 }`}
                 target="_blank"
               >
-                <Image src={item.imgPath} alt={item.alt} width={item.size} height={item.size} />
+                <Image src={item.imgPath} alt={item.alt} width={item.size} height={item.size} unoptimized />
               </a>
             ))}
           </nav>
