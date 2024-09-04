@@ -1,7 +1,7 @@
 import SummonerRecordListContainer from '@/components/summoner/SummonerRecordListContainer';
 import SummonerLeagueContainer from '@/components/SummonerLeagueContainer';
 
-import { getChampionsData, getSummonerData, getVersionsData } from '@/service/requestJsonData.api';
+import { getChampionsData, getRunesData, getSummonerData, getVersionsData } from '@/service/requestJsonData.api';
 
 export async function generateMetadata({ params }: { params: { summoner: string } }) {
   const summoner = params.summoner.replace('-', '#');
@@ -15,11 +15,19 @@ export default async function SummonerPage({ params }: { params: { summoner: str
   const { id, puuid } = await getSummonerData(name, tag);
   const championsData = await getChampionsData(true);
   const [latestVersion] = await getVersionsData();
+  const runesDataArr = await getRunesData();
+  console.log(runesDataArr);
+
   return (
     <>
       <SummonerLeagueContainer summonerId={id} />
       <div className="flex-1 min-h-[60rem]">
-        <SummonerRecordListContainer puuid={puuid} championsData={championsData} version={latestVersion} />
+        <SummonerRecordListContainer
+          puuid={puuid}
+          championsData={championsData}
+          version={latestVersion}
+          runesDataArr={runesDataArr}
+        />
       </div>
     </>
   );

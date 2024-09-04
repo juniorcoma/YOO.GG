@@ -123,3 +123,18 @@ export async function getSummonerLeagueData(summonerId: string) {
 
   return summonerLeagueData;
 }
+
+export async function getRunesData() {
+  const versionData = await getVersionsData();
+  const versionSliceArr = versionData.slice(0, 5);
+
+  const runeDataArr = await Promise.all(
+    versionSliceArr.map(async (version: string) => {
+      const requestUrl = DDRAGON_DATA_URL.RUNES.replace('{VERSION}', version);
+      const responseData = await fetch(requestUrl);
+      const runesData = await responseData.json();
+      return { [version]: runesData };
+    }),
+  );
+  return runeDataArr;
+}

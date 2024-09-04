@@ -19,12 +19,14 @@ interface SummonerRecordListContainerProps {
   puuid: string;
   championsData: any;
   version: string;
+  runesDataArr: any;
 }
 
 export default function SummonerRecordListContainer({
   puuid,
   championsData,
   version,
+  runesDataArr,
 }: SummonerRecordListContainerProps) {
   const searchParams = useSearchParams();
   const type = (searchParams.get('queue_type') as GameType | undefined) || 'TOTAL';
@@ -71,8 +73,13 @@ export default function SummonerRecordListContainer({
       </ContentBox>
       <div className="flex flex-col gap-[0.8rem] mb-[1.6rem]">
         {filterSummonerData.map((record, index) => (
-          <div key={index}>
-            <SummonerRecordCard.CardLayer isWin={record.win}>
+          <div key={index} className="flex flex-col gap-[0.8rem]">
+            <SummonerRecordCard.CardLayer
+              isWin={record.win}
+              gameVersion={recordList[index].info.gameVersion}
+              perks={record.perks}
+              runesDataArr={runesDataArr}
+            >
               <SummonerRecordCard.KeySummary
                 isWin={record.win}
                 queueId={Number(recordList[index].info.queueId)}

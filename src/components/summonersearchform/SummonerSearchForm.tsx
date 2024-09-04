@@ -22,7 +22,7 @@ export default function SummonerSearchForm({ inputId }: SummonerSearchFormProps)
           <div className="text-color-gray-400 w-[19.4rem]">Korea</div>
         </div>
         <div className="relative flex-1">
-          <label className="mb-[0.4rem] cursor-pointer" htmlFor="summoner-search-main">
+          <label className="mb-[0.4rem] cursor-pointer" htmlFor={inputId}>
             검색
           </label>
           <input

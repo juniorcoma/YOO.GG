@@ -277,6 +277,13 @@ html {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .arrow {
+    transition: 0.3s;
+    transform: rotate(0deg);
+  }
+  .arrow.rotate {
+    transform: rotate(180deg);
+  }
 }
 
 @layer utilities {
