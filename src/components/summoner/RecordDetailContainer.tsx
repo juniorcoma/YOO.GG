@@ -20,7 +20,7 @@ export default function RecordDetailContainer({
   const { [version]: runeData } = runesDataArr.find((data: any) => data[version]);
 
   const { primaryStyle, subStyle } = checkingRune(runeData, perks);
-  console.log(runesDataArr);
+
   return (
     <div className={`${isOpen ? '' : 'hidden'} bg-color-gray-00 min-h-[20rem] rounded-[0.8rem] overflow-hidden`}>
       <div className="px-[1.6rem] py-[1.2rem] bg-color-gray-100 text-[1.4rem] font-bold text-color-gray-500">

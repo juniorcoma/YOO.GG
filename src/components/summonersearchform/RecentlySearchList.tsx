@@ -86,7 +86,7 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
                       localStorage.setItem('recentlySearch', JSON.stringify(filterList));
                     }}
                   >
-                    <Image src={`/images/close_img.png`} width={24} height={24} alt="close" />
+                    <img src={`/images/close_img.png`} width={24} height={24} alt="close" />
                   </button>
                 </li>
               );

@@ -16,7 +16,6 @@ export default async function SummonerPage({ params }: { params: { summoner: str
   const championsData = await getChampionsData(true);
   const [latestVersion] = await getVersionsData();
   const runesDataArr = await getRunesData();
-  console.log(runesDataArr);
 
   return (
     <>
