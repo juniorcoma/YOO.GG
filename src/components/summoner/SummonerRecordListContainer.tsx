@@ -34,7 +34,7 @@ export default function SummonerRecordListContainer({
 
   if (isPending) return <SsummonerRecordListContainer />;
 
-  if (!data) return <div>데이터 없다</div>;
+  if (!data) return <div>데이터가 없습니다</div>;
   const recordList: MatchDtoType[] = data.pages.flat();
   const filterSummonerData = filterMatchData(recordList, puuid) as ParticipantDtoType[];
 
@@ -43,7 +43,7 @@ export default function SummonerRecordListContainer({
       <ContentBox titleText="최근 게임">
         <div className="px-[1.6rem] flex justify-center items-center pt-[3.2rem] pb-[6.4rem]">
           <div className="flex flex-col items-center gap-[1.6rem]">
-            <Image src={'/images/em_bee_sad.png'} width={128} height={128} alt="슬픈 벌꿀 이미지" />
+            <img src={'/images/em_bee_sad.png'} width={128} height={128} alt="슬픈 벌꿀 이미지" />
             <div className="text-[1.6rem]">최근 기록된 전적이 없습니다.</div>
           </div>
         </div>
