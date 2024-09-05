@@ -23,13 +23,19 @@ export default function SkillVideoBox({ skill, skillkey, close, communitySkillDa
         <p>소모값 : {skill.costBurn ? skill.costBurn : '없음'}</p>
         <p>스킬범위 : {skill.rangeBurn ? skill.rangeBurn : '없음'}</p>
       </div>
-      <video
-        src={`${REQUEST_DATA_HOST.SKILL_VIDEO}${communitySkillData.abilityVideoPath}`}
-        controls
-        autoPlay
-        muted
-        loop
-      ></video>
+      {communitySkillData.abilityVideoPath ? (
+        <video
+          src={`${REQUEST_DATA_HOST.SKILL_VIDEO}${communitySkillData.abilityVideoPath}`}
+          controls
+          autoPlay
+          muted
+          loop
+        ></video>
+      ) : (
+        <div className="flex-1 bg-color-gray-200 flex items-center justify-center text-[2rem]">
+          관련 스킬 영상이 없습니다
+        </div>
+      )}
       <button type="button" className="modal-close-btn" onClick={close}>
         닫기
       </button>
