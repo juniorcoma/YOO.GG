@@ -17,7 +17,7 @@ export default function LolMusicListContainer() {
 
   return (
     <ContentBox
-      titleText={contentType === 'worlds' ? 'LOL WORLDS MUSIC' : 'LOL CINEMATIC MUSIC'}
+      titleText={contentType === 'worlds' ? 'LOL WORLDS MUSIC' : 'LOL CINEMATIC VIDEO'}
       css="min-w-[36rem]"
       SubTitleComponent={
         <ContentTypeController
