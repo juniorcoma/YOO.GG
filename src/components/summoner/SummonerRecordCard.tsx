@@ -92,61 +92,89 @@ function DetailInfo({
   const championData = championsData.find((champion: any) => participant.championId === Number(champion.key));
 
   return (
-    <div className="flex flex-col gap-[0.8rem] flex-1">
-      <div className="flex gap-[1.2rem]">
-        <div className="flex gap-[0.4rem] h-[5.8rem] items-center">
-          <Link
-            href={`/champions/${championData.id}/info`}
-            className="h-[4.8rem] w-[4.8rem] rounded-[50%] overflow-hidden relative block"
-          >
-            <img
-              src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.id}.png`}
-              alt={`${participant.championName} 이미지`}
-            />
-          </Link>
-          <div className="flex gap-[0.2rem]">
-            <div className="flex flex-col gap-[0.2rem]">
-              <SummonerSpellImgRender
-                summonerSpells={[participant.summoner1Id, participant.summoner2Id]}
-                version={version}
+    <>
+      <div className="flex flex-col gap-[0.8rem] flex-1">
+        <div className="flex gap-[1.2rem]">
+          <div className="flex gap-[0.4rem] h-[5.8rem] items-center">
+            <Link
+              href={`/champions/${championData.id}/info`}
+              className="h-[4.8rem] w-[4.8rem] rounded-[50%] overflow-hidden relative block"
+            >
+              <img
+                src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${championData.id}.png`}
+                alt={`${participant.championName} 이미지`}
               />
+            </Link>
+            <div className="flex gap-[0.2rem]">
+              <div className="flex flex-col gap-[0.2rem]">
+                <SummonerSpellImgRender
+                  summonerSpells={[participant.summoner1Id, participant.summoner2Id]}
+                  version={version}
+                />
+              </div>
+              <div className="flex flex-col gap-[0.2rem]">
+                <SummonerRunesImgRender
+                  summonerRunes={participant.perks.styles}
+                  gameVersion={gameVersion}
+                  runesDataArr={runesDataArr}
+                />
+              </div>
             </div>
-            <div className="flex flex-col gap-[0.2rem]">
-              <SummonerRunesImgRender
-                summonerRunes={participant.perks.styles}
-                gameVersion={gameVersion}
-                runesDataArr={runesDataArr}
-              />
+          </div>
+          <div className="w-[10.8rem] self-center">
+            <div className="text-[1.6rem]">
+              <strong>
+                <span>{participant.kills}</span> / <span className="text-color-red-600">{participant.deaths}</span> /{' '}
+                <span>{participant.assists}</span>
+              </strong>
             </div>
+            <div className="text-[1.2rem] text-color-gray-500">{participant.challenges.kda.toFixed(2)} : 1 평점</div>
           </div>
         </div>
-        <div className="w-[10.8rem] self-center">
-          <div className="text-[1.6rem]">
-            <strong>
-              <span>{participant.kills}</span> / <span className="text-color-red-600">{participant.deaths}</span> /{' '}
-              <span>{participant.assists}</span>
-            </strong>
-          </div>
-          <div className="text-[1.2rem] text-color-gray-500">{participant.challenges.kda.toFixed(2)} : 1 평점</div>
-        </div>
-        <div className="pl-[0.8rem] border-l border-color-primary-300 flex flex-col text-[1.2rem]">
-          <div>스킬 사용횟수</div>
-          <div>
-            Q : {participant.spell1Casts} W : {participant.spell2Casts}
-          </div>
-          <div>
-            E : {participant.spell3Casts} R : {participant.spell4Casts}
-          </div>
+        <div className="flex gap-[1.6rem]">
+          <ItemImgRender
+            isWin={participant.win}
+            itemsArr={[item0, item1, item2, item3, item4, item5, item6]}
+            version={version}
+          />
         </div>
       </div>
-      <div className="flex gap-[1.6rem]">
-        <ItemImgRender
-          isWin={participant.win}
-          itemsArr={[item0, item1, item2, item3, item4, item5, item6]}
-          version={version}
-        />
+      <div
+        className={`pl-[0.8rem] border-l ${
+          participant.win ? 'border-color-primary-300' : 'border-color-red-300'
+        } flex flex-col text-[1.2rem] gap-[0.2rem]`}
+      >
+        <div>스킬 사용횟수</div>
+        <span>
+          Q:{' '}
+          <strong className={`inline-block ${participant.win ? 'text-color-primary-600' : 'text-color-red-600'}`}>
+            {participant.spell1Casts}
+          </strong>{' '}
+          <span className="text-color-gray-400">회</span>
+        </span>
+        <span>
+          W:{' '}
+          <strong className={`inline-block ${participant.win ? 'text-color-primary-600' : 'text-color-red-600'}`}>
+            {participant.spell2Casts}
+          </strong>{' '}
+          <span className="text-color-gray-400">회</span>
+        </span>
+        <span>
+          E:{' '}
+          <strong className={`inline-block ${participant.win ? 'text-color-primary-600' : 'text-color-red-600'}`}>
+            {participant.spell3Casts}
+          </strong>{' '}
+          <span className="text-color-gray-400">회</span>
+        </span>
+        <span>
+          R:{' '}
+          <strong className={`inline-block ${participant.win ? 'text-color-primary-600' : 'text-color-red-600'}`}>
+            {participant.spell4Casts}
+          </strong>{' '}
+          <span className="text-color-gray-400">회</span>
+        </span>
       </div>
-    </div>
+    </>
   );
 }
 
