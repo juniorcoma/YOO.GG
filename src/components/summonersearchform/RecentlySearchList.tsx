@@ -65,11 +65,11 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
             renderList.map((item: string, index) => {
               const [name, tagId] = item.split('-');
               return (
-                <li
-                  key={index}
-                  className="px-[1.6rem] py-[1.2rem] hover:bg-color-primary-100 flex justify-between leading-[1]"
-                >
-                  <Link href={`/summoner/kr/${item}`} className="flex-1 flex gap-[0.8rem] items-center">
+                <li key={index} className="leading-[1] flex">
+                  <Link
+                    href={`/summoner/kr/${item}`}
+                    className="flex-1 flex gap-[0.8rem] items-center px-[1.6rem] py-[1.2rem] hover:bg-color-primary-100"
+                  >
                     <span className="font-bold text-[1.2rem] text-color-gray-00 rounded-[0.4rem] bg-color-primary-500 w-[3.1rem] h-[2rem] flex justify-center items-center">
                       KR
                     </span>
@@ -81,10 +81,12 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
                   <button
                     onMouseDown={e => {
                       e.preventDefault();
+
                       const filterList = renderList.filter(list => list !== item);
                       setRenderList(filterList);
                       localStorage.setItem('recentlySearch', JSON.stringify(filterList));
                     }}
+                    className="px-[1.6rem] py-[1.2rem] hover:bg-color-red-100 flex justify-center items-center"
                   >
                     <img src={`/images/close_img.png`} width={24} height={24} alt="close" />
                   </button>
