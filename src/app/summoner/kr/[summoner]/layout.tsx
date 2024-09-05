@@ -15,6 +15,7 @@ export default async function SummonerLayout({
   const summonerData = await getSummonerData(name, tag);
 
   if (summonerData.error) {
+    console.log(summonerData.error);
     return notFound();
   }
 
