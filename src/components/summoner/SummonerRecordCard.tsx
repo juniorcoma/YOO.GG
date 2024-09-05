@@ -52,11 +52,11 @@ function CardLayer({
 function KeySummary({
   isWin,
   queueId,
-  tiemInfo,
+  timeInfo: timeInfo,
 }: {
   isWin: boolean;
   queueId: number;
-  tiemInfo: { gameCreation: number; gameDuration: number };
+  timeInfo: { gameCreation: number; gameDuration: number };
 }) {
   return (
     <div className="flex w-[10.8rem] flex-col gap-[0.8rem] text-[1.2rem] text-color-gray-500">
@@ -64,12 +64,12 @@ function KeySummary({
         <div className={`mb-[0.4rem] ${isWin ? 'text-color-primary-600' : 'text-color-red-600'} text-[1.4rem]`}>
           {QUEUEID_KR_TYPE[queueId]}
         </div>
-        <div>{calculateGameCreation(tiemInfo.gameCreation)}</div>
+        <div>{calculateGameCreation(timeInfo.gameCreation)}</div>
       </div>
       <div className={`h-[0.1rem] ${isWin ? 'bg-color-primary-200' : 'bg-color-red-200'} w-[60%]`} />
       <div>
         <div className="mb-[0.4rem]">{isWin ? '승리' : '패배'}</div>
-        <div>{calculateGameDuration(tiemInfo.gameDuration)}</div>
+        <div>{calculateGameDuration(timeInfo.gameDuration)}</div>
       </div>
     </div>
   );
@@ -80,11 +80,13 @@ function DetailInfo({
   version,
   gameVersion,
   championsData,
+  runesDataArr,
 }: {
   participant: ParticipantDtoType;
   version: string;
   gameVersion: string;
   championsData: any;
+  runesDataArr: any;
 }) {
   const { item0, item1, item2, item3, item4, item5, item6 } = participant;
   const championData = championsData.find((champion: any) => participant.championId === Number(champion.key));
@@ -110,7 +112,11 @@ function DetailInfo({
               />
             </div>
             <div className="flex flex-col gap-[0.2rem]">
-              <SummonerRunesImgRender summonerRunes={participant.perks.styles} gameVersion={gameVersion} />
+              <SummonerRunesImgRender
+                summonerRunes={participant.perks.styles}
+                gameVersion={gameVersion}
+                runesDataArr={runesDataArr}
+              />
             </div>
           </div>
         </div>
@@ -179,24 +185,18 @@ function SummonerSpellImgRender({ summonerSpells, version }: { summonerSpells: [
 function SummonerRunesImgRender({
   summonerRunes,
   gameVersion,
+  runesDataArr,
 }: {
   summonerRunes: PerkStyleDtoType[];
   gameVersion: string;
+  runesDataArr: any;
 }) {
-  const dataVersion = gameVersion.split('.').slice(0, 2).join('.');
-  const { data } = useSuspenseQuery({
-    queryKey: ['summonerRunes', dataVersion],
-    queryFn: async () => {
-      const requestUrl = DDRAGON_DATA_URL.RUNES.replace('{VERSION}', `${dataVersion}.1`);
-      const { data } = await axios.get(requestUrl);
-      return data;
-    },
+  const version = `${gameVersion.split('.').slice(0, 2).join('.')}.1`;
 
-    staleTime: Infinity,
-  });
+  const { [version]: runeData } = runesDataArr.find((data: any) => data[version]);
 
   const runeImgUrlList = summonerRunes.map((rune, index) => {
-    const matchRuneStyle = data.find((data: any) => data.id === rune.style);
+    const matchRuneStyle = runeData.find((data: any) => data.id === rune.style);
     if (index === 0) {
       const mainRune = matchRuneStyle.slots[0].runes?.find((data: any) => data.id === rune.selections[0].perk);
       return mainRune?.icon || null;
@@ -264,7 +264,7 @@ function ItemImgRender({
           );
         return (
           <Image
-            key={item.name}
+            key={`${item.name}+${index}`}
             src={`${imgSrcVersionLoader(version, 'ITEM')}${item.image.full}`}
             width={22}
             height={22}

@@ -42,52 +42,64 @@ export default async function ChampInfoPage({ params }: { params: { champname: s
       </div>
       <main className="w-[108rem] pt-[3.2rem] m-auto flex gap-[1.6rem]">
         <div className="flex-1 flex flex-col gap-[1.6rem]">
-          <ContentBox
-            titleText={`${champDetailData.name} 스킬 정보`}
-            SubTitleComponent={<div className="text-[1.2rem] text-color-gray-500">자세히 볼려면 스킬 클릭하세요!</div>}
-          >
-            <ChampionSkillBox
-              skill={[champDetailData.passive, ...champDetailData.spells]}
-              communitySkillData={[passive, ...spells]}
-              version={latestVersion}
+          <section>
+            <ContentBox
+              titleText={`${champDetailData.name} 스킬 정보`}
+              SubTitleComponent={
+                <div className="text-[1.2rem] text-color-gray-500">자세히 볼려면 스킬 클릭하세요!</div>
+              }
+            >
+              <ChampionSkillBox
+                skill={[champDetailData.passive, ...champDetailData.spells]}
+                communitySkillData={[passive, ...spells]}
+                version={latestVersion}
+              />
+            </ContentBox>
+          </section>
+          <section>
+            <ContentBox
+              titleText={`${champDetailData.name} 기본 스탯 정보`}
+              SubTitleComponent={
+                <span className="text-[1.2rem] text-color-primary-500">메커니즘 : {champDetailData.partype}</span>
+              }
+            >
+              <ChampionStatTable stat={champDetailData.stats} partype={champDetailData.partype} />
+            </ContentBox>
+          </section>
+          <section>
+            <ChampionSkinControlContainer
+              titleName={champDetailData.name}
+              name={params.champname}
+              skinRenderList={champDetailData.skins}
             />
-          </ContentBox>
-          <ContentBox
-            titleText={`${champDetailData.name} 기본 스탯 정보`}
-            SubTitleComponent={
-              <span className="text-[1.2rem] text-color-primary-500">메커니즘 : {champDetailData.partype}</span>
-            }
-          >
-            <ChampionStatTable stat={champDetailData.stats} partype={champDetailData.partype} />
-          </ContentBox>
-          <ChampionSkinControlContainer
-            titleName={champDetailData.name}
-            name={params.champname}
-            skinRenderList={champDetailData.skins}
-          />
+          </section>
         </div>
         <div className="w-[39.1rem] flex flex-col gap-[1.6rem]">
-          <ContentBox titleText="스토리">
-            <div className="px-[1.6rem] pt-[1.6rem] pb-[2.4rem] text-[1.6rem]">
-              <p>{champDetailData.lore}</p>
-            </div>
-          </ContentBox>
-          <ContentBox titleText="챔피언 TIP">
-            <div className="px-[1.6rem] pt-[1.6rem] pb-[2.4rem] text-[1.6rem]">
-              <p className="text-color-primary-500 mb-[1.2rem]">아군일 때</p>
-              {champDetailData.allytips.map((tip: string[], index: number) => (
-                <p key={index} className="text-[1.4rem] mb-[0.8rem]">
-                  {tip}
-                </p>
-              ))}
-              <p className="text-color-red-500 mb-[1.2rem]">적군일 때</p>
-              {champDetailData.enemytips.map((tip: string[], index: number) => (
-                <p key={index} className="text-[1.4rem] mb-[0.8rem]">
-                  {tip}
-                </p>
-              ))}
-            </div>
-          </ContentBox>
+          <section>
+            <ContentBox titleText="스토리">
+              <div className="px-[1.6rem] pt-[1.6rem] pb-[2.4rem] text-[1.6rem]">
+                <p>{champDetailData.lore}</p>
+              </div>
+            </ContentBox>
+          </section>
+          <section>
+            <ContentBox titleText="챔피언 TIP">
+              <div className="px-[1.6rem] pt-[1.6rem] pb-[2.4rem] text-[1.6rem]">
+                <p className="text-color-primary-500 mb-[1.2rem]">아군일 때</p>
+                {champDetailData.allytips.map((tip: string[], index: number) => (
+                  <p key={index} className="text-[1.4rem] mb-[0.8rem]">
+                    {tip}
+                  </p>
+                ))}
+                <p className="text-color-red-500 mb-[1.2rem]">적군일 때</p>
+                {champDetailData.enemytips.map((tip: string[], index: number) => (
+                  <p key={index} className="text-[1.4rem] mb-[0.8rem]">
+                    {tip}
+                  </p>
+                ))}
+              </div>
+            </ContentBox>
+          </section>
         </div>
       </main>
     </>

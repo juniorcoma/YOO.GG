@@ -12,14 +12,14 @@ export default async function SummonerLeagueContainer({ summonerId }: SummonerLe
   const summonerLeagueData = await getSummonerLeagueData(summonerId);
 
   return (
-    <div className="flex flex-col gap-[1.6rem] w-[38.1rem]">
+    <section className="flex flex-col gap-[1.6rem] w-[38.1rem]">
       <ContentBox titleText="솔로랭크">
         <SummonerTierBox data={summonerLeagueData.find(data => data.queueType === 'RANKED_SOLO_5x5')} />
       </ContentBox>
       <ContentBox titleText="자유랭크">
         <SummonerTierBox data={summonerLeagueData.find(data => data.queueType === 'RANKED_FLEX_SR')} />
       </ContentBox>
-    </div>
+    </section>
   );
 }
 

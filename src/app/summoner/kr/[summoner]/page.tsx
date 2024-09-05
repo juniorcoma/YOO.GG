@@ -10,6 +10,7 @@ export async function generateMetadata({ params }: { params: { summoner: string 
     title: `${summonerName} 전적 검색`,
   };
 }
+
 export default async function SummonerPage({ params }: { params: { summoner: string } }) {
   const [name, tag] = decodeURIComponent(params.summoner).split('-');
   const { id, puuid } = await getSummonerData(name, tag);

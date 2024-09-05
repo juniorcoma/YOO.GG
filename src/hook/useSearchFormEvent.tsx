@@ -14,6 +14,7 @@ export default function useSearchFormEvent() {
 
   const handleSubmitEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!inputValue) return;
     const [valueName, valueTagId] = inputValue.split('#');
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}account/${valueName}/${valueTagId}/isvalid`);
     const { gameName, tagLine } = data;
