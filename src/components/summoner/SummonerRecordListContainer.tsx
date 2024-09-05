@@ -83,12 +83,13 @@ export default function SummonerRecordListContainer({
               <SummonerRecordCard.KeySummary
                 isWin={record.win}
                 queueId={Number(recordList[index].info.queueId)}
-                tiemInfo={{
+                timeInfo={{
                   gameCreation: recordList[index].info.gameCreation,
                   gameDuration: recordList[index].info.gameDuration,
                 }}
               />
               <SummonerRecordCard.DetailInfo
+                runesDataArr={runesDataArr}
                 participant={record}
                 version={version}
                 gameVersion={recordList[index].info.gameVersion}
