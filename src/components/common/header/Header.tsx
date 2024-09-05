@@ -19,6 +19,7 @@ function TopHeader() {
     <div className="bg-[#1C1C1F] relative">
       <div className="h-[4.8rem] flex items-center">
         <Link href="/" className="h-full px-[2.4rem] flex justify-center items-center">
+          <h1 className="hidden-logo">YOO.GG</h1>
           <Logo />
         </Link>
         <ContentSelectBox />

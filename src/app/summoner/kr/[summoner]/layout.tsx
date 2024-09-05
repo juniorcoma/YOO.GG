@@ -26,7 +26,7 @@ export default async function SummonerLayout({
         </div>
       </div>
       <GameTypeControlBar />
-      <div className="w-[108rem] m-auto pt-[3.2rem] flex gap-[1.6rem]">{children}</div>
+      <main className="w-[108rem] m-auto pt-[3.2rem] flex gap-[1.6rem]">{children}</main>
     </>
   );
 }
