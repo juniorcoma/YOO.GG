@@ -5,7 +5,3 @@ export const riotRequest = axios.create({
     'X-Riot-Token': process.env.RIOT_DEVELOP_TOKEN,
   },
 });
-
-export const backendRequest = axios.create({
-  baseURL: process.env.SERVER_HOST,
-});
