@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ModalSetterContext, ModalState } from './ModalProvider';
+import { ModalSetterContext, ModalState } from '../components/providers/ModalProvider';
 
 export default function useModal() {
   const setModalState = useContext(ModalSetterContext);

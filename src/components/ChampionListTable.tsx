@@ -1,17 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
-import PositionBottom from '@/assets/icons/position_bottom.svg';
-import PositionTop from '@/assets/icons/position_top.svg';
-import PositionMid from '@/assets/icons/position_mid.svg';
-import PositionJungle from '@/assets/icons/position_jungle.svg';
-import PositionSupport from '@/assets/icons/position_support.svg';
-import { ChampPositionType } from '@/types';
+
+import { ChampPositionType, ExtendedChampionDataType } from '@/types';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
+import PositionIconRender from './render/PositionIconRender';
 
 interface ChampionListTableProps {
-  championsData: any;
-  currentPosition: 'all' | 'top' | 'jungle' | 'mid' | 'bottom' | 'support';
+  championsData: ExtendedChampionDataType[];
+  currentPosition: 'all' | ChampPositionType;
   version: string;
 }
 
@@ -38,7 +35,7 @@ export default function ChampionListTable({ championsData, currentPosition, vers
         </tr>
       </thead>
       <tbody>
-        {tableRenderData.map((champ: any, index: number) => (
+        {tableRenderData.map((champ, index) => (
           <tr
             key={champ.key}
             className="text-[1.2rem] border-b border-color-gray-200 hover:bg-color-gray-100 py-[0.8rem]"
@@ -74,24 +71,9 @@ export default function ChampionListTable({ championsData, currentPosition, vers
 }
 
 function filterPositionChampion(
-  championData: any,
+  championsData: ExtendedChampionDataType[],
   currentPosition: 'all' | 'top' | 'jungle' | 'mid' | 'bottom' | 'support',
 ) {
-  if (currentPosition === 'all') return championData;
-  else return championData.filter((champ: any) => champ.position === currentPosition);
-}
-
-export function PositionIconRender({ position }: { position: ChampPositionType }) {
-  switch (position) {
-    case 'top':
-      return <PositionTop />;
-    case 'bottom':
-      return <PositionBottom />;
-    case 'jungle':
-      return <PositionJungle />;
-    case 'mid':
-      return <PositionMid />;
-    case 'support':
-      return <PositionSupport />;
-  }
+  if (currentPosition === 'all') return championsData;
+  else return championsData.filter(champ => champ.position === currentPosition);
 }

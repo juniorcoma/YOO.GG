@@ -1,6 +1,7 @@
-import ContentBox from '@/components/ContentBox';
+import ContentBox from '@/components/common/ContentBox';
+import RotationsList from '@/components/contentboxinner/RotationsList';
 import LolMusicListContainer from '@/components/LolMusicListContainer';
-import RotationsList from '@/components/RotationsList';
+
 import SummonerSearchForm from '@/components/summonersearchform/SummonerSearchForm';
 
 import Image from 'next/image';

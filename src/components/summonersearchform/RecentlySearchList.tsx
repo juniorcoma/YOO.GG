@@ -12,6 +12,7 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
   const [renderList, setRenderList] = useState<string[]>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const pathName = usePathname();
+
   useEffect(() => {
     const getItems = localStorage.getItem('recentlySearch');
     if (getItems) {
@@ -62,7 +63,7 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
         <div className="px-[1.6rem] pt-[0.8rem] pb-[1.6rem]">최근 검색</div>
         <ul>
           {renderList.length ? (
-            renderList.map((item: string, index) => {
+            renderList.map((item, index) => {
               const [name, tagId] = item.split('-');
               return (
                 <li key={index} className="leading-[1] flex">

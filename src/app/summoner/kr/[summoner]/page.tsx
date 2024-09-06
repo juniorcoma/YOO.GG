@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: { summoner: string 
 export default async function SummonerPage({ params }: { params: { summoner: string } }) {
   const [name, tag] = decodeURIComponent(params.summoner).split('-');
   const { id, puuid } = await getSummonerData(name, tag);
-  const championsData = await getChampionsData(true);
+  const championsData = await getChampionsData();
   const [latestVersion] = await getVersionsData();
   const runesDataArr = await getRunesData();
 

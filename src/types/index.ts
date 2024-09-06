@@ -1,3 +1,5 @@
+import { ChampionsDataType } from './staticData';
+
 export type ChampPositionType = 'top' | 'jungle' | 'mid' | 'bottom' | 'support';
 
 export interface ChampPositionDataType {
@@ -35,6 +37,8 @@ export interface MatchingStatArrType {
   level?: keyof ChampionStatType;
 }
 
-export type ChampTagType = 'Marksman' | 'Assassin' | 'Fighter' | 'Mage' | 'Tank' | 'Support';
-
 export type GameType = 'TOTAL' | 'SOLORANKED' | 'FLEXRANKED' | 'ARAM';
+
+export interface ExtendedChampionDataType extends ChampionsDataType {
+  position: ChampPositionType;
+}

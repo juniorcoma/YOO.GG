@@ -1,10 +1,12 @@
-import { ChampPositionType, ChampTagType } from '@/types';
+import { ChampPositionType } from '@/types';
 import Image from 'next/image';
-import { PositionIconRender } from './ChampionListTable';
+
 import { CHAMPION_TAG_INFO } from '@/constant';
 import { getVersionsData } from '@/service/requestJsonData.api';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import FavoriteBtn from './FavoriteBtn';
+import { ChampionDataType } from '@/types/staticData';
+import PositionIconRender from './render/PositionIconRender';
 
 interface ChampionProfileProps {
   id: string;
@@ -12,7 +14,7 @@ interface ChampionProfileProps {
   name: string;
   position: ChampPositionType;
   title: string;
-  tags: ChampTagType[];
+  tags: ChampionDataType['tags'];
 }
 
 export default async function ChampionProfile({ id, img, name, position, title, tags }: ChampionProfileProps) {
@@ -34,7 +36,7 @@ export default async function ChampionProfile({ id, img, name, position, title, 
         <p className="text-[2rem] leading-[1.2]">{title}</p>
         <div className="flex gap-[0.8rem] items-center text-[1.6rem]">
           <PositionIconRender position={position} />
-          <span>{tags.map((tag: ChampTagType) => CHAMPION_TAG_INFO[tag]).join(' | ')}</span>
+          <span>{tags.map(tag => CHAMPION_TAG_INFO[tag]).join(' | ')}</span>
         </div>
       </div>
     </div>
