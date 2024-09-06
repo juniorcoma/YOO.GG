@@ -1,11 +1,11 @@
 'use server';
 
 import { COMMUNITY_DRAGON_DATA_URL, DDRAGON_DATA_URL, SERVER_REQUEST_URL } from '@/constant/API';
+import { GameType } from '@/types';
 import {
   AccountType,
   ChampionMasteryDataType,
   LeagueDataType,
-  RequestErrorType,
   RotationsDataType,
   SummonerDataType,
 } from '@/types/response';
@@ -148,4 +148,14 @@ export async function getRunesData(): Promise<RunesDataType[]> {
     }),
   );
   return runeDataArr;
+}
+
+export async function getInitialRecordData(puuid: string, type: GameType | undefined) {
+  const gameType = type || 'TOTAL';
+  const requestUrl = `${SERVER_REQUEST_URL.SUMMONER_RECORD_DATA}${puuid}?type=${gameType}`;
+  const initialRecordResponse = await fetch(requestUrl);
+
+  const initialRecordData = await initialRecordResponse.json();
+
+  return initialRecordData;
 }
