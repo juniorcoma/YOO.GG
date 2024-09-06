@@ -4,6 +4,10 @@ export interface AccountType {
   tagLine: string;
 }
 
+export interface RequestErrorType {
+  error: string;
+}
+
 export interface LeagueDataType {
   leagueId: string;
   queueType: string;
@@ -17,6 +21,15 @@ export interface LeagueDataType {
   inactive: boolean;
   freshBlood: boolean;
   hotStreak: boolean;
+}
+
+export interface ChampionMasteryDataType {
+  puuid: string;
+  championPointsUntilNextLevel: number;
+  chestGranted: boolean;
+  championId: number;
+  championLevel: number;
+  championPoints: number;
 }
 
 export interface SummonerDataType {

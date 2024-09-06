@@ -5,20 +5,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { PositionIconRender } from './ChampionListTable';
+
+import { ExtendedChampionDataType } from '@/types';
+import PositionIconRender from './render/PositionIconRender';
 
 interface ChampionSearchBarProps {
-  championsData: any;
+  championsData: ExtendedChampionDataType[];
   version: string;
 }
 export default function ChampionSearchBar({ championsData, version }: ChampionSearchBarProps) {
   const [value, setValue] = useState('');
-  const [matchList, setMatchList] = useState<any[]>([]);
+  const [matchList, setMatchList] = useState<ExtendedChampionDataType[]>([]);
   const router = useRouter();
   useEffect(() => {
     if (value !== '') {
       const regexp = new RegExp(`^${value}`);
-      const matchChamp = championsData.filter((champ: any) => regexp.test(champ.name));
+      const matchChamp = championsData.filter(champ => regexp.test(champ.name));
 
       setMatchList(matchChamp);
     }
@@ -64,7 +66,7 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
                 <h3 className="text-[1.4rem] font-bold">Champion Build</h3>
               </div>
               <ul className="flex flex-col">
-                {matchList.map((champ: any) => (
+                {matchList.map(champ => (
                   <li key={champ.key}>
                     <Link
                       href={`/champions/${champ.id}/info`}

@@ -12,7 +12,7 @@ export default async function SummonerLayout({
   params: { summoner: string };
 }>) {
   const [name, tag] = decodeURIComponent(params.summoner).split('-');
-  const summonerData = await getSummonerData(name, tag);
+  const summonerData = (await getSummonerData(name, tag)) as any;
 
   if (summonerData.error) {
     return notFound();

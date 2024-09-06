@@ -1,9 +1,23 @@
 'use server';
 
 import { COMMUNITY_DRAGON_DATA_URL, DDRAGON_DATA_URL, SERVER_REQUEST_URL } from '@/constant/API';
-import { LeagueDataType, RotationsDataType } from '@/types/response';
+import {
+  AccountType,
+  ChampionMasteryDataType,
+  LeagueDataType,
+  RequestErrorType,
+  RotationsDataType,
+  SummonerDataType,
+} from '@/types/response';
+import {
+  ChampionDataType,
+  ChampionsDataType,
+  CommunityChampionDataType,
+  ItemsDataType,
+  RunesDataType,
+} from '@/types/staticData';
 
-export async function getVersionsData() {
+export async function getVersionsData(): Promise<string[]> {
   const versionResponse = await fetch(`${DDRAGON_DATA_URL.VERSION}`, {
     next: { revalidate: false, tags: ['versions'] },
   });
@@ -12,7 +26,7 @@ export async function getVersionsData() {
   return versionsData;
 }
 
-export async function getChampionsData(isReturn?: boolean) {
+export async function getChampionsData(): Promise<ChampionsDataType[]> {
   const [latestVersion] = await getVersionsData();
 
   const requestUrl = DDRAGON_DATA_URL.CHAMPIONS.replace('{VERSION}', latestVersion);
@@ -21,12 +35,11 @@ export async function getChampionsData(isReturn?: boolean) {
     next: { revalidate: false, tags: ['champions'] },
   });
   const championsData = await championsResponse.json();
-  if (isReturn) {
-    return Object.values(championsData.data);
-  }
+
+  return Object.values(championsData.data);
 }
 
-export async function getSummonerSpellsData() {
+export async function getSummonerSpellsData(): Promise<SummonerDataType[]> {
   const [latestVersion] = await getVersionsData();
 
   const requestUrl = DDRAGON_DATA_URL.SUMMONER_SPELLS.replace('{VERSION}', latestVersion);
@@ -40,7 +53,7 @@ export async function getSummonerSpellsData() {
   return Object.values(data);
 }
 
-export async function getChampionData(champName: string) {
+export async function getChampionData(champName: string): Promise<ChampionDataType> {
   const [latestVersion] = await getVersionsData();
   const requestUrl = DDRAGON_DATA_URL.CHAMPION.replace('{VERSION}', latestVersion).replace('{CHAMPNAME}', champName);
 
@@ -53,7 +66,7 @@ export async function getChampionData(champName: string) {
   return data[champName];
 }
 
-export async function getItemsData() {
+export async function getItemsData(): Promise<ItemsDataType> {
   const [latestVersion] = await getVersionsData();
 
   const requestUrl = DDRAGON_DATA_URL.ITEMS.replace('{VERSION}', latestVersion);
@@ -64,10 +77,10 @@ export async function getItemsData() {
 
   const { data } = await itemsResponse.json();
 
-  return data;
+  return data.data;
 }
 
-export async function getCommunityChampionData(id: string) {
+export async function getCommunityChampionData(id: string): Promise<CommunityChampionDataType> {
   const requestUrl = COMMUNITY_DRAGON_DATA_URL.CHAMPION.replace('{CHAMPID}', id);
 
   const championResponse = await fetch(requestUrl, {
@@ -79,14 +92,14 @@ export async function getCommunityChampionData(id: string) {
   return championData;
 }
 
-export async function getRotationsChampionsData() {
+export async function getRotationsChampionsData(): Promise<RotationsDataType> {
   const rotationsResponse = await fetch(`${SERVER_REQUEST_URL.ROTATIONS}`);
-  const rotationsData: RotationsDataType = await rotationsResponse.json();
+  const rotationsData = await rotationsResponse.json();
 
   return rotationsData;
 }
 
-export async function getSummonerData(name: string, tag: string) {
+export async function getSummonerData(name: string, tag: string): Promise<AccountType & SummonerDataType> {
   const requestUrl = `${SERVER_REQUEST_URL.SUMMONER}${name}/${tag}`;
 
   const summonerResponse = await fetch(requestUrl, {
@@ -98,7 +111,7 @@ export async function getSummonerData(name: string, tag: string) {
   return summonerData;
 }
 
-export async function getChampionMasteryData(puuid: string) {
+export async function getChampionMasteryData(puuid: string): Promise<ChampionMasteryDataType[]> {
   const requestUrl = `${SERVER_REQUEST_URL.CHAMPION_MASTERY}${puuid}`;
 
   const championMasteryResponse = await fetch(requestUrl, {
@@ -110,19 +123,19 @@ export async function getChampionMasteryData(puuid: string) {
   return championMasteryData;
 }
 
-export async function getSummonerLeagueData(summonerId: string) {
+export async function getSummonerLeagueData(summonerId: string): Promise<LeagueDataType[]> {
   const requestUrl = `${SERVER_REQUEST_URL.SUMMONER_LEAGUE}${summonerId}`;
 
   const summonerLeagueResponse = await fetch(requestUrl, {
     cache: 'no-cache',
   });
 
-  const summonerLeagueData: LeagueDataType[] = await summonerLeagueResponse.json();
+  const summonerLeagueData = await summonerLeagueResponse.json();
 
   return summonerLeagueData;
 }
 
-export async function getRunesData() {
+export async function getRunesData(): Promise<RunesDataType[]> {
   const versionData = await getVersionsData();
   const versionSliceArr = versionData.slice(0, 5);
 

@@ -3,7 +3,7 @@
 import { SPELL_KEY } from '@/constant';
 import useModal from '@/hook/useModal';
 import Image from 'next/image';
-import SkillVideoBox from './SkillVideoBox';
+import SkillVideoBox from '../modalcontent/SkillVideoBox';
 import { SpellKeyType } from '@/types';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 

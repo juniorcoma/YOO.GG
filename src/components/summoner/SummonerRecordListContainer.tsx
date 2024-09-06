@@ -1,7 +1,7 @@
 'use client';
 
 import useGetSummonerRecordList from '@/hook/query/useGetSummonerRecordList';
-import ContentBox from '../ContentBox';
+import ContentBox from '../common/ContentBox';
 import SummonerRecordCard from './SummonerRecordCard';
 import { useSearchParams } from 'next/navigation';
 import { GameType } from '@/types';
@@ -14,12 +14,13 @@ import PlayChampionList from '../PlayChampionList';
 import SsummonerRecordListContainer from '../skeleton/SummonerRecordListContainer.skeleton';
 import Loading from '@/assets/icons/loading.svg';
 import Image from 'next/image';
+import { ChampionsDataType, RunesDataType } from '@/types/staticData';
 
 interface SummonerRecordListContainerProps {
   puuid: string;
-  championsData: any;
+  championsData: ChampionsDataType[];
   version: string;
-  runesDataArr: any;
+  runesDataArr: RunesDataType[];
 }
 
 export default function SummonerRecordListContainer({
@@ -67,7 +68,7 @@ export default function SummonerRecordListContainer({
           </div>
           <div>
             <div className="mb-[1.6rem]">많이 플레이한 챔피언 TOP 3 ({recordList.length}게임)</div>
-            <PlayChampionList filterData={filterSummonerData} championData={championsData} version={version} />
+            <PlayChampionList filterData={filterSummonerData} championsData={championsData} version={version} />
           </div>
         </div>
       </ContentBox>

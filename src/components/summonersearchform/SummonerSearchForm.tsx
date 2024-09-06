@@ -1,8 +1,9 @@
 'use client';
 import ButtonSvg from '@/assets/icons/form_submit.svg';
-import useSearchFormEvent from '@/hook/useSearchFormEvent';
+
 import RecentlySearchList from './RecentlySearchList';
 import { useRef } from 'react';
+import useSearchFormEvent from '@/hook/useSearchFormEvent';
 
 interface SummonerSearchFormProps {
   inputId: string;

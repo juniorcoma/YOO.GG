@@ -5,11 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default async function RotationsList() {
-  const championsData: any = await getChampionsData(true);
+  const championsData = await getChampionsData();
   const rotationsData = await getRotationsChampionsData();
   const [latestVersion] = await getVersionsData();
   const renderItemArr = rotationsData.freeChampionIds.map(ids => {
-    return championsData.find((champion: any) => ids === Number(champion.key));
+    return championsData?.find(champion => ids === Number(champion.key));
   });
   return (
     <ul className="px-[1.6rem] py-[1.2rem] flex flex-wrap gap-[1.2rem] justify-center">

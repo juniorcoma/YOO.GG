@@ -1,15 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import ContentBox from './ContentBox';
+import ContentBox from './common/ContentBox';
 import { DDRAGON_IMG_URL } from '@/constant/API';
 import { useRef, useState } from 'react';
 import useModal from '@/hook/useModal';
-import FullSkinContainer from './FullSkinContainer';
+import FullSkinContainer from './modalcontent/FullSkinContainer';
+import { ChampionDataType } from '@/types/staticData';
 
 interface ChampionSkinControlContainerProps {
   name: string;
-  skinRenderList: { id: string; num: number; name: string; chromas: boolean }[];
+  skinRenderList: ChampionDataType['skins'];
   titleName: string;
 }
 

@@ -1,13 +1,13 @@
 'use client';
 
-import { ModalStateContext } from '@/hook/ModalProvider';
+import { ModalStateContext } from '@/components/providers/ModalProvider';
 import useModal from '@/hook/useModal';
 import { usePathname } from 'next/navigation';
 
 import { useContext, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-export default function ModalContainer() {
+export default function ModalContainerProviders() {
   const { component: Component, props } = useContext(ModalStateContext);
   const pathName = usePathname();
   const { closeModal } = useModal();

@@ -1,16 +1,17 @@
 import { ParticipantDtoType } from '@/types/response';
+import { ChampionsDataType } from '@/types/staticData';
 import descPlayChampionList from '@/utils/descPlayChampionList';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import Image from 'next/image';
 
 interface PlayChampionListProps {
   filterData: ParticipantDtoType[];
-  championData: any;
+  championsData: ChampionsDataType[];
   version: string;
 }
 
-export default function PlayChampionList({ filterData, championData, version }: PlayChampionListProps) {
-  const descPlayChampList = descPlayChampionList(filterData, championData);
+export default function PlayChampionList({ filterData, championsData, version }: PlayChampionListProps) {
+  const descPlayChampList = descPlayChampionList(filterData, championsData);
 
   return (
     <ul className="flex flex-col gap-[0.8rem]">

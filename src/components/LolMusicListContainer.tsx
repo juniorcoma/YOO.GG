@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import ContentBox from './ContentBox';
-import LolMusicList from './LolMusicList';
+import ContentBox from './common/ContentBox';
+import LolMusicList from './contentboxinner/LolMusicList';
 
 export default function LolMusicListContainer() {
   const [contentType, setContentType] = useState<'worlds' | 'cinematic'>('worlds');

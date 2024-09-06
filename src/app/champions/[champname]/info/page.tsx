@@ -1,9 +1,11 @@
 import ChampionProfile from '@/components/ChampionProfile';
-import ChampionSkillBox from '@/components/ChampionSkillBox';
+
 import ChampionSkinControlContainer from '@/components/ChampionSkinControlContainer';
 import ChampionStatContainer from '@/components/ChampionStatContainer';
-import ChampionStatTable from '@/components/ChampionStatTable';
-import ContentBox from '@/components/ContentBox';
+
+import ContentBox from '@/components/common/ContentBox';
+import ChampionSkillBox from '@/components/contentboxinner/ChampionSkillBox';
+import ChampionStatTable from '@/components/contentboxinner/ChampionStatTable';
 
 import { CHAMPION_POSITION_DATA } from '@/constant';
 import { getChampionData, getCommunityChampionData, getVersionsData } from '@/service/requestJsonData.api';
@@ -86,13 +88,13 @@ export default async function ChampInfoPage({ params }: { params: { champname: s
             <ContentBox titleText="챔피언 TIP">
               <div className="px-[1.6rem] pt-[1.6rem] pb-[2.4rem] text-[1.6rem]">
                 <p className="text-color-primary-500 mb-[1.2rem]">아군일 때</p>
-                {champDetailData.allytips.map((tip: string[], index: number) => (
+                {champDetailData.allytips.map((tip: string, index: number) => (
                   <p key={index} className="text-[1.4rem] mb-[0.8rem]">
                     {tip}
                   </p>
                 ))}
                 <p className="text-color-red-500 mb-[1.2rem]">적군일 때</p>
-                {champDetailData.enemytips.map((tip: string[], index: number) => (
+                {champDetailData.enemytips.map((tip: string, index: number) => (
                   <p key={index} className="text-[1.4rem] mb-[0.8rem]">
                     {tip}
                   </p>

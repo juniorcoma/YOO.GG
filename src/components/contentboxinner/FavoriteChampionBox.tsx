@@ -1,13 +1,14 @@
 'use client';
 
 import { EMOTES_ICON_IMG_URL } from '@/constant';
+import { ChampionsDataType } from '@/types/staticData';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 interface FavoriteChampionBoxProps {
-  championsData: any;
+  championsData: ChampionsDataType[];
   version: string;
 }
 
@@ -34,8 +35,9 @@ export default function FavoriteChampionBox({ championsData, version }: Favorite
 
   return (
     <ul className="px-[1.6rem] py-[1.2rem] flex gap-[0.8rem] flex-wrap">
-      {favoriteChamp.map((item: any) => {
-        const championData = championsData.find((champ: any) => champ.key === item);
+      {favoriteChamp.map(item => {
+        const championData = championsData.find(champ => champ.key === item);
+        if (!championData) return null;
         return (
           <li key={championData.key}>
             <Link

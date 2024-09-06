@@ -1,10 +1,7 @@
+import { ChampionDataType } from '@/types/staticData';
+
 interface ChampionStatContainerProps {
-  info: {
-    attack: number;
-    defense: number;
-    magic: number;
-    difficulty: number;
-  };
+  info: ChampionDataType['info'];
 }
 
 export default function ChampionStatContainer({ info }: ChampionStatContainerProps) {

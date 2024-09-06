@@ -12,6 +12,7 @@ import Link from 'next/link';
 import SummonerCardBtnIcon from './SummonerCardBtnIcon';
 import { useState } from 'react';
 import RecordDetailContainer from './RecordDetailContainer';
+import { RunesDataType } from '@/types/staticData';
 
 function CardLayer({
   children,
@@ -24,7 +25,7 @@ function CardLayer({
   isWin: boolean;
   gameVersion: string;
   perks: PerksDtoType;
-  runesDataArr: any;
+  runesDataArr: RunesDataType[];
 }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
