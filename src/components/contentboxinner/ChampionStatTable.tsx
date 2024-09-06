@@ -1,8 +1,8 @@
 import { MATCHING_STAT_ARR } from '@/constant';
-import { ChampionStatType, MatchingStatArrType } from '@/types';
+import { ChampionDataType } from '@/types/staticData';
 
 interface ChampionStatTableProps {
-  stat: ChampionStatType;
+  stat: ChampionDataType['stats'];
   partype: string;
 }
 export default function ChampionStatTable({ stat, partype }: ChampionStatTableProps) {
@@ -61,7 +61,7 @@ export default function ChampionStatTable({ stat, partype }: ChampionStatTablePr
   );
 }
 
-function formatChampionStat(stats: ChampionStatType) {
+function formatChampionStat(stats: ChampionDataType['stats']) {
   const matchStatArr = MATCHING_STAT_ARR.map(stat => {
     if (stat.level) {
       return { ...stat, value: stats[stat.value], level: stats[stat.level] };

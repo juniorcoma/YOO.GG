@@ -1,5 +1,6 @@
 import { DDRAGON_IMG_URL } from '@/constant/API';
 import { PerksDtoType } from '@/types/response';
+import { RuneDataType, RunesDataType } from '@/types/staticData';
 
 import Image from 'next/image';
 
@@ -7,7 +8,7 @@ interface RecordDetailContainerProps {
   isOpen: boolean;
   gameVersion: string;
   perks: PerksDtoType;
-  runesDataArr: any;
+  runesDataArr: RunesDataType[];
 }
 
 export default function RecordDetailContainer({
@@ -17,7 +18,7 @@ export default function RecordDetailContainer({
   runesDataArr,
 }: RecordDetailContainerProps) {
   const version = `${gameVersion.split('.').slice(0, 2).join('.')}.1`;
-  const { [version]: runeData } = runesDataArr.find((data: any) => data[version]);
+  const { [version]: runeData } = runesDataArr.find(data => data[version]) as { [key: string]: RuneDataType[] };
 
   const { primaryStyle, subStyle } = checkingRune(runeData, perks);
 
@@ -36,9 +37,9 @@ export default function RecordDetailContainer({
             <span className="text-[1.4rem] font-bold">{primaryStyle.name}</span>
           </div>
           <div className="flex flex-col gap-[0.8rem]">
-            {primaryStyle.slots.map((style: any, styleIndex: number) => (
+            {primaryStyle.slots.map((style, styleIndex) => (
               <div key={styleIndex} className="flex gap-[1.6rem]">
-                {style.map((rune: any, index: number) => (
+                {style.map((rune, index) => (
                   <div
                     key={index}
                     className={`${styleIndex === 0 ? 'rounded-[50%] bg-color-gray-200' : ''} ${
@@ -67,9 +68,9 @@ export default function RecordDetailContainer({
             <span className="text-[1.4rem] font-bold">{subStyle.name}</span>
           </div>
           <div className="flex flex-col gap-[0.8rem]">
-            {subStyle.slots.map((style: any, styleIndex: number) => (
+            {subStyle.slots.map((style, styleIndex) => (
               <div key={styleIndex} className="flex gap-[1.6rem]">
-                {style.map((rune: any, index: number) => (
+                {style.map((rune, index) => (
                   <div key={index}>
                     <img
                       src={`${DDRAGON_IMG_URL.RUNE}${rune.icon}`}
@@ -89,9 +90,9 @@ export default function RecordDetailContainer({
   );
 }
 
-function checkingRune(runeData: any, perks: PerksDtoType) {
-  const primaryStyle = runeData.find((rune: any) => rune.id === perks.styles[0].style);
-  const subStyle = runeData.find((rune: any) => rune.id === perks.styles[1].style);
+function checkingRune(runeData: RuneDataType[], perks: PerksDtoType) {
+  const primaryStyle = runeData.find(rune => rune.id === perks.styles[0].style) as RuneDataType;
+  const subStyle = runeData.find(rune => rune.id === perks.styles[1].style) as RuneDataType;
   const subStyleSlost = subStyle.slots.slice(1);
   const newPrimarySlotsArr = [];
   const newSubStyleSlotsArr = [];
@@ -100,7 +101,7 @@ function checkingRune(runeData: any, perks: PerksDtoType) {
       newPrimarySlotsArr.push([]);
       continue;
     }
-    const slot = primaryStyle.slots[i].runes.map((runeStyle: any) => {
+    const slot = primaryStyle.slots[i].runes.map(runeStyle => {
       if (runeStyle.id === perks.styles[0].selections[i].perk) {
         return { ...runeStyle, check: true };
       } else {
@@ -112,9 +113,9 @@ function checkingRune(runeData: any, perks: PerksDtoType) {
 
   for (let i = 0; i < subStyleSlost.length; i++) {
     for (let j = 0; j < perks.styles[1]?.selections.length; j++) {
-      const isContain = !!subStyleSlost[i].runes.find((rune: any) => rune.id === perks.styles[1].selections[j].perk);
+      const isContain = !!subStyleSlost[i].runes.find(rune => rune.id === perks.styles[1].selections[j].perk);
       if (isContain) {
-        const slot = subStyleSlost[i].runes.map((rune: any) => {
+        const slot = subStyleSlost[i].runes.map(rune => {
           if (rune.id === perks.styles[1].selections[j].perk) {
             return { ...rune, check: true };
           } else {
@@ -125,7 +126,7 @@ function checkingRune(runeData: any, perks: PerksDtoType) {
         break;
       } else {
         if (j === 0) continue;
-        const slot = subStyleSlost[i].runes.map((rune: any) => {
+        const slot = subStyleSlost[i].runes.map(rune => {
           return { ...rune, check: false };
         });
         newSubStyleSlotsArr.push(slot);

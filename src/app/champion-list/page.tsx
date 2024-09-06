@@ -1,7 +1,8 @@
 import ChampionListContainer from '@/components/ChampionListContainer';
-import ChampionSearchBar from '@/components/ChmapionSearchBar';
-import ContentBox from '@/components/ContentBox';
-import FavoriteChampionBox from '@/components/FavoriteChampionBox';
+import ChampionSearchBar from '@/components/ChampionSearchBar';
+
+import ContentBox from '@/components/common/ContentBox';
+import FavoriteChampionBox from '@/components/contentboxinner/FavoriteChampionBox';
 
 import { CHAMPION_POSITION_DATA } from '@/constant';
 
@@ -13,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default async function ChmapionListPage() {
-  const championsData: any = await getChampionsData(true);
-  const positionChampData = championsData.map((champ: any) => ({
+  const championsData = await getChampionsData();
+  const positionChampData = championsData.map(champ => ({
     ...champ,
     position: CHAMPION_POSITION_DATA[champ.id],
   }));

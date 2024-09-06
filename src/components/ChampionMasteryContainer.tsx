@@ -1,5 +1,6 @@
 import { DDRAGON_IMG_URL } from '@/constant/API';
 import { getChampionMasteryData, getChampionsData } from '@/service/requestJsonData.api';
+import { ChampionsDataType } from '@/types/staticData';
 import Image from 'next/image';
 
 interface ChampionMasteryContainerProps {
@@ -8,11 +9,11 @@ interface ChampionMasteryContainerProps {
 
 export default async function ChampionMasteryContainer({ puuid }: ChampionMasteryContainerProps) {
   const championMasteryData = await getChampionMasteryData(puuid);
-  const championsData: any = await getChampionsData(true);
+  const championsData = await getChampionsData();
   return (
     <ul className="flex gap-[3.2rem]">
-      {championMasteryData.map((item: any) => {
-        const matchChampData = championsData.find((champ: any) => item.championId === Number(champ.key));
+      {championMasteryData.map(item => {
+        const matchChampData = championsData.find(champ => item.championId === Number(champ.key)) as ChampionsDataType;
 
         return (
           <li key={item.championId} className="flex flex-col gap-[0.4rem]">

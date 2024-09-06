@@ -2,18 +2,10 @@ import Image from 'next/image';
 import ChampionMasteryContainer from './ChampionMasteryContainer';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import { getVersionsData } from '@/service/requestJsonData.api';
+import { AccountType, SummonerDataType } from '@/types/response';
 
 interface SummonerProfileProps {
-  summonerData: {
-    puuid: string;
-    gameName: string;
-    tagLine: string;
-    id: string;
-    accountId: string;
-    profileIconId: number;
-    revisionDate: number;
-    summonerLevel: number;
-  };
+  summonerData: AccountType & SummonerDataType;
 }
 
 export default async function SummonerProfile({ summonerData }: SummonerProfileProps) {
