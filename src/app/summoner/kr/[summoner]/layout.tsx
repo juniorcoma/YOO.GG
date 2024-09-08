@@ -1,7 +1,7 @@
 import GameTypeControlBar from '@/components/GameTypeControlBar';
 import SummonerProfile from '@/components/SummonerProfile';
 
-import { getSummonerData } from '@/service/requestJsonData.api';
+import { getItemsData, getSummonerData, getSummonerSpellsData } from '@/service/requestJsonData.api';
 import { notFound } from 'next/navigation';
 
 export default async function SummonerLayout({
@@ -13,7 +13,8 @@ export default async function SummonerLayout({
 }>) {
   const [name, tag] = decodeURIComponent(params.summoner).split('-');
   const summonerData = (await getSummonerData(name, tag)) as any;
-
+  await getItemsData();
+  await getSummonerSpellsData();
   if (summonerData.error) {
     console.log(summonerData.error);
     return notFound();
