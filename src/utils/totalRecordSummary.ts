@@ -1,6 +1,8 @@
-import { ParticipantDtoType } from '@/types/response';
+import { MatchDtoType, ParticipantDtoType } from '@/types/response';
+import filterMatchData from './filterMatchData';
 
-export default function totalRecordSummary(filterData: ParticipantDtoType[]) {
+export default function totalRecordSummary(filterData: MatchDtoType[], puuid: string) {
+  const summonerRecordData = filterMatchData(filterData, puuid);
   const summonerData = {
     win: 0,
     lose: 0,
@@ -13,7 +15,7 @@ export default function totalRecordSummary(filterData: ParticipantDtoType[]) {
     totalAvg: 0,
   };
 
-  filterData.forEach(item => {
+  summonerRecordData.forEach(item => {
     if (item.win) {
       summonerData.win += 1;
     } else {

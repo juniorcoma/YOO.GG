@@ -1,7 +1,6 @@
-import SummonerRecordListContainer from '@/components/summoner/SummonerRecordListContainer';
-import SummonerLeagueContainer from '@/components/SummonerLeagueContainer';
+import SummonerContentContainer from '@/components/SummonerContentContainer';
 
-import { getChampionsData, getRunesData, getSummonerData, getVersionsData } from '@/service/requestJsonData.api';
+import { GameType } from '@/types';
 
 export async function generateMetadata({ params }: { params: { summoner: string } }) {
   const summoner = params.summoner.replace('-', '#');
@@ -11,24 +10,14 @@ export async function generateMetadata({ params }: { params: { summoner: string 
   };
 }
 
-export default async function SummonerPage({ params }: { params: { summoner: string } }) {
-  const [name, tag] = decodeURIComponent(params.summoner).split('-');
-  const { id, puuid } = await getSummonerData(name, tag);
-  const championsData = await getChampionsData();
-  const [latestVersion] = await getVersionsData();
-  const runesDataArr = await getRunesData();
+export default async function SummonerPage({
+  params,
+  searchParams,
+}: {
+  params: { summoner: string };
+  searchParams: { [key: string]: GameType };
+}) {
+  const { queue_type } = searchParams;
 
-  return (
-    <>
-      <SummonerLeagueContainer summonerId={id} />
-      <div className="flex-1 min-h-[60rem]">
-        <SummonerRecordListContainer
-          puuid={puuid}
-          championsData={championsData}
-          version={latestVersion}
-          runesDataArr={runesDataArr}
-        />
-      </div>
-    </>
-  );
+  return <SummonerContentContainer summonerName={decodeURIComponent(params.summoner)} gameType={queue_type} />;
 }

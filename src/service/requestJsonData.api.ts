@@ -1,11 +1,11 @@
 'use server';
 
 import { COMMUNITY_DRAGON_DATA_URL, DDRAGON_DATA_URL, SERVER_REQUEST_URL } from '@/constant/API';
+import { GameType } from '@/types';
 import {
   AccountType,
   ChampionMasteryDataType,
   LeagueDataType,
-  RequestErrorType,
   RotationsDataType,
   SummonerDataType,
 } from '@/types/response';
@@ -15,6 +15,7 @@ import {
   CommunityChampionDataType,
   ItemsDataType,
   RunesDataType,
+  SummonerSpellDataType,
 } from '@/types/staticData';
 
 export async function getVersionsData(): Promise<string[]> {
@@ -39,7 +40,7 @@ export async function getChampionsData(): Promise<ChampionsDataType[]> {
   return Object.values(championsData.data);
 }
 
-export async function getSummonerSpellsData(): Promise<SummonerDataType[]> {
+export async function getSummonerSpellsData(): Promise<SummonerSpellDataType[]> {
   const [latestVersion] = await getVersionsData();
 
   const requestUrl = DDRAGON_DATA_URL.SUMMONER_SPELLS.replace('{VERSION}', latestVersion);
@@ -77,7 +78,7 @@ export async function getItemsData(): Promise<ItemsDataType> {
 
   const { data } = await itemsResponse.json();
 
-  return data.data;
+  return data;
 }
 
 export async function getCommunityChampionData(id: string): Promise<CommunityChampionDataType> {
@@ -148,4 +149,14 @@ export async function getRunesData(): Promise<RunesDataType[]> {
     }),
   );
   return runeDataArr;
+}
+
+export async function getInitialRecordData(puuid: string, type: GameType | undefined) {
+  const gameType = type || 'TOTAL';
+  const requestUrl = `${SERVER_REQUEST_URL.SUMMONER_RECORD_DATA}${puuid}?type=${gameType}`;
+  const initialRecordResponse = await fetch(requestUrl);
+
+  const initialRecordData = await initialRecordResponse.json();
+
+  return initialRecordData;
 }
