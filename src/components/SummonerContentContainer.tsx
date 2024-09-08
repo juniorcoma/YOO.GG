@@ -2,8 +2,6 @@ import { getSummonerData } from '@/service/requestJsonData.api';
 import { GameType } from '@/types';
 import SummonerLeagueContainer from './SummonerLeagueContainer';
 
-import { Suspense } from 'react';
-import SsummonerRecordListContainer from './skeleton/SummonerRecordListContainer.skeleton';
 import SummonerRecordServerContainer from './SummonerRecordServerContainer';
 
 interface SummonerContentContainerProps {
@@ -18,9 +16,7 @@ export default async function SummonerContentContainer({ summonerName, gameType 
     <>
       <SummonerLeagueContainer summonerId={id} />
       <div className="flex-1 min-h-[60rem]">
-        <Suspense fallback={<SsummonerRecordListContainer />}>
-          <SummonerRecordServerContainer puuid={puuid} gameType={gameType} />
-        </Suspense>
+        <SummonerRecordServerContainer puuid={puuid} gameType={gameType} />
       </div>
     </>
   );

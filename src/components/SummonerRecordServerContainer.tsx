@@ -19,15 +19,14 @@ export default async function SummonerRecordServerContainer({
   const championsData = await getChampionsData();
   const [latestVersion] = await getVersionsData();
   const runesDataArr = await getRunesData();
-  const initialRecordData = await getInitialRecordData(puuid, gameType);
   const itemsData = await getItemsData();
   const summonerSpellsData = await getSummonerSpellsData();
   return (
     <SummonerRecordClientContainer
       data={{ champions: championsData, runesArr: runesDataArr, summonerSpells: summonerSpellsData, items: itemsData }}
       puuid={puuid}
-      initialRecordData={initialRecordData}
       latestVersion={latestVersion}
+      gameType={gameType}
     />
   );
 }

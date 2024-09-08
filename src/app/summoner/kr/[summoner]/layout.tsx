@@ -13,9 +13,7 @@ export default async function SummonerLayout({
 }>) {
   const [name, tag] = decodeURIComponent(params.summoner).split('-');
   const summonerData = (await getSummonerData(name, tag)) as any;
-  await getItemsData();
-  await getSummonerSpellsData();
-  await getRunesData();
+
   if (summonerData.error) {
     console.log(summonerData.error);
     return notFound();

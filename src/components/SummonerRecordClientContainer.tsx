@@ -4,7 +4,7 @@ import { MatchDtoType, ParticipantDtoType } from '@/types/response';
 import { ChampionsDataType, ItemsDataType, RunesDataType, SummonerSpellDataType } from '@/types/staticData';
 import ContentBox from './common/ContentBox';
 import Image from 'next/image';
-import useInfinityRecordData from '@/hook/useInfinityRecordData';
+
 import DoughnutChartBox from './DoughnutChartBox';
 import PlayChampionList from './PlayChampionList';
 import totalRecordSummary from '@/utils/totalRecordSummary';
@@ -14,6 +14,9 @@ import GameSummary from './recordcard/SummaryContent';
 import MainContent from './recordcard/MainContent';
 import ParticipantsListContent from './recordcard/ParticipantsListContent';
 import Loading from '@/assets/icons/loading.svg';
+import useGetSummonerRecordList from '@/hook/query/useGetSummonerRecordList';
+import { GameType } from '@/types';
+import SsummonerRecordListContainer from './skeleton/SummonerRecordListContainer.skeleton';
 interface SummonerRecordClientContainerProps {
   data: {
     champions: ChampionsDataType[];
@@ -22,25 +25,31 @@ interface SummonerRecordClientContainerProps {
     items: ItemsDataType;
   };
   puuid: string;
-  initialRecordData: MatchDtoType[];
   latestVersion: string;
+  gameType: GameType;
 }
 
 export default function SummonerRecordClientContainer({
   data,
   puuid,
-  initialRecordData,
   latestVersion,
+  gameType,
 }: SummonerRecordClientContainerProps) {
   const { champions, runesArr } = data;
   const {
-    data: refetchData,
+    data: summonerRecordList,
     isFetching,
-    refetchNextPage,
+    isPending,
     hasNextPage,
-  } = useInfinityRecordData({ initialData: initialRecordData, puuid });
+    fetchNextPage,
+  } = useGetSummonerRecordList(puuid, gameType);
 
-  if (!initialRecordData.length) {
+  if (isPending) {
+    return <SsummonerRecordListContainer />;
+  }
+
+  const recordListData = summonerRecordList?.pages.flat();
+  if (!recordListData?.length) {
     return (
       <ContentBox titleText="최근 게임">
         <div className="px-[1.6rem] flex justify-center items-center pt-[3.2rem] pb-[6.4rem]">
@@ -52,7 +61,7 @@ export default function SummonerRecordClientContainer({
       </ContentBox>
     );
   }
-  const recordSummaryData = totalRecordSummary(refetchData, puuid);
+  const recordSummaryData = totalRecordSummary(recordListData, puuid);
   return (
     <>
       <ContentBox titleText="최근 게임" css="mb-[2.4rem]">
@@ -69,9 +78,9 @@ export default function SummonerRecordClientContainer({
             </div>
           </div>
           <div>
-            <div className="mb-[1.6rem]">많이 플레이한 챔피언 TOP 3 ({refetchData.length}게임)</div>
+            <div className="mb-[1.6rem]">많이 플레이한 챔피언 TOP 3 ({recordListData.length}게임)</div>
             <PlayChampionList
-              filterData={filterMatchData(refetchData, puuid)}
+              filterData={filterMatchData(recordListData, puuid)}
               championsData={champions}
               version={latestVersion}
             />
@@ -79,7 +88,7 @@ export default function SummonerRecordClientContainer({
         </div>
       </ContentBox>
       <div className="flex flex-col gap-[0.8rem] mb-[1.6rem]">
-        {refetchData.map((record, index) => {
+        {recordListData.map((record, index) => {
           const summonerGameInfo = record.info.participants.find(
             participant => participant.puuid === puuid,
           ) as ParticipantDtoType;
@@ -116,7 +125,7 @@ export default function SummonerRecordClientContainer({
       {hasNextPage ? (
         <button
           className={`h-[5rem] text-[1.6rem] bg-color-gray-00 border border-color-gray-300 w-full rounded-[0.4rem]`}
-          onClick={() => refetchNextPage()}
+          onClick={() => fetchNextPage()}
           disabled={isFetching}
         >
           {isFetching ? (
