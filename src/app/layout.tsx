@@ -5,7 +5,7 @@ import './globals.css';
 import Header from '@/components/common/header/Header';
 import Footer from '@/components/common/footer/Footer';
 
-import { getChampionsData, getVersionsData } from '@/service/requestJsonData.api';
+import { getChampionsData, getItemsData, getSummonerSpellsData, getVersionsData } from '@/service/requestJsonData.api';
 
 import { ModalsProvider } from '@/components/providers/ModalProvider';
 import BackgroundProvider from '@/components/providers/BackgroundProvider';
@@ -54,6 +54,8 @@ export default async function RootLayout({
 }>) {
   await getChampionsData();
   await getVersionsData();
+  await getItemsData();
+  await getSummonerSpellsData();
   return (
     <html lang="ko" className={AppleSDGOdicNeo.className}>
       <meta name="title" content="롤 전적 검색 사이트 YOO.GG - 챔피언 정보와 게임 전적, 라이엇 아이디 태그 검색"></meta>
