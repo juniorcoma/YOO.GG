@@ -15,6 +15,7 @@ import {
   CommunityChampionDataType,
   ItemsDataType,
   RunesDataType,
+  SummonerSpellDataType,
 } from '@/types/staticData';
 
 export async function getVersionsData(): Promise<string[]> {
@@ -39,7 +40,7 @@ export async function getChampionsData(): Promise<ChampionsDataType[]> {
   return Object.values(championsData.data);
 }
 
-export async function getSummonerSpellsData(): Promise<SummonerDataType[]> {
+export async function getSummonerSpellsData(): Promise<SummonerSpellDataType[]> {
   const [latestVersion] = await getVersionsData();
 
   const requestUrl = DDRAGON_DATA_URL.SUMMONER_SPELLS.replace('{VERSION}', latestVersion);
@@ -77,7 +78,7 @@ export async function getItemsData(): Promise<ItemsDataType> {
 
   const { data } = await itemsResponse.json();
 
-  return data.data;
+  return data;
 }
 
 export async function getCommunityChampionData(id: string): Promise<CommunityChampionDataType> {
