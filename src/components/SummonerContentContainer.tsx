@@ -11,6 +11,8 @@ interface SummonerContentContainerProps {
   gameType: GameType;
 }
 
+export const revalidate = 0;
+
 export default async function SummonerContentContainer({ summonerName, gameType }: SummonerContentContainerProps) {
   const [name, tag] = summonerName.split('-');
   const { id, puuid } = await getSummonerData(name, tag);
