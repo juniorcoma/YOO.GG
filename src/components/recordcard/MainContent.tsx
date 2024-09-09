@@ -1,4 +1,5 @@
 import { DDRAGON_IMG_URL } from '@/constant/API';
+import useTooltip from '@/hook/useTooltip';
 import { ParticipantDtoType, PerkStyleDtoType } from '@/types/response';
 import {
   ChampionsDataType,
@@ -10,6 +11,9 @@ import {
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import Image from 'next/image';
 import Link from 'next/link';
+import SummonerSpellTooltip from '../tooltipcontent/SummonerSpellTooltip';
+import ItemTooltip from '../tooltipcontent/ItemTooltip';
+import RuneTooltip from '../tooltipcontent/RuneTooltip';
 
 interface MainContentProps {
   participant: ParticipantDtoType;
@@ -44,13 +48,12 @@ export default function MainContent({ participant, version, gameVersion, data }:
               />
             </Link>
             <div className="flex gap-[0.2rem]">
-              <div className="flex flex-col gap-[0.2rem]">
-                <SummonerSpellImgRender
-                  summonerSpells={[participant.summoner1Id, participant.summoner2Id]}
-                  version={version}
-                  spellsData={data.summonerSpells}
-                />
-              </div>
+              <SummonerSpellImgRender
+                summonerSpells={[participant.summoner1Id, participant.summoner2Id]}
+                version={version}
+                spellsData={data.summonerSpells}
+              />
+
               <div className="flex flex-col gap-[0.2rem]">
                 <SummonerRunesImgRender
                   summonerRunes={participant.perks.styles}
@@ -131,8 +134,10 @@ function SummonerSpellImgRender({
     spellsData.find((spell: any) => id === Number(spell.key)),
   ) as SummonerSpellDataType[];
 
+  const { openTooltip, closeTooltip } = useTooltip();
+
   return (
-    <>
+    <div className="flex flex-col gap-[0.2rem]">
       {renderImgList.map(spell => (
         <img
           key={spell.key}
@@ -141,9 +146,13 @@ function SummonerSpellImgRender({
           height={22}
           alt={`${spell.name} 스펠 이미지`}
           className="rounded-[0.4rem]"
+          onMouseOver={e => {
+            openTooltip({ component: SummonerSpellTooltip, props: { data: spell }, target: e.target as HTMLElement });
+          }}
+          onMouseLeave={closeTooltip}
         />
       ))}
-    </>
+    </div>
   );
 }
 
@@ -164,23 +173,28 @@ function SummonerRunesImgRender({
     const matchRuneStyle = runeData.find(data => data.id === rune.style) as RuneDataType;
     if (index === 0) {
       const mainRune = matchRuneStyle.slots[0].runes?.find((data: any) => data.id === rune.selections[0].perk);
-      return mainRune?.icon || null;
+      return mainRune;
     }
-    return matchRuneStyle?.icon || null;
+    return matchRuneStyle;
   });
-
+  const { openTooltip, closeTooltip } = useTooltip();
   return (
     <>
-      {runeImgUrlList.map((rune: string | null, index) => {
+      {runeImgUrlList.map((rune, index) => {
         if (!rune) return <span key={index} className="w-[2.2rem] h-[2.2rem]"></span>;
+
         return (
           <img
-            key={rune}
-            src={`${DDRAGON_IMG_URL.RUNE}${rune}`}
+            key={rune.id}
+            src={`${DDRAGON_IMG_URL.RUNE}${rune?.icon}`}
             width={22}
             height={22}
             alt={`룬 이미지`}
             className={`${!index ? 'rounded-[50%] bg-color-gray-900' : ''}`}
+            onMouseOver={e => {
+              openTooltip({ component: RuneTooltip, props: { data: rune }, target: e.target as HTMLElement });
+            }}
+            onMouseLeave={closeTooltip}
           />
         );
       })}
@@ -203,7 +217,7 @@ function ItemImgRender({
     if (!itemId) return undefined;
     return itemsData[itemId];
   });
-
+  const { openTooltip, closeTooltip } = useTooltip();
   return (
     <div className="flex gap-[0.2rem]">
       {renderItemsArr.map((item, index) => {
@@ -225,6 +239,10 @@ function ItemImgRender({
             unoptimized
             alt={`${item.name}`}
             className="rounded-[0.4rem]"
+            onMouseOver={e => {
+              openTooltip({ component: ItemTooltip, props: { data: item }, target: e.target as HTMLElement });
+            }}
+            onMouseLeave={closeTooltip}
           />
         );
       })}

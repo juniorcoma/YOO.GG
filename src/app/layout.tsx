@@ -12,6 +12,8 @@ import BackgroundProvider from '@/components/providers/BackgroundProvider';
 import ProgressProviders from '@/components/providers/ProgressBarProvider';
 import ReactQueryProviders from '@/components/providers/ReactQueryProviders';
 import ModalContainerProviders from '@/components/providers/ModalContainerProviders';
+import { TooltipProviders } from '@/components/providers/TooltipProviders';
+import TooltipContainerProviders from '@/components/providers/TooltipContainerProviders';
 
 const AppleSDGOdicNeo = localFont({
   src: [
@@ -66,8 +68,11 @@ export default async function RootLayout({
               <Header />
               <ReactQueryProviders>
                 <ModalsProvider>
-                  <ModalContainerProviders />
-                  {children}
+                  <TooltipProviders>
+                    <ModalContainerProviders />
+                    <TooltipContainerProviders />
+                    {children}
+                  </TooltipProviders>
                 </ModalsProvider>
               </ReactQueryProviders>
               <Footer />
@@ -75,6 +80,7 @@ export default async function RootLayout({
           </ProgressProviders>
         </BackgroundProvider>
         <div id="portal"></div>
+        <div id="tooltip"></div>
       </body>
     </html>
   );

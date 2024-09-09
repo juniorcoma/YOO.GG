@@ -1,4 +1,4 @@
-interface ImageDataType {
+export interface ImageDataType {
   full: string;
   sprite: string;
   group: string;
@@ -147,7 +147,7 @@ export interface RuneDataType {
   slots: RuneDetailDataType[];
 }
 
-interface RuneDetailDataType {
+export interface RuneDetailDataType {
   runes: {
     id: number;
     key: string;
