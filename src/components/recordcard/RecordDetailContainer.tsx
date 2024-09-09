@@ -1,8 +1,10 @@
 import { DDRAGON_IMG_URL } from '@/constant/API';
+import useTooltip from '@/hook/useTooltip';
 import { PerksDtoType } from '@/types/response';
 import { RuneDataType, RunesDataType } from '@/types/staticData';
 
 import Image from 'next/image';
+import RuneTooltip from '../tooltipcontent/RuneTooltip';
 
 interface RecordDetailContainerProps {
   isOpen: boolean;
@@ -22,6 +24,7 @@ export default function RecordDetailContainer({
 
   const { primaryStyle, subStyle } = checkingRune(runeData, perks);
 
+  const { openTooltip, closeTooltip } = useTooltip();
   return (
     <div className={`${isOpen ? '' : 'hidden'} bg-color-gray-00 min-h-[20rem] rounded-[0.8rem] overflow-hidden`}>
       <div className="px-[1.6rem] py-[1.2rem] bg-color-gray-100 text-[1.4rem] font-bold text-color-gray-500">
@@ -45,6 +48,10 @@ export default function RecordDetailContainer({
                     className={`${styleIndex === 0 ? 'rounded-[50%] bg-color-gray-200' : ''} ${
                       rune.check && styleIndex === 0 ? 'bg-color-primary-300' : ''
                     }`}
+                    onMouseOver={e => {
+                      openTooltip({ component: RuneTooltip, props: { data: rune }, target: e.target as HTMLElement });
+                    }}
+                    onMouseLeave={closeTooltip}
                   >
                     <img
                       src={`${DDRAGON_IMG_URL.RUNE}${rune.icon}`}
@@ -71,7 +78,13 @@ export default function RecordDetailContainer({
             {subStyle.slots.map((style, styleIndex) => (
               <div key={styleIndex} className="flex gap-[1.6rem]">
                 {style.map((rune, index) => (
-                  <div key={index}>
+                  <div
+                    key={index}
+                    onMouseOver={e => {
+                      openTooltip({ component: RuneTooltip, props: { data: rune }, target: e.target as HTMLElement });
+                    }}
+                    onMouseLeave={closeTooltip}
+                  >
                     <img
                       src={`${DDRAGON_IMG_URL.RUNE}${rune.icon}`}
                       width={32}
