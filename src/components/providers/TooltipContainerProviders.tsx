@@ -6,7 +6,6 @@ import { TooltipStateContext } from './TooltipProviders';
 
 export default function TooltipContainerProviders() {
   const { component: Component, props, target } = useContext(TooltipStateContext);
-  console.log(target);
   const [position, setPosition] = useState<{ top: null | number; left: number | null }>({ top: null, left: null });
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
