@@ -12,7 +12,10 @@ export default function TooltipContainerProviders() {
     if (target && ref.current) {
       const rect = target?.getBoundingClientRect();
       setPosition({
-        top: rect?.top + window.scrollY - (ref.current?.offsetHeight + 10) || null,
+        top:
+          window.innerHeight / 2 > rect?.top
+            ? rect?.bottom + window.scrollY + 10
+            : rect?.top + window.scrollY - (ref.current?.offsetHeight + 10) || null,
         left: rect?.left || null,
       });
     }
