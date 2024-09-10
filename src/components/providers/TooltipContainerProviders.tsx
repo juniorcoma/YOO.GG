@@ -6,14 +6,17 @@ import { TooltipStateContext } from './TooltipProviders';
 
 export default function TooltipContainerProviders() {
   const { component: Component, props, target } = useContext(TooltipStateContext);
-  console.log(target);
+  console.log(window.innerHeight);
   const [position, setPosition] = useState<{ top: null | number; left: number | null }>({ top: null, left: null });
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (target && ref.current) {
       const rect = target?.getBoundingClientRect();
       setPosition({
-        top: rect?.top + window.scrollY - (ref.current?.offsetHeight + 10) || null,
+        top:
+          window.innerHeight / 2 > rect?.top
+            ? rect?.bottom + window.scrollY + 10
+            : rect?.top + window.scrollY - (ref.current?.offsetHeight + 10) || null,
         left: rect?.left || null,
       });
     }
