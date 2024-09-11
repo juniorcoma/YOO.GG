@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer id="footer" className={`${pathName === '/' ? 'footer-home' : 'footer-other'}`}>
       <div className="footer-inner">
-        <section className="flex justify-between">
+        <div className="flex justify-between header dark:text-color-gray-700">
           <strong className="pb-[1.6rem]">
             <Link href="/">
               <img
@@ -38,8 +38,8 @@ export default function Footer() {
             <div>React Query</div>
             <div>Riot API</div>
           </div>
-        </section>
-        <section className="mt-[2.4rem] pt-[2.4rem] flex justify-between">
+        </div>
+        <div className="mt-[2.4rem] pt-[2.4rem] flex justify-between bottom dark:text-color-gray-700">
           <div>
             @ By using this website, you agree to our terms. We utilize Riot Games API for League of Legends data but
             are not affiliated with Riot Games.
@@ -60,7 +60,7 @@ export default function Footer() {
               </a>
             ))}
           </nav>
-        </section>
+        </div>
       </div>
     </footer>
   );

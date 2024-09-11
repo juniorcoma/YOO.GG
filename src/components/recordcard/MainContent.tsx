@@ -190,7 +190,7 @@ function SummonerRunesImgRender({
             width={22}
             height={22}
             alt={`룬 이미지`}
-            className={`${!index ? 'rounded-[50%] bg-color-gray-900' : ''}`}
+            className={`${!index ? 'rounded-[50%] bg-color-gray-600' : ''}`}
             onMouseOver={e => {
               openTooltip({ component: RuneTooltip, props: { data: rune }, target: e.target as HTMLElement });
             }}

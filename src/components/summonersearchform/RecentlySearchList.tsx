@@ -69,9 +69,9 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
                 <li key={index} className="leading-[1] flex">
                   <Link
                     href={`/summoner/kr/${item}`}
-                    className="flex-1 flex gap-[0.8rem] items-center px-[1.6rem] py-[1.2rem] hover:bg-color-primary-100"
+                    className="flex-1 flex gap-[0.8rem] items-center px-[1.6rem] py-[1.2rem] hover:bg-color-gray-100"
                   >
-                    <span className="font-bold text-[1.2rem] text-color-gray-00 rounded-[0.4rem] bg-color-primary-500 w-[3.1rem] h-[2rem] flex justify-center items-center">
+                    <span className="font-bold text-[1.2rem] text-[#fff] rounded-[0.4rem] bg-color-primary-500 w-[3.1rem] h-[2rem] flex justify-center items-center">
                       KR
                     </span>
                     <div>

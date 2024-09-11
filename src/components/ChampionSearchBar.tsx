@@ -61,11 +61,11 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
         </span>
         <div className="search-popup">
           {matchList.length !== 0 && (
-            <>
-              <div className="p-[1.2rem] border-b border-color-primary-500">
+            <div className="bg-color-gray-00 shadow-md shadow-color-gray-00 dark:shadow-color-gray-900">
+              <div className="p-[1.2rem] border-b border-color-primary-500 ">
                 <h3 className="text-[1.4rem] font-bold">Champion Build</h3>
               </div>
-              <ul className="flex flex-col">
+              <ul className="flex flex-col pb-[1.6rem]">
                 {matchList.map(champ => (
                   <li key={champ.key}>
                     <Link
@@ -89,7 +89,7 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
                   </li>
                 ))}
               </ul>
-            </>
+            </div>
           )}
         </div>
       </div>
