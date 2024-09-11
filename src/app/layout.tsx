@@ -61,7 +61,7 @@ export default async function RootLayout({
   return (
     <html lang="ko" className={AppleSDGOdicNeo.className}>
       <meta name="title" content="롤 전적 검색 사이트 YOO.GG - 챔피언 정보와 게임 전적, 라이엇 아이디 태그 검색"></meta>
-      <body className="text-color-gray-900">
+      <body>
         <BackgroundProvider>
           <ProgressProviders>
             <div id="__next">
