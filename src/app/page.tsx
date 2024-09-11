@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="layout-container home">
+    <div className="layout-container">
       <div className="content-wrapper ">
         <main>
           <div className="mt-[6.4rem] mb-[4.8rem]">
