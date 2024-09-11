@@ -22,7 +22,7 @@ export default function ChampionSkillBox({ skill, communitySkillData, version }:
         {skill.map((skill: any, index: number) => (
           <button
             type="button"
-            className="flex gap-[0.4rem] flex-col items-center hover:bg-color-gray-200 w-[10rem] py-[0.8rem]"
+            className="flex gap-[0.4rem] flex-col items-center hover:bg-color-gray-200 w-[10rem] py-[0.8rem] rounded-[0.4rem]"
             key={skill.id}
             onClick={() =>
               openModal({

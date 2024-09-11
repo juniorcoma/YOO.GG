@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+html {
+  font-size: 62.5%;
+  position: relative;
+  color: var(--color-gray-900);
   --color-primary-100: #ecf2ff;
   --color-primary-200: #d5e3ff;
   --color-primary-300: #b3cdff;
@@ -33,9 +36,39 @@
   --color-red-900: #59343b;
 }
 
-html {
+html.dark {
   font-size: 62.5%;
   position: relative;
+  color: var(--color-gray-900);
+  --color-primary-100: #28344e;
+  --color-primary-200: #2f436e;
+  --color-primary-300: #2f436e;
+  --color-primary-400: #4171d6;
+  --color-primary-500: #5383e8;
+  --color-primary-600: #5383e8;
+  --color-primary-700: #5383e8;
+  --color-primary-800: #81acff;
+  --color-primary-900: #81acff;
+  --color-gray-00: #31313c;
+  --color-gray-100: #282830;
+  --color-gray-200: #1c1c1f;
+  --color-gray-250: #424254;
+  --color-gray-300: #515163;
+  --color-gray-400: #7b7a8e;
+  --color-gray-500: #9e9eb1;
+  --color-gray-600: #9e9eb1;
+  --color-gray-700: #b7b7c9;
+  --color-gray-800: #b7b7c9;
+  --color-gray-900: #fff;
+  --color-red-100: #59343b;
+  --color-red-200: #703c47;
+  --color-red-300: #703c47;
+  --color-red-400: #d31a45;
+  --color-red-500: #e84057;
+  --color-red-600: #e84057;
+  --color-red-700: #e84057;
+  --color-red-800: #ff6c81;
+  --color-red-900: #ff6c81;
 }
 
 @layer base {
@@ -56,7 +89,7 @@ html {
   }
 
   .content-box {
-    background-color: #fff;
+    background-color: var(--color-gray-00);
     border-radius: 4px;
     height: 100%;
     height: fit-content;
@@ -69,6 +102,7 @@ html {
     padding: 4.8rem 0;
     font-size: 1.4rem;
   }
+
   #footer strong {
     font-size: 1.6rem;
   }
@@ -76,6 +110,10 @@ html {
     width: 108rem;
     margin: auto;
     margin-top: 4.8rem;
+  }
+
+  .footer-home .footer-inner {
+    color: var(--color-gray-300);
   }
   .content-header {
     background-color: var(--color-gray-00);
@@ -248,12 +286,12 @@ html {
   }
   .content-controller:hover {
     background-color: var(--color-primary-500);
-    color: var(--color-gray-00);
+    color: #fff;
   }
 
   .list-box {
     border-radius: 0.8rem;
-    background-color: #fff;
+    background-color: var(--color-gray-00);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
     position: absolute;
     font-size: 1.4rem;
@@ -320,29 +358,21 @@ html {
     margin: -1px;
     overflow: hidden;
   }
-  .footer-home {
-    background-color: var(--color-primary-500);
+
+  .footer-home strong {
     color: #fff;
   }
-  .footer-other {
-    background-color: var(--color-gray-200);
-    color: var(--color-gray-500);
-  }
-  .footer-home section:nth-child(2) {
-    border-top: 1px solid #fff;
-  }
-  .footer-other section:nth-child(2) {
-    border-top: 1px solid var(--color-gray-300);
-  }
-  .footer-other .title {
+  .footer-other strong {
     color: var(--color-gray-900);
   }
-  .layout-container.home {
-    background-color: var(--color-primary-500);
+
+  .footer-home .bottom:nth-child(2) {
+    border-top: 1px solid var(--color-gray-300);
   }
-  .layout-container.other {
-    background-color: var(--color-gray-200);
+  .footer-other .bottom:nth-child(2) {
+    border-top: 1px solid var(--color-gray-300);
   }
+
   .champ-name {
     color: #fff;
     position: absolute;
@@ -440,7 +470,7 @@ html {
   }
 
   .skeleton {
-    background-color: #f2f2f2;
+    background-color: var(--color-gray-700);
     position: relative;
     overflow: hidden;
   }
@@ -462,7 +492,7 @@ html {
 
   .content-controller.active {
     background-color: var(--color-primary-500);
-    color: var(--color-gray-00);
+    color: #fff;
   }
 
   .hidden-scroll {
@@ -492,6 +522,12 @@ html {
   .bottom-line {
     height: 0.1rem;
     background: linear-gradient(90deg, #5177f0, #a46dc5 33.5%, #fb5a90 67.5%, #ff3478);
+  }
+
+  .text-effect {
+    color: transparent;
+    background: linear-gradient(90deg, #5177f0, #a46dc5 33.5%, #fb5a90 67.5%, #ff3478);
+    background-clip: text;
   }
 }
 

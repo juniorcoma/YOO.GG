@@ -65,7 +65,7 @@ function Navbar({ pathName, version }: { pathName: string; version: string }) {
       </ul>
       <a
         href={`https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-${mainVersion}-${subVersion}-notes/`}
-        className="py-[0.4rem] px-[0.8rem] bg-color-primary-600 text-[1.4rem] rounded-[0.4rem] inline-flex gap-[0.4rem] items-center hover:bg-color-primary-700"
+        className="py-[0.4rem] px-[0.8rem] bg-[#4171d6] text-[1.4rem] rounded-[0.4rem] inline-flex gap-[0.4rem] items-center hover:bg-[#2f5ec0]"
         target="_blank"
       >
         <div className="lol-icon-original w-[2.4rem] h-[2.4rem]" />
