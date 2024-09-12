@@ -3,6 +3,7 @@ import Logo from '@/assets/icons/yoogg_logo.svg';
 import BottomHeader from './BottomHeader';
 import { getVersionsData } from '@/service/requestJsonData.api';
 import DarkmodeControlBtn from '../DarkmodeControlBtn';
+import LanguageControlBtn from '../LanguageControlBtn';
 
 export default async function Header() {
   const [latestVersion] = await getVersionsData();
@@ -23,8 +24,9 @@ function TopHeader() {
           <h1 className="hidden-logo">YOO.GG</h1>
           <Logo />
         </Link>
-        <div>
+        <div className="flex gap-[0.8rem]">
           <DarkmodeControlBtn />
+          <LanguageControlBtn />
         </div>
       </div>
     </div>
