@@ -1,7 +1,9 @@
+import useModal from '@/hook/useModal';
 import useOutsideClick from '@/hook/useOutsideClick';
 
 export default function YouTubeVideoBox({ videoSrc }: { videoSrc: string }) {
-  const ref = useOutsideClick<HTMLDivElement>();
+  const { closeModal } = useModal();
+  const ref = useOutsideClick<HTMLDivElement>({ callback: closeModal });
   return (
     <div ref={ref}>
       <iframe

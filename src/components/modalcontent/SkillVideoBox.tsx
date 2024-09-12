@@ -1,4 +1,5 @@
 import { REQUEST_DATA_HOST } from '@/constant/API';
+import useModal from '@/hook/useModal';
 import useOutsideClick from '@/hook/useOutsideClick';
 import { SpellKeyType } from '@/types';
 
@@ -10,7 +11,8 @@ interface SkillVideoBoxProps {
 }
 
 export default function SkillVideoBox({ skill, skillkey, close, communitySkillData }: SkillVideoBoxProps) {
-  const ref = useOutsideClick<HTMLDivElement>();
+  const { closeModal } = useModal();
+  const ref = useOutsideClick<HTMLDivElement>({ callback: closeModal });
 
   return (
     <div className="video-box" ref={ref}>

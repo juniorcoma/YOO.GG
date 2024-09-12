@@ -1,4 +1,5 @@
 import { DDRAGON_IMG_URL } from '@/constant/API';
+import useModal from '@/hook/useModal';
 import useOutsideClick from '@/hook/useOutsideClick';
 import Image from 'next/image';
 
@@ -9,7 +10,8 @@ interface FullSkinContainerProps {
 }
 
 export default function FullSkinContainer({ champName, skinNum, skinName }: FullSkinContainerProps) {
-  const ref = useOutsideClick<HTMLDivElement>();
+  const { closeModal } = useModal();
+  const ref = useOutsideClick<HTMLDivElement>({ callback: closeModal });
   return (
     <div className="full-img-box" ref={ref}>
       <img
