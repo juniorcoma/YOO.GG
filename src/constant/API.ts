@@ -46,11 +46,11 @@ export const REQUEST_DATA_HOST = {
 
 export const DDRAGON_DATA_URL = {
   VERSION: `${REQUEST_DATA_HOST.DDRAGON}api/versions.json`,
-  CHAMPIONS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/champion.json`,
-  CHAMPION: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/champion/{CHAMPNAME}.json`,
-  SUMMONER_SPELLS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/summoner.json`,
-  RUNES: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/runesReforged.json`,
-  ITEMS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/ko_KR/item.json`,
+  CHAMPIONS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/{LANGUAGE}/champion.json`,
+  CHAMPION: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/{LANGUAGE}/champion/{CHAMPNAME}.json`,
+  SUMMONER_SPELLS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/{LANGUAGE}/summoner.json`,
+  RUNES: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/{LANGUAGE}/runesReforged.json`,
+  ITEMS: `${REQUEST_DATA_HOST.DDRAGON}cdn/{VERSION}/data/{LANGUAGE}/item.json`,
 };
 
 export const DDRAGON_IMG_URL = {
@@ -101,4 +101,9 @@ export const LOL_CINEMATIC_MUSIC = {
   '2022': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}mDYqT0_9VR4?si=UFj_OszBS9sDxnW0`,
   '2023': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}lZ17VxvlFi8?si=ZrcdPb3DmQmauz9b`,
   '2024': `${REQUEST_DATA_HOST.YOUTUBE_VIDEO}ZHhqwBwmRkI?si=r2SMDoEHVToYpcw3`,
+};
+
+export const REQUEST_LANGUAGE_MATCHER = {
+  ko: 'ko_KR',
+  en: 'en_US',
 };

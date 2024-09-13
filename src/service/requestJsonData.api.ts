@@ -1,7 +1,12 @@
 'use server';
 
-import { COMMUNITY_DRAGON_DATA_URL, DDRAGON_DATA_URL, SERVER_REQUEST_URL } from '@/constant/API';
-import { GameType } from '@/types';
+import {
+  COMMUNITY_DRAGON_DATA_URL,
+  DDRAGON_DATA_URL,
+  REQUEST_LANGUAGE_MATCHER,
+  SERVER_REQUEST_URL,
+} from '@/constant/API';
+import { GameType, LanguageParamsType } from '@/types';
 import {
   AccountType,
   ChampionMasteryDataType,
@@ -25,10 +30,10 @@ export async function getVersionsData(): Promise<string[]> {
   return versionsData;
 }
 
-export async function getChampionsData(): Promise<ChampionsDataType[]> {
+export async function getChampionsData(lang: LanguageParamsType): Promise<ChampionsDataType[]> {
   const [latestVersion] = await getVersionsData();
-
-  const requestUrl = DDRAGON_DATA_URL.CHAMPIONS.replace('{VERSION}', latestVersion);
+  const language = REQUEST_LANGUAGE_MATCHER[lang];
+  const requestUrl = DDRAGON_DATA_URL.CHAMPIONS.replace('{VERSION}', latestVersion).replace('{LANGUAGE}', language);
 
   const championsResponse = await fetch(requestUrl, {
     next: { revalidate: false, tags: ['champions'] },
@@ -38,10 +43,13 @@ export async function getChampionsData(): Promise<ChampionsDataType[]> {
   return Object.values(championsData.data);
 }
 
-export async function getSummonerSpellsData(): Promise<SummonerSpellDataType[]> {
+export async function getSummonerSpellsData(lang: LanguageParamsType): Promise<SummonerSpellDataType[]> {
   const [latestVersion] = await getVersionsData();
-
-  const requestUrl = DDRAGON_DATA_URL.SUMMONER_SPELLS.replace('{VERSION}', latestVersion);
+  const language = REQUEST_LANGUAGE_MATCHER[lang];
+  const requestUrl = DDRAGON_DATA_URL.SUMMONER_SPELLS.replace('{VERSION}', latestVersion).replace(
+    '{LANGUAGE}',
+    language,
+  );
 
   const summonerSpellsResponse = await fetch(requestUrl, {
     next: { revalidate: false, tags: ['summonerSpells'] },
@@ -52,9 +60,12 @@ export async function getSummonerSpellsData(): Promise<SummonerSpellDataType[]> 
   return Object.values(data);
 }
 
-export async function getChampionData(champName: string): Promise<ChampionDataType> {
+export async function getChampionData(champName: string, lang: LanguageParamsType): Promise<ChampionDataType> {
   const [latestVersion] = await getVersionsData();
-  const requestUrl = DDRAGON_DATA_URL.CHAMPION.replace('{VERSION}', latestVersion).replace('{CHAMPNAME}', champName);
+  const language = REQUEST_LANGUAGE_MATCHER[lang];
+  const requestUrl = DDRAGON_DATA_URL.CHAMPION.replace('{VERSION}', latestVersion)
+    .replace('{LANGUAGE}', language)
+    .replace('{CHAMPNAME}', champName);
 
   const championResponse = await fetch(requestUrl, {
     cache: 'no-store',
@@ -65,10 +76,10 @@ export async function getChampionData(champName: string): Promise<ChampionDataTy
   return data[champName];
 }
 
-export async function getItemsData(): Promise<ItemsDataType> {
+export async function getItemsData(lang: LanguageParamsType): Promise<ItemsDataType> {
   const [latestVersion] = await getVersionsData();
-
-  const requestUrl = DDRAGON_DATA_URL.ITEMS.replace('{VERSION}', latestVersion);
+  const language = REQUEST_LANGUAGE_MATCHER[lang];
+  const requestUrl = DDRAGON_DATA_URL.ITEMS.replace('{VERSION}', latestVersion).replace('{LANGUAGE}', language);
 
   const itemsResponse = await fetch(requestUrl, {
     next: { revalidate: false, tags: ['items'] },
@@ -134,13 +145,13 @@ export async function getSummonerLeagueData(summonerId: string): Promise<LeagueD
   return summonerLeagueData;
 }
 
-export async function getRunesData(): Promise<RunesDataType[]> {
+export async function getRunesData(lang: LanguageParamsType): Promise<RunesDataType[]> {
   const versionData = await getVersionsData();
   const versionSliceArr = versionData.slice(0, 5);
-
+  const language = REQUEST_LANGUAGE_MATCHER[lang];
   const runeDataArr = await Promise.all(
     versionSliceArr.map(async (version: string) => {
-      const requestUrl = DDRAGON_DATA_URL.RUNES.replace('{VERSION}', version);
+      const requestUrl = DDRAGON_DATA_URL.RUNES.replace('{VERSION}', version).replace('{LANGUAGE}', language);
       const responseData = await fetch(requestUrl);
       const runesData = await responseData.json();
       return { [version]: runesData };
