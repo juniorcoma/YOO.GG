@@ -29,7 +29,7 @@ export default async function ChampInfoPage({
   const champDetailData = await getChampionData(champname, locale);
   const { passive, spells } = await getCommunityChampionData(champDetailData.key);
   const [latestVersion] = await getVersionsData();
-  console.log(champDetailData);
+
   return (
     <>
       <div className="content-header">
