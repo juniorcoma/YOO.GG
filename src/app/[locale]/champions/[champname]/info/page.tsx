@@ -1,17 +1,12 @@
 import ChampionProfile from '@/components/ChampionProfile';
 
-import ChampionSkinControlContainer from '@/components/ChampionSkinControlContainer';
 import ChampionStatContainer from '@/components/ChampionStatContainer';
 
-import ContentBox from '@/components/common/ContentBox';
 import ChampionInfoContainer from '@/components/container/ChampionInfoContainer';
-import ChampionSkillBox from '@/components/contentboxinner/ChampionSkillBox';
-import ChampionStatTable from '@/components/contentboxinner/ChampionStatTable';
 
 import { CHAMPION_POSITION_DATA } from '@/constant';
 import { getChampionData, getCommunityChampionData, getVersionsData } from '@/service/requestJsonData.api';
 import { LanguageParamsType } from '@/types';
-import { useTranslations } from 'next-intl';
 
 export async function generateMetadata({
   params: { champname, locale },
@@ -34,7 +29,7 @@ export default async function ChampInfoPage({
   const champDetailData = await getChampionData(champname, locale);
   const { passive, spells } = await getCommunityChampionData(champDetailData.key);
   const [latestVersion] = await getVersionsData();
-
+  console.log(champDetailData);
   return (
     <>
       <div className="content-header">

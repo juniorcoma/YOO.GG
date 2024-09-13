@@ -37,7 +37,7 @@ export default function ChampionStatTable({ stat, partype, language }: ChampionS
             </td>
           </tr>
         ))}
-        {(partype === '기력' || partype === '마나') && (
+        {(partype === '기력' || partype === '마나' || partype === 'Mana' || partype === 'Energy') && (
           <>
             <tr className="border-b border-color-gray-200 partype">
               <td className="py-[1.2rem] pl-[1.6rem]">{partype}</td>
