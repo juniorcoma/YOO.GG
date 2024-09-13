@@ -180,36 +180,36 @@ export const SPELL_KEY: SpellKeyType[] = ['P', 'Q', 'W', 'E', 'R'];
 
 export const MATCHING_STAT_ARR: MatchingStatArrType[] = [
   {
-    name: '체력',
+    name: { ko: '체력', en: 'Health' },
     value: 'hp',
     level: 'hpperlevel',
   },
   {
-    name: '공격력',
+    name: { ko: '공격력', en: 'Attack Damage' },
     value: 'attackdamage',
     level: 'attackdamageperlevel',
   },
   {
-    name: '방어력',
+    name: { ko: '방어력', en: 'Armor' },
     value: 'armor',
     level: 'armorperlevel',
   },
   {
-    name: '마법저항력',
+    name: { ko: '마법저항력', en: 'Magic Resist' },
     value: 'spellblock',
     level: 'spellblockperlevel',
   },
   {
-    name: '체력재생',
+    name: { ko: '체력재생', en: 'Health Regen' },
     value: 'hpregen',
     level: 'hpregenperlevel',
   },
   {
-    name: '공격사거리',
+    name: { ko: '공격사거리', en: 'Attack Range' },
     value: 'attackrange',
   },
   {
-    name: '이동속도',
+    name: { ko: '이동속도', en: 'Move Speed' },
     value: 'movespeed',
   },
 ];
