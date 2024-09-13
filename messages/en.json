@@ -1,6 +1,88 @@
 {
+  "summonerSearchBar": {
+    "regionLabel": "Region",
+    "searchLabel": "Search",
+    "inputPlaceHolder": "Player Name"
+  },
+  "recentlySummonerSearchBox": {
+    "strongTitle": "Player Name + Tag",
+    "restTitle": "to search for match history!",
+    "other": "Recent Searches",
+    "notSearch": "No recently searched summoners."
+  },
+  "patchLink": {
+    "text": "Patch notes"
+  },
   "homePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "wolrdsMusic": "Worlds Music Video",
+    "cinematicMusic": "LoL Cinematic",
+    "worldControlBtn": "Worlds",
+    "cinematicControlBtn": "Cinematic",
+    "rotationsContentBox": "Rotation Champions"
+  },
+
+  "championListPage": {
+    "contentHeaderTitle": "Champion Analysis",
+    "contentHeaderDescription1": "Champion information for LoL patch 14.18.",
+    "contentHeaderDescription2": "Discover new insights about champions with Summoner's Rift analysis!"
+  },
+  "ChampionSearchBar": {
+    "hiddenLabel": "Search",
+    "inputPlaceHolder": "Search Champion (Garen, Galio, ...)"
+  },
+  "championListTable": {
+    "cell1": "Number",
+    "cell2": "Champion",
+    "cell3": "Position",
+    "cell4": "Nickname",
+    "cell5": "Difficulty"
+  },
+  "championDetail": {
+    "skillContent": "Skill Information",
+    "skillContentSub": "Click the skill to see more details!",
+    "champStatContent": "Base Stats Information",
+    "champStatContentSub": "Mechanics",
+    "champStoryContent": "Story",
+    "champSkinContent": "Skins",
+    "champSkinDetail": "View Details",
+    "champTipContent": "Champion Tips",
+    "champTipContentSub1": "When Playing",
+    "champTipContentSub2": "When Facing an Enemy"
+  },
+  "championStatTable": {
+    "cell1": "Attribute",
+    "cell2": "Value",
+    "cell3": "Growth per Level",
+    "regen": "Regen"
+  },
+  "summonerLeagueContent": {
+    "contentBox1Title": "Ranked Solo/Duo",
+    "contentBox2Title": "Ranked Flex"
+  },
+  "ingame": {
+    "text": "Live Game"
+  },
+  "summonerRecordContainer": {
+    "recordSummaryText": "Recent Games",
+    "manyPlayChampText": "Top 3 Most Played Champions",
+    "gameCount": "Games",
+    "moreBtnText": "View More",
+    "noRecordBoxText": "No recent records available.",
+    "lastRecordText1": "This is the last record.",
+    "lastRecordText2": "YOO.GG provides records from the latest version to the previous 5 versions of LOL."
+  },
+  "notFoundPage": {
+    "title": "Please Check Again",
+    "description1": "The page for the address you entered",
+    "description2": "could not find the summoner or has been changed to another page.",
+    "description3": "Please check the summoner name or the address again.",
+    "prevBtnText": "Previous Page",
+    "homeBtnText": "Home"
+  },
+  "errorPage": {
+    "title": "Page Error",
+    "description1": "An error occurred while processing the page you requested.",
+    "description2": "We apologize for the inconvenience. Please try again later.",
+    "homeBtn": "Return to Home"
   }
 }
