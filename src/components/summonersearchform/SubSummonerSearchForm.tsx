@@ -26,7 +26,7 @@ export default function SubSummonerSearchForm() {
             <span className="bg-[#ebeef1] rounded-[0.4rem] px-[0.4rem] py-[0.1rem]">#KR1</span>
           </label>
           <input
-            className="text-[1.4rem] px-[1.6rem] flex-1"
+            className="text-[1.4rem] px-[1.6rem] flex-1 text-[#000]"
             value={inputValue}
             onChange={handleChangeEvent}
             id="summoner-search"
