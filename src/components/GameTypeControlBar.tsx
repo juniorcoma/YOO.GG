@@ -1,7 +1,9 @@
 'use client';
 
 import { GAME_TYPE_RENDER_LIST } from '@/constant/renderList';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { LanguageParamsType } from '@/types';
+import { useTranslations } from 'next-intl';
+import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function GameTypeControlBar() {
   const searchParams = useSearchParams();
@@ -9,8 +11,9 @@ export default function GameTypeControlBar() {
   const router = useRouter();
   const pathArr = pathName.split('/');
   const isIngame = pathArr[pathArr.length - 1] === 'ingame';
+  const t = useTranslations('ingame');
   const type = isIngame ? '' : searchParams.get('queue_type') || 'TOTAL';
-
+  const { locale } = useParams();
   const handleClick = (type: string) => {
     if (isIngame) {
       pathArr.splice(pathArr.length - 1, 1);
@@ -37,7 +40,7 @@ export default function GameTypeControlBar() {
                 }`}
                 onClick={() => handleClick(item.query)}
               >
-                {item.text}
+                {item.text[locale as LanguageParamsType]}
               </button>
             </li>
           ))}
@@ -50,7 +53,7 @@ export default function GameTypeControlBar() {
             }`}
             onClick={handleIngameBtnClick}
           >
-            인게임
+            {t('text')}
           </button>
         </div>
       </div>

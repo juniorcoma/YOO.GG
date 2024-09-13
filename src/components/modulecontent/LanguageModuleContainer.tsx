@@ -3,10 +3,15 @@
 import { useContext, useEffect } from 'react';
 import { ModuleStateContext } from '../providers/ModuleStateProviders';
 import Close from '@/assets/icons/Close';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+import { LanguageRenderList } from '@/constant/renderList';
+import { LanguageParamsType } from '@/types';
 
 export default function LanguageModuleContainer() {
   const { moduleState, handleCloseModule } = useContext(ModuleStateContext);
-
+  const pathName = usePathname();
+  const { locale } = useParams();
+  const router = useRouter();
   useEffect(() => {
     if (moduleState) {
       document.body.style.overflow = 'hidden';
@@ -14,6 +19,17 @@ export default function LanguageModuleContainer() {
       document.body.style.overflow = '';
     }
   }, [moduleState]);
+
+  const handleOnclick = (lang: LanguageParamsType, locale: LanguageParamsType) => {
+    const pathArr = pathName.split('/');
+    pathArr.splice(0, 2);
+    pathArr.unshift(lang);
+
+    const url = pathArr.join('/');
+
+    router.push(`/${url}`);
+  };
+
   return (
     <div
       className={`${moduleState ? 'module-container_open' : 'module-container_close'} module-container`}
@@ -30,12 +46,22 @@ export default function LanguageModuleContainer() {
           </button>
         </div>
         <div className="px-[2.4rem] flex flex-col text-[1.8rem]">
-          <button type="button" className="language-btn">
-            한국어
-          </button>
-          <button type="button" className="language-btn">
-            English
-          </button>
+          {LanguageRenderList.map(lang =>
+            lang.value === locale ? (
+              <span key={lang.id} className="language-btn current">
+                {lang.text}
+              </span>
+            ) : (
+              <button
+                type="button"
+                className="language-btn"
+                key={lang.id}
+                onClick={() => handleOnclick(lang.value as 'ko' | 'en', locale as 'ko' | 'en')}
+              >
+                {lang.text}
+              </button>
+            ),
+          )}
         </div>
       </div>
     </div>

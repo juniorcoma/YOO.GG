@@ -1,6 +1,7 @@
 import SummonerContentContainer from '@/components/SummonerContentContainer';
 
 import { GameType } from '@/types';
+import { Suspense } from 'react';
 
 export async function generateMetadata({ params }: { params: { summoner: string } }) {
   const summoner = params.summoner.replace('-', '#');

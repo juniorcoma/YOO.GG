@@ -2,20 +2,28 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
 
-import { ChampPositionType, ExtendedChampionDataType } from '@/types';
+import { ChampPositionType, ExtendedChampionDataType, LanguageParamsType } from '@/types';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import PositionIconRender from './render/PositionIconRender';
+import { useTranslations } from 'next-intl';
 
 interface ChampionListTableProps {
   championsData: ExtendedChampionDataType[];
   currentPosition: 'all' | ChampPositionType;
   version: string;
+  language: LanguageParamsType;
 }
 
-export default function ChampionListTable({ championsData, currentPosition, version }: ChampionListTableProps) {
+export default function ChampionListTable({
+  championsData,
+  currentPosition,
+  version,
+  language,
+}: ChampionListTableProps) {
   const tableRenderData = useMemo(() => {
     return filterPositionChampion(championsData, currentPosition);
   }, [championsData, currentPosition]);
+  const t = useTranslations('championListTable');
   return (
     <table className="table">
       <colgroup>
@@ -27,11 +35,11 @@ export default function ChampionListTable({ championsData, currentPosition, vers
       </colgroup>
       <thead className="bg-color-gray-100 text-[1.2rem] text-color-gray-500">
         <tr>
-          <th>순번</th>
-          <th align="left">챔피언</th>
-          <th>포지션</th>
-          <th>별명</th>
-          <th>난이도</th>
+          <th>{t('cell1')}</th>
+          <th align="left">{t('cell2')}</th>
+          <th>{t('cell3')}</th>
+          <th>{t('cell4')}</th>
+          <th>{t('cell5')}</th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +50,7 @@ export default function ChampionListTable({ championsData, currentPosition, vers
           >
             <td className="py-[1.2rem] pl-[1.6rem] text-color-gray-400">{index + 1}</td>
             <td>
-              <Link href={`/champions/${champ.id}/info`} className="flex gap-[0.8rem] items-center">
+              <Link href={`/${language}/champions/${champ.id}/info`} className="flex gap-[0.8rem] items-center">
                 <div className="overflow-hidden rounded-[0.4rem]">
                   <Image
                     src={`${imgSrcVersionLoader(version, 'CHAMPION_SQUARE')}${champ.image.full}`}

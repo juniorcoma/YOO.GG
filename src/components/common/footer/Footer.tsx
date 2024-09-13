@@ -14,7 +14,11 @@ export default function Footer() {
           <strong className="pb-[1.6rem]">
             <Link href="/">
               <img
-                src={pathName === '/' ? '/images/yoogg_logo_img1.png' : '/images/yoogg_logo_img2.png'}
+                src={
+                  pathName === '/ko' || pathName === '/en'
+                    ? '/images/yoogg_logo_img1.png'
+                    : '/images/yoogg_logo_img2.png'
+                }
                 alt="YOO.GG"
                 width={140}
                 height={40}

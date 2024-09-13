@@ -1,13 +1,13 @@
 'use client';
 
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function useSearchFormEvent() {
   const [inputValue, setInputValue] = useState('');
   const router = useRouter();
-
+  const { locale } = useParams();
   const handleChangeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -22,7 +22,7 @@ export default function useSearchFormEvent() {
     if (data) {
       setInputValue('');
       saveLocalstorage('recentlySearch', `${gameName}-${tagLine}`);
-      router.push(`/summoner/kr/${gameName}-${tagLine}`);
+      router.push(`/${locale}/summoner/kr/${gameName}-${tagLine}`);
     } else {
       alert('소환사를 찾을 수 없습니다');
     }

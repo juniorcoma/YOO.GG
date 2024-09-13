@@ -1,6 +1,7 @@
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { forwardRef, useEffect, useState } from 'react';
 
 interface RecentlySearchListProps {
@@ -12,7 +13,8 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
   const [renderList, setRenderList] = useState<string[]>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const pathName = usePathname();
-
+  const t = useTranslations('recentlySummonerSearchBox');
+  const { locale } = useParams();
   useEffect(() => {
     const getItems = localStorage.getItem('recentlySearch');
     if (getItems) {
@@ -56,11 +58,11 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
     <div className={`list-box ${isVisible ? '' : 'hidden'}`} style={{ left: `${left}%` }}>
       <div className="p-[1.6rem] text-color-gray-400 border-b border-color-gray-300">
         <p>
-          이제 <span className="text-color-primary-500">플레이어 이름 + 태그</span>로 전적을 검색하세요!
+          <span className="text-color-primary-500">{t('strongTitle')}</span> {t('restTitle')}
         </p>
       </div>
       <div>
-        <div className="px-[1.6rem] pt-[0.8rem] pb-[1.6rem]">최근 검색</div>
+        <div className="px-[1.6rem] pt-[0.8rem] pb-[1.6rem]">{t('other')}</div>
         <ul>
           {renderList.length ? (
             renderList.map((item, index) => {
@@ -68,7 +70,7 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
               return (
                 <li key={index} className="leading-[1] flex">
                   <Link
-                    href={`/summoner/kr/${item}`}
+                    href={`/${locale}/summoner/kr/${item}`}
                     className="flex-1 flex gap-[0.8rem] items-center px-[1.6rem] py-[1.2rem] hover:bg-color-gray-100"
                   >
                     <span className="font-bold text-[1.2rem] text-[#fff] rounded-[0.4rem] bg-color-primary-500 w-[3.1rem] h-[2rem] flex justify-center items-center">
@@ -96,7 +98,7 @@ const RecentlySearchList = forwardRef<HTMLInputElement, RecentlySearchListProps>
             })
           ) : (
             <div className="p-[1.6rem] flex justify-center items-center h-[30rem]">
-              <p className="text-[1.6rem] text-color-gray-400">최근 검색한 소환사가 없습니다.</p>
+              <p className="text-[1.6rem] text-color-gray-400">{t('notSearch')}</p>
             </div>
           )}
         </ul>

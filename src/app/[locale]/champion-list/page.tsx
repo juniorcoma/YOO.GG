@@ -7,13 +7,15 @@ import FavoriteChampionBox from '@/components/contentboxinner/FavoriteChampionBo
 import { CHAMPION_POSITION_DATA } from '@/constant';
 
 import { getChampionsData, getVersionsData } from '@/service/requestJsonData.api';
+import { LanguageParamsType } from '@/types';
 import { Metadata } from 'next';
+import { useTranslations } from 'next-intl';
 
 export const metadata: Metadata = {
   title: '챔피언 리스트',
 };
 
-export default async function ChmapionListPage() {
+export default async function ChmapionListPage({ params }: { params: { locale: LanguageParamsType } }) {
   const championsData = await getChampionsData();
   const positionChampData = championsData.map(champ => ({
     ...champ,
@@ -25,24 +27,31 @@ export default async function ChmapionListPage() {
     <>
       <div className="content-header">
         <div>
-          <div className="flex flex-col gap-[0.4rem] mb-[1.2rem]">
-            <h1 className="text-[2.4rem]">챔피언 분석</h1>
-            <p className="font-bold text-[1.4rem] text-color-gray-500">
-              롤 14.15패치의 챔피언 정보입니다.
-              <br /> 협곡 챔피언 분석으로 챔피언의 새로운 점을 알아보세요!
-            </p>
-          </div>
+          <ContentHeaderTextBox />
           <ChampionSearchBar championsData={positionChampData} version={latestVersion} />
         </div>
       </div>
       <div className="w-[108rem] pt-[3.2rem] m-auto flex gap-[1.6rem]">
         <aside>
-          <ContentBox titleText="즐겨찾기" css="w-[36rem]">
+          <ContentBox titleText={params.locale === 'ko' ? '즐겨찾기' : 'Favorite'} css="w-[36rem]">
             <FavoriteChampionBox championsData={positionChampData} version={latestVersion} />
           </ContentBox>
         </aside>
         <ChampionListContainer championsData={positionChampData} version={latestVersion} />
       </div>
     </>
+  );
+}
+
+function ContentHeaderTextBox() {
+  const t = useTranslations('championListPage');
+  return (
+    <div className="flex flex-col gap-[0.4rem] mb-[1.2rem]">
+      <h1 className="text-[2.4rem]">{t('contentHeaderTitle')}</h1>
+      <p className="font-bold text-[1.4rem] text-color-gray-500">
+        {t('contentHeaderDescription1')}
+        <br /> {t('contentHeaderDescription2')}
+      </p>
+    </div>
   );
 }
