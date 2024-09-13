@@ -386,6 +386,11 @@ html.dark {
     align-items: center;
     border-radius: 0.4rem;
   }
+
+  .language-btn.current {
+    background-color: var(--color-gray-200);
+  }
+
   .language-btn:hover {
     background-color: var(--color-gray-200);
   }
