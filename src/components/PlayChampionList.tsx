@@ -2,6 +2,7 @@ import { ParticipantDtoType } from '@/types/response';
 import { ChampionsDataType } from '@/types/staticData';
 import descPlayChampionList from '@/utils/descPlayChampionList';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 interface PlayChampionListProps {
@@ -12,7 +13,7 @@ interface PlayChampionListProps {
 
 export default function PlayChampionList({ filterData, championsData, version }: PlayChampionListProps) {
   const descPlayChampList = descPlayChampionList(filterData, championsData);
-
+  const t = useTranslations('recordSummaryBox');
   return (
     <ul className="flex flex-col gap-[0.8rem]">
       {descPlayChampList.map(list => (
@@ -25,7 +26,10 @@ export default function PlayChampionList({ filterData, championsData, version }:
             />
           </div>
           <div>
-            {list[1].win}승 {list[1].lose}패{'  '}
+            {list[1].win}
+            {t('win')} {list[1].lose}
+            {t('lose')}
+            {'  '}
             <span className="text-color-primary-500">
               {Math.floor((list[1].win / (list[1].win + list[1].lose)) * 100)}%
             </span>

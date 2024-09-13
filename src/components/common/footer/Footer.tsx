@@ -1,12 +1,14 @@
 'use client';
 
 import { FOOTER_SNS_RENDER_LIST } from '@/constant/renderList';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function Footer() {
   const pathName = usePathname();
+  const t = useTranslations('footer');
   return (
     <footer id="footer" className={`${pathName === '/' ? 'footer-home' : 'footer-other'}`}>
       <div className="footer-inner">
@@ -14,7 +16,11 @@ export default function Footer() {
           <strong className="pb-[1.6rem]">
             <Link href="/">
               <img
-                src={pathName === '/' ? '/images/yoogg_logo_img1.png' : '/images/yoogg_logo_img2.png'}
+                src={
+                  pathName === '/ko' || pathName === '/en'
+                    ? '/images/yoogg_logo_img1.png'
+                    : '/images/yoogg_logo_img2.png'
+                }
                 alt="YOO.GG"
                 width={140}
                 height={40}
@@ -23,7 +29,7 @@ export default function Footer() {
           </strong>
           <div className="ml-[0.8rem]">
             <strong className="pb-[1.6rem] title">Developer</strong>
-            <div>박현우</div>
+            <div>{t('developerName')}</div>
           </div>
           <div className="ml-[0.8rem]">
             <strong className="pb-[1.6rem] title">Email</strong>

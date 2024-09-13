@@ -2,16 +2,17 @@ import GameTypeControlBar from '@/components/GameTypeControlBar';
 import SummonerProfile from '@/components/SummonerProfile';
 
 import { getItemsData, getRunesData, getSummonerData, getSummonerSpellsData } from '@/service/requestJsonData.api';
+import { LanguageParamsType } from '@/types';
 import { notFound } from 'next/navigation';
 
 export default async function SummonerLayout({
   children,
-  params,
+  params: { summoner, locale },
 }: Readonly<{
   children: React.ReactElement;
-  params: { summoner: string };
+  params: { summoner: string; locale: LanguageParamsType };
 }>) {
-  const [name, tag] = decodeURIComponent(params.summoner).split('-');
+  const [name, tag] = decodeURIComponent(summoner).split('-');
   const summonerData = (await getSummonerData(name, tag)) as any;
 
   if (summonerData.error) {
@@ -22,7 +23,7 @@ export default async function SummonerLayout({
     <>
       <div className="content-header">
         <div>
-          <SummonerProfile summonerData={summonerData} />
+          <SummonerProfile summonerData={summonerData} language={locale} />
         </div>
       </div>
       <GameTypeControlBar />

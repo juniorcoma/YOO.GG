@@ -1,13 +1,16 @@
 import { MATCHING_STAT_ARR } from '@/constant';
+import { LanguageParamsType } from '@/types';
 import { ChampionDataType } from '@/types/staticData';
+import { useTranslations } from 'next-intl';
 
 interface ChampionStatTableProps {
   stat: ChampionDataType['stats'];
   partype: string;
+  language: LanguageParamsType;
 }
-export default function ChampionStatTable({ stat, partype }: ChampionStatTableProps) {
+export default function ChampionStatTable({ stat, partype, language }: ChampionStatTableProps) {
   const championStatsInfo = formatChampionStat(stat);
-
+  const t = useTranslations('championStatTable');
   return (
     <table className="table">
       <colgroup>
@@ -17,15 +20,15 @@ export default function ChampionStatTable({ stat, partype }: ChampionStatTablePr
       </colgroup>
       <thead className="bg-color-gray-100 text-[1.2rem] text-color-gray-500">
         <tr>
-          <th align="left">항목</th>
-          <th>수치</th>
-          <th>레벨당 증가율</th>
+          <th align="left">{t('cell1')}</th>
+          <th>{t('cell2')}</th>
+          <th>{t('cell3')}</th>
         </tr>
       </thead>
       <tbody className="text-[1.4rem]">
         {championStatsInfo.map(stat => (
-          <tr key={stat.name} className="border-b border-color-gray-200">
-            <td className="py-[1.2rem] pl-[1.6rem]">{stat.name}</td>
+          <tr key={stat.value} className="border-b border-color-gray-200">
+            <td className="py-[1.2rem] pl-[1.6rem]">{stat.name[language]}</td>
             <td align="center">
               <strong>{stat.value}</strong>
             </td>
@@ -46,7 +49,9 @@ export default function ChampionStatTable({ stat, partype }: ChampionStatTablePr
               </td>
             </tr>
             <tr className="border-b border-color-gray-200 partype">
-              <td className="py-[1.2rem] pl-[1.6rem]">{partype} 재생</td>
+              <td className="py-[1.2rem] pl-[1.6rem]">
+                {partype} {t('regen')}
+              </td>
               <td align="center">
                 <strong>{stat.mpregen}</strong>
               </td>

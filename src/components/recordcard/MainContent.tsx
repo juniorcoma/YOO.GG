@@ -14,6 +14,7 @@ import Link from 'next/link';
 import SummonerSpellTooltip from '../tooltipcontent/SummonerSpellTooltip';
 import ItemTooltip from '../tooltipcontent/ItemTooltip';
 import RuneTooltip from '../tooltipcontent/RuneTooltip';
+import { useTranslations } from 'next-intl';
 
 interface MainContentProps {
   participant: ParticipantDtoType;
@@ -32,6 +33,7 @@ export default function MainContent({ participant, version, gameVersion, data }:
   const championData = data.champions.find(
     champion => participant.championId === Number(champion.key),
   ) as ChampionsDataType;
+  const t = useTranslations('recordCard');
 
   return (
     <>
@@ -70,7 +72,9 @@ export default function MainContent({ participant, version, gameVersion, data }:
                 <span>{participant.assists}</span>
               </strong>
             </div>
-            <div className="text-[1.2rem] text-color-gray-500">{participant.challenges.kda.toFixed(2)} : 1 평점</div>
+            <div className="text-[1.2rem] text-color-gray-500">
+              {participant.challenges.kda.toFixed(2)} : 1 {t('kda')}
+            </div>
           </div>
         </div>
         <div className="flex gap-[1.6rem]">
@@ -87,34 +91,34 @@ export default function MainContent({ participant, version, gameVersion, data }:
           participant.win ? 'border-color-primary-300' : 'border-color-red-300'
         } flex flex-col text-[1.2rem] gap-[0.2rem]`}
       >
-        <div>스킬 사용횟수</div>
+        <div>{t('skillCount')}</div>
         <span>
           Q:{' '}
           <strong className={`inline-block ${participant.win ? 'text-color-primary-600' : 'text-color-red-600'}`}>
             {participant.spell1Casts}
           </strong>{' '}
-          <span className="text-color-gray-400">회</span>
+          <span className="text-color-gray-400">{t('count')}</span>
         </span>
         <span>
           W:{' '}
           <strong className={`inline-block ${participant.win ? 'text-color-primary-600' : 'text-color-red-600'}`}>
             {participant.spell2Casts}
           </strong>{' '}
-          <span className="text-color-gray-400">회</span>
+          <span className="text-color-gray-400">{t('count')}</span>
         </span>
         <span>
           E:{' '}
           <strong className={`inline-block ${participant.win ? 'text-color-primary-600' : 'text-color-red-600'}`}>
             {participant.spell3Casts}
           </strong>{' '}
-          <span className="text-color-gray-400">회</span>
+          <span className="text-color-gray-400">{t('count')}</span>
         </span>
         <span>
           R:{' '}
           <strong className={`inline-block ${participant.win ? 'text-color-primary-600' : 'text-color-red-600'}`}>
             {participant.spell4Casts}
           </strong>{' '}
-          <span className="text-color-gray-400">회</span>
+          <span className="text-color-gray-400">{t('count')}</span>
         </span>
       </div>
     </>

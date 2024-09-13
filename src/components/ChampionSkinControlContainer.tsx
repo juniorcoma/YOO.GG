@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import useModal from '@/hook/useModal';
 import FullSkinContainer from './modalcontent/FullSkinContainer';
 import { ChampionDataType } from '@/types/staticData';
+import { useTranslations } from 'next-intl';
 
 interface ChampionSkinControlContainerProps {
   name: string;
@@ -43,10 +44,10 @@ export default function ChampionSkinControlContainer({
   const handleFullImgEvent = (skinName: string, skinNum: number) => {
     openModal({ component: FullSkinContainer, props: { champName: name, skinName, skinNum } });
   };
-
+  const t = useTranslations('championDetail');
   return (
     <ContentBox
-      titleText={`${titleName} 스킨`}
+      titleText={`${titleName} ${t('champSkinContent')}`}
       SubTitleComponent={<SliderControlBtn handlePrev={handlePrevEvent} handleNext={handleNextEvent} />}
     >
       <div className="p-[1.6rem] overflow-hidden flex w-[67.3rem]">
@@ -54,14 +55,14 @@ export default function ChampionSkinControlContainer({
           {skinRenderList.map(skin => (
             <div key={skin.id} className="skin-img-box">
               <button type="button" className="full-img-btn" onClick={() => handleFullImgEvent(skin.name, skin.num)}>
-                <span>자세히 보기</span>
+                <span>{t('champSkinDetail')}</span>
               </button>
               <img
                 src={`${DDRAGON_IMG_URL.CHAMPION_LOADING}${name}_${skin.num}.jpg`}
                 alt={`${skin.name} 이미지`}
                 className="rounded-[0.8rem] scale-105"
               />
-              <div className="skin-name">{skin.name === 'default' ? '기본' : skin.name}</div>
+              <div className="skin-name">{skin.name === 'default' ? name : skin.name}</div>
             </div>
           ))}
         </div>

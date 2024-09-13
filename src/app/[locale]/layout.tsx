@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import './globals.css';
+import '../globals.css';
 
 import Header from '@/components/common/header/Header';
 import Footer from '@/components/common/footer/Footer';
@@ -14,11 +14,16 @@ import ReactQueryProviders from '@/components/providers/ReactQueryProviders';
 import ModalContainerProviders from '@/components/providers/ModalContainerProviders';
 import { TooltipProviders } from '@/components/providers/TooltipProviders';
 import TooltipContainerProviders from '@/components/providers/TooltipContainerProviders';
+import LanguageModuleContainer from '@/components/modulecontent/LanguageModuleContainer';
+import ModuleStateProviders from '@/components/providers/ModuleStateProviders';
+import { getMessages } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { LanguageParamsType } from '@/types';
 
 const AppleSDGOdicNeo = localFont({
   src: [
     {
-      path: '../../public/font/AppleSDGothicNeo-Regular.woff2',
+      path: '../../../public/font/AppleSDGothicNeo-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
@@ -51,36 +56,47 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: LanguageParamsType };
 }>) {
-  await getChampionsData();
+  await getChampionsData(locale);
   await getVersionsData();
-  await getItemsData();
-  await getSummonerSpellsData();
+  await getItemsData(locale);
+  await getSummonerSpellsData(locale);
+
+  const messages = await getMessages();
   return (
-    <html lang="ko" className={AppleSDGOdicNeo.className}>
+    <html lang={locale} className={AppleSDGOdicNeo.className}>
       <meta name="title" content="롤 전적 검색 사이트 YOO.GG - 챔피언 정보와 게임 전적, 라이엇 아이디 태그 검색"></meta>
       <body>
-        <BackgroundProvider>
-          <ProgressProviders>
-            <div id="__next">
-              <Header />
-              <ReactQueryProviders>
-                <ModalsProvider>
-                  <TooltipProviders>
-                    <ModalContainerProviders />
-                    <TooltipContainerProviders />
-                    {children}
-                  </TooltipProviders>
-                </ModalsProvider>
-              </ReactQueryProviders>
-              <Footer />
-            </div>
-          </ProgressProviders>
-        </BackgroundProvider>
-        <div id="portal"></div>
-        <div id="tooltip"></div>
+        <NextIntlClientProvider messages={messages}>
+          <BackgroundProvider>
+            <ProgressProviders>
+              <ModuleStateProviders>
+                <div id="__next">
+                  <Header />
+                  <ReactQueryProviders>
+                    <ModalsProvider>
+                      <TooltipProviders>
+                        <ModalContainerProviders />
+                        <TooltipContainerProviders />
+                        {children}
+                      </TooltipProviders>
+                    </ModalsProvider>
+                  </ReactQueryProviders>
+                  <Footer />
+                  <div id="module-portal">
+                    <LanguageModuleContainer />
+                  </div>
+                </div>
+              </ModuleStateProviders>
+            </ProgressProviders>
+          </BackgroundProvider>
+          <div id="portal"></div>
+          <div id="tooltip"></div>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

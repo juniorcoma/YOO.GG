@@ -3,10 +3,12 @@ import RotationsList from '@/components/contentboxinner/RotationsList';
 import LolMusicListContainer from '@/components/LolMusicListContainer';
 
 import SummonerSearchForm from '@/components/summonersearchform/SummonerSearchForm';
+import { useTranslations } from 'next-intl';
 
 import Image from 'next/image';
 
-export default function Home() {
+export default function Home({ params: { locale } }: { params: { locale: 'en' | 'ko' } }) {
+  const t = useTranslations('homePage');
   return (
     <div className="layout-container">
       <div className="content-wrapper ">
@@ -29,8 +31,8 @@ export default function Home() {
                 <LolMusicListContainer />
               </section>
               <section>
-                <ContentBox titleText="로테이션 챔피언" css="flex-1">
-                  <RotationsList />
+                <ContentBox titleText={t('rotationsContentBox')} css="flex-1">
+                  <RotationsList language={locale} />
                 </ContentBox>
               </section>
             </div>

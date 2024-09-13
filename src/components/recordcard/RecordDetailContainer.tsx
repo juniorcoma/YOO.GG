@@ -5,6 +5,7 @@ import { RuneDataType, RunesDataType } from '@/types/staticData';
 
 import Image from 'next/image';
 import RuneTooltip from '../tooltipcontent/RuneTooltip';
+import { useTranslations } from 'next-intl';
 
 interface RecordDetailContainerProps {
   isOpen: boolean;
@@ -23,17 +24,17 @@ export default function RecordDetailContainer({
   const { [version]: runeData } = runesDataArr.find(data => data[version]) as { [key: string]: RuneDataType[] };
 
   const { primaryStyle, subStyle } = checkingRune(runeData, perks);
-
+  const t = useTranslations('recordDetailBox');
   const { openTooltip, closeTooltip } = useTooltip();
   return (
     <div className={`${isOpen ? '' : 'hidden'} bg-color-gray-00 min-h-[20rem] rounded-[0.8rem] overflow-hidden`}>
       <div className="px-[1.6rem] py-[1.2rem] bg-color-gray-100 text-[1.4rem] font-bold text-color-gray-500">
-        룬 정보
+        {t('title')}
       </div>
       <div className="p-[1.6rem] flex gap-[2.4rem] justify-around">
         <div className="flex gap-[2.4rem] items-center">
           <div className="flex flex-col items-center gap-[0.8rem]">
-            <span className="text-[1.2rem] text-color-gray-500">메인 룬</span>
+            <span className="text-[1.2rem] text-color-gray-500"> {t('main')}</span>
             <div className="rounded-[50%] bg-color-gray-200 p-[0.4rem]">
               <img src={`${DDRAGON_IMG_URL.RUNE}${primaryStyle.icon}`} width={32} height={32} alt={primaryStyle.name} />
             </div>
@@ -68,7 +69,7 @@ export default function RecordDetailContainer({
         </div>
         <div className="flex gap-[2.4rem] items-center">
           <div className="flex flex-col items-center gap-[0.8rem]">
-            <span className="text-[1.2rem] text-color-gray-500">서브 룬</span>
+            <span className="text-[1.2rem] text-color-gray-500">{t('sub')}</span>
             <div className="rounded-[50%] bg-color-gray-200 p-[0.4rem]">
               <img src={`${DDRAGON_IMG_URL.RUNE}${subStyle.icon}`} width={32} height={32} alt={primaryStyle.name} />
             </div>

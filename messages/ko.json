@@ -1,0 +1,142 @@
+{
+  "summonerSearchBar": {
+    "regionLabel": "지역",
+    "searchLabel": "검색",
+    "inputPlaceHolder": "플레이어 이름"
+  },
+
+  "recentlySummonerSearchBox": {
+    "strongTitle": "플레이어 이름 + 태그",
+    "restTitle": "로 전적을 검색하세요!",
+    "other": "최근 검색",
+    "notSearch": "최근 검색한 소환사가 없습니다."
+  },
+
+  "patchLink": {
+    "text": "패치 노트 보기"
+  },
+
+  "homePage": {
+    "wolrdsMusic": "롤드컵 뮤비",
+    "cinematicMusic": "롤 시네마틱",
+    "worldControlBtn": "월즈",
+    "cinematicControlBtn": "시네마틱",
+    "rotationsContentBox": "로테이션 챔피언"
+  },
+
+  "championListPage": {
+    "contentHeaderTitle": "챔피언 분석",
+    "contentHeaderDescription1": "롤 14.18패치의 챔피언 정보입니다.",
+    "contentHeaderDescription2": "협곡 챔피언 분석으로 챔피언의 새로운 점을 알아보세요!"
+  },
+  "ChampionSearchBar": {
+    "hiddenLabel": "검색",
+    "inputPlaceHolder": "챔피언 검색 (가렌, 갈리오,...)"
+  },
+
+  "championListTable": {
+    "cell1": "순번",
+    "cell2": "챔피언",
+    "cell3": "포지션",
+    "cell4": "별명",
+    "cell5": "난이도"
+  },
+  "championDetail": {
+    "skillContent": "스킬 정보",
+    "skillContentSub": "자세히 볼려면 스킬 클릭하세요!",
+    "champStatContent": "기본 스탯 정보",
+    "champStatContentSub": "메커니즘",
+    "champStoryContent": "스토리",
+    "champSkinContent": "스킨",
+    "champSkinDetail": "자세히 보기",
+    "champTipContent": "챔피언 TIP",
+    "champTipContentSub1": "플레이할때",
+    "champTipContentSub2": "적군일 때"
+  },
+  "championStatTable": {
+    "cell1": "항목",
+    "cell2": "수치",
+    "cell3": "레벨당 증가율",
+    "regen": "재생"
+  },
+  "summonerLeagueContent": {
+    "contentBox1Title": "솔로랭크",
+    "contentBox2Title": "자유랭크"
+  },
+  "ingame": {
+    "text": "인게임"
+  },
+  "summonerRecordContainer": {
+    "recordSummaryText": "최근 게임",
+    "manyPlayChampText": "많이 플레이한 챔피언 TOP 3",
+    "gameCount": "게임",
+    "moreBtnText": "더보기",
+    "noRecordBoxText": "최근 기록된 전적이 없습니다.",
+    "lastRecordText1": "마지막 전적입니다.",
+    "lastRecordText2": "YOO.GG는 LOL최신 버전에서 이전5버전까지 제공합니다 "
+  },
+
+  "notFoundPage": {
+    "title": "다시 한번 확인주세요.",
+    "description1": "지금 입력하신 주소의 페이지는",
+    "description2": "소환사를 찾을 수 없거나 다른 페이지로 변경되었습니다.",
+    "description3": "소환사이름을 다시 확인 또는 주소를 다시 확인해주세요",
+    "prevBtnText": "이전 페이지",
+    "homeBtnText": "홈"
+  },
+  "errorPage": {
+    "title": "페이지 에러",
+    "description1": "요청하신 페이지를 처리 중에 오류가 발생했습니다.",
+    "description2": "서비스 이용에 불편을 드려 죄송합니다. 잠시후 다시 시도해주세요.",
+    "homeBtn": "홈으로 돌아가기"
+  },
+  "champStatContainer": {
+    "atteck": "공격",
+    "defense": "방어",
+    "magic": "마법",
+    "difficulty": "난이도"
+  },
+  "ingamePage": {
+    "title": "현재 인게임 기능을 사용할 수 없습니다."
+  },
+  "recordSummaryBox": {
+    "count": "전",
+    "win": "승",
+    "lose": "패",
+    "percent": "승률"
+  },
+  "recordCard": {
+    "kda": "평점",
+    "skillCount": "스킬 사용횟수",
+    "count": "번"
+  },
+  "recordDetailBox": {
+    "title": "룬 정보",
+    "main": "메인 룬",
+    "sub": "서브 룬"
+  },
+  "itemTooltip": {
+    "price": "가격",
+    "sell": "판매 가격"
+  },
+  "spellTooltip": {
+    "cooldown": "쿨타임",
+    "unit": "초"
+  },
+  "favoriteBox": {
+    "emptyMessage": "즐겨찾기 한 챔피언이 없어요!"
+  },
+  "skillVideoBox": {
+    "notVideo": "관련 스킬 영상이 없습니다",
+    "closeBtn": "닫기",
+    "cooldonw": "쿨타임",
+    "cost": "소모값",
+    "range": "스킬 범위",
+    "emptyCool": "알 수 없음",
+    "unit": "초",
+    "nodata": "없음"
+  },
+  "footer": {
+    "developerName": "박현우"
+  }
+}

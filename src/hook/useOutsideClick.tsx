@@ -1,14 +1,16 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import useModal from './useModal';
 
-export default function useOutsideClick<T extends HTMLElement>() {
+interface useOutsideClickProps {
+  callback: () => void;
+}
+
+export default function useOutsideClick<T extends HTMLElement>({ callback }: useOutsideClickProps) {
   const targetRef = useRef<T>(null);
-  const { closeModal } = useModal();
 
   const handleOutsideClick = (e: MouseEvent) => {
-    if (!targetRef.current?.contains(e.target as Node)) {
-      closeModal();
+    if (!targetRef.current?.contains(e.target as Node) && targetRef.current) {
+      callback();
     }
   };
 

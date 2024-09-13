@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 import { ExtendedChampionDataType } from '@/types';
 import PositionIconRender from './render/PositionIconRender';
+import { useTranslations } from 'next-intl';
 
 interface ChampionSearchBarProps {
   championsData: ExtendedChampionDataType[];
@@ -17,6 +18,7 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
   const [value, setValue] = useState('');
   const [matchList, setMatchList] = useState<ExtendedChampionDataType[]>([]);
   const router = useRouter();
+  const t = useTranslations('ChampionSearchBar');
   useEffect(() => {
     if (value !== '') {
       const regexp = new RegExp(`^${value}`);
@@ -42,12 +44,12 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
     <form className="champion-search-box" onSubmit={handleSubmitEvent}>
       <div className="h-full relative">
         <label className="search-label" htmlFor="search-champion">
-          검색
+          {t('hiddenLabel')}
         </label>
         <input
           id="search-champion"
           className="pl-[4.8rem] pr-[6.4rem] w-full h-full text-[1.6rem]"
-          placeholder="챔피언 검색 (가렌, 갈리오,...)"
+          placeholder={t('inputPlaceHolder')}
           value={value}
           onChange={e => setValue(e.target.value)}
           autoComplete="off"

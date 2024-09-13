@@ -1,4 +1,5 @@
 import 'chart.js/auto';
+import { useTranslations } from 'next-intl';
 import { Doughnut } from 'react-chartjs-2';
 
 interface DoughnutChartBoxProps {
@@ -8,6 +9,7 @@ interface DoughnutChartBoxProps {
 
 export default function DoughnutChartBox({ win, lose }: DoughnutChartBoxProps) {
   const totalRecordCount = win + lose;
+  const t = useTranslations('recordSummaryBox');
   const data = {
     backgroundColor: ['#5383E8', '#FF6C81'],
 
@@ -22,7 +24,10 @@ export default function DoughnutChartBox({ win, lose }: DoughnutChartBoxProps) {
   return (
     <div className="flex flex-col w-[10rem]">
       <div className="text-center">
-        {totalRecordCount}전 {win}승 {lose}패
+        {totalRecordCount}
+        {t('count')} {win}
+        {t('win')} {lose}
+        {t('lose')}
       </div>
       <div className="relative">
         <Doughnut data={data} options={{ cutout: '65%', borderColor: 'transparent' }} />
