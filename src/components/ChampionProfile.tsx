@@ -1,4 +1,4 @@
-import { ChampPositionType } from '@/types';
+import { ChampPositionType, LanguageParamsType } from '@/types';
 import Image from 'next/image';
 
 import { CHAMPION_TAG_INFO } from '@/constant';
@@ -15,9 +15,18 @@ interface ChampionProfileProps {
   position: ChampPositionType;
   title: string;
   tags: ChampionDataType['tags'];
+  language: LanguageParamsType;
 }
 
-export default async function ChampionProfile({ id, img, name, position, title, tags }: ChampionProfileProps) {
+export default async function ChampionProfile({
+  id,
+  img,
+  name,
+  position,
+  title,
+  tags,
+  language,
+}: ChampionProfileProps) {
   const [latestVersion] = await getVersionsData();
   return (
     <div className="flex gap-[1.2rem]">
@@ -36,7 +45,7 @@ export default async function ChampionProfile({ id, img, name, position, title, 
         <p className="text-[2rem] leading-[1.2]">{title}</p>
         <div className="flex gap-[0.8rem] items-center text-[1.6rem]">
           <PositionIconRender position={position} />
-          <span>{tags.map(tag => CHAMPION_TAG_INFO[tag]).join(' | ')}</span>
+          <span>{tags.map(tag => CHAMPION_TAG_INFO[tag][language]).join(' | ')}</span>
         </div>
       </div>
     </div>

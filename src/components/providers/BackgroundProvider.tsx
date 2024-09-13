@@ -21,10 +21,10 @@ export default function BackgroundProvider({ children }: { children: React.React
 
     if (html.classList.contains('dark')) {
       html.style.backgroundColor = 'var(--color-gray-200)';
-    } else if (pathName !== '/') {
-      html.style.backgroundColor = 'var(--color-gray-200)';
-    } else if (pathName === '/') {
+    } else if (pathName === '/ko' || pathName === '/en') {
       html.style.backgroundColor = 'var(--color-primary-500)';
+    } else {
+      html.style.backgroundColor = 'var(--color-gray-200)';
     }
   }, [pathName, isDark]);
 

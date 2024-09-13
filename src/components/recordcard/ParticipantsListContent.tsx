@@ -4,6 +4,7 @@ import devideParticipants from '@/utils/devideParticipants';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 interface ParticipantsListContentProps {
   participants: ParticipantDtoType[];
@@ -19,6 +20,7 @@ export default function ParticipantsListContent({
   championsData,
 }: ParticipantsListContentProps) {
   const { team1, team2 } = devideParticipants(participants);
+  const { locale } = useParams();
   return (
     <div className="flex gap-[0.4rem] text-[1.2rem] text-color-gray-500">
       <div className="participant-list">
@@ -40,7 +42,7 @@ export default function ParticipantsListContent({
               {team.puuid === puuid || !team.riotIdGameName ? (
                 <span className="text-color-gray-900">{team.riotIdGameName || '알 수 없음'}</span>
               ) : (
-                <Link href={`/summoner/kr/${team.riotIdGameName}-${team.riotIdTagline}`} scroll={false}>
+                <Link href={`/${locale}/summoner/kr/${team.riotIdGameName}-${team.riotIdTagline}`} scroll={false}>
                   {team.riotIdGameName}
                 </Link>
               )}
@@ -67,7 +69,7 @@ export default function ParticipantsListContent({
               {team.puuid === puuid || !team.riotIdGameName ? (
                 <span className="text-color-gray-900">{team.riotIdGameName || '알 수 없음'}</span>
               ) : (
-                <Link href={`/summoner/kr/${team.riotIdGameName}-${team.riotIdTagline}`} scroll={false}>
+                <Link href={`/${locale}/summoner/kr/${team.riotIdGameName}-${team.riotIdTagline}`} scroll={false}>
                   {team.riotIdGameName}
                 </Link>
               )}

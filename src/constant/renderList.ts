@@ -3,12 +3,18 @@ import { LOL_CINEMATIC_INFO, LOL_WORLDS_INFO } from '.';
 export const BOTTOM_NAV_RENDER_LIST = [
   {
     id: 1,
-    innerText: '홈',
-    path: '/',
+    innerText: {
+      ko: '홈',
+      en: 'Home',
+    },
+    path: '',
   },
   {
     id: 2,
-    innerText: '챔피언 분석',
+    innerText: {
+      ko: '챔피언 리스트',
+      en: 'Champions',
+    },
     path: '/champion-list',
   },
 ];
@@ -40,32 +46,50 @@ export const FOOTER_SNS_RENDER_LIST = [
 export const POSITION_BTN_RENDER_LIST = [
   {
     id: 1,
-    text: '전체',
+    text: {
+      ko: '전체',
+      en: 'All',
+    },
     setValue: 'all',
   },
   {
     id: 2,
-    text: '탑',
+    text: {
+      ko: '탑',
+      en: 'Top',
+    },
     setValue: 'top',
   },
   {
     id: 3,
-    text: '정글',
+    text: {
+      ko: '정글',
+      en: 'Jungle',
+    },
     setValue: 'jungle',
   },
   {
     id: 4,
-    text: '미드',
+    text: {
+      ko: '미드',
+      en: 'Mid',
+    },
     setValue: 'mid',
   },
   {
     id: 5,
-    text: '바텀',
+    text: {
+      ko: '바텀',
+      en: 'Bottom',
+    },
     setValue: 'bottom',
   },
   {
     id: 6,
-    text: '서포터',
+    text: {
+      ko: '서포터',
+      en: 'Support',
+    },
     setValue: 'support',
   },
 ];
@@ -73,22 +97,22 @@ export const POSITION_BTN_RENDER_LIST = [
 export const GAME_TYPE_RENDER_LIST = [
   {
     id: 1,
-    text: '전체',
+    text: { ko: '전체', en: 'All' },
     query: 'TOTAL',
   },
   {
     id: 2,
-    text: '솔로랭크',
+    text: { ko: '솔로랭크', en: 'Ranked Solo/Duo' },
     query: 'SOLORANKED',
   },
   {
     id: 3,
-    text: '자유랭크',
+    text: { ko: '자유랭크', en: 'Ranked Flex' },
     query: 'FLEXRANKED',
   },
   {
     id: 4,
-    text: '무작위 총력전',
+    text: { ko: '무작위 총력전', en: 'ARAM' },
     query: 'ARAM',
   },
 ];
@@ -124,3 +148,17 @@ export const LOL_CINEMATIC_RENDER_LIST: {
   year: (2019 + index).toString() as '2019' | '2020' | '2021' | '2022' | '2023' | '2024',
   title: LOL_CINEMATIC_INFO[index],
 }));
+
+export const LanguageRenderList = [
+  {
+    id: 1,
+    text: '한국어',
+    value: 'ko',
+  },
+
+  {
+    id: 2,
+    text: 'English',
+    value: 'en',
+  },
+];

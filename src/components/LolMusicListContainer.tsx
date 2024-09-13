@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import ContentBox from './common/ContentBox';
 import LolMusicList from './contentboxinner/LolMusicList';
+import { useTranslations } from 'next-intl';
 
 export default function LolMusicListContainer() {
   const [contentType, setContentType] = useState<'worlds' | 'cinematic'>('worlds');
-
+  const t = useTranslations('homePage');
   const handleWorlds = () => {
     setContentType('worlds');
   };
@@ -17,7 +18,7 @@ export default function LolMusicListContainer() {
 
   return (
     <ContentBox
-      titleText={contentType === 'worlds' ? 'LOL WORLDS MUSIC' : 'LOL CINEMATIC VIDEO'}
+      titleText={contentType === 'worlds' ? t('wolrdsMusic') : t('cinematicMusic')}
       css="min-w-[36rem]"
       SubTitleComponent={
         <ContentTypeController
@@ -41,13 +42,14 @@ function ContentTypeController({
   handleWorlds: () => void;
   handleCinematic: () => void;
 }) {
+  const t = useTranslations('homePage');
   return (
     <div className="flex gap-[0.8rem] text-[1.2rem]">
       <button className={`content-controller ${contentType === 'worlds' && 'active'}`} onClick={handleWorlds}>
-        월즈
+        {t('worldControlBtn')}
       </button>
       <button className={`content-controller ${contentType === 'cinematic' && 'active'}`} onClick={handleCinematic}>
-        시네마틱
+        {t('cinematicControlBtn')}
       </button>
     </div>
   );

@@ -6,6 +6,8 @@ export interface ChampPositionDataType {
   [key: string]: ChampPositionType;
 }
 
+export type LanguageParamsType = 'ko' | 'en';
+
 export type SpellKeyType = 'P' | 'Q' | 'W' | 'E' | 'R';
 
 export interface ChampionStatType {
@@ -32,7 +34,7 @@ export interface ChampionStatType {
 }
 
 export interface MatchingStatArrType {
-  name: string;
+  name: { ko: string; en: string };
   value: keyof ChampionStatType;
   level?: keyof ChampionStatType;
 }

@@ -180,47 +180,65 @@ export const SPELL_KEY: SpellKeyType[] = ['P', 'Q', 'W', 'E', 'R'];
 
 export const MATCHING_STAT_ARR: MatchingStatArrType[] = [
   {
-    name: '체력',
+    name: { ko: '체력', en: 'Health' },
     value: 'hp',
     level: 'hpperlevel',
   },
   {
-    name: '공격력',
+    name: { ko: '공격력', en: 'Attack Damage' },
     value: 'attackdamage',
     level: 'attackdamageperlevel',
   },
   {
-    name: '방어력',
+    name: { ko: '방어력', en: 'Armor' },
     value: 'armor',
     level: 'armorperlevel',
   },
   {
-    name: '마법저항력',
+    name: { ko: '마법저항력', en: 'Magic Resist' },
     value: 'spellblock',
     level: 'spellblockperlevel',
   },
   {
-    name: '체력재생',
+    name: { ko: '체력재생', en: 'Health Regen' },
     value: 'hpregen',
     level: 'hpregenperlevel',
   },
   {
-    name: '공격사거리',
+    name: { ko: '공격사거리', en: 'Attack Range' },
     value: 'attackrange',
   },
   {
-    name: '이동속도',
+    name: { ko: '이동속도', en: 'Move Speed' },
     value: 'movespeed',
   },
 ];
 
 export const CHAMPION_TAG_INFO = {
-  Marksman: '원거리 딜러',
-  Assassin: '암살자',
-  Fighter: '전사',
-  Mage: '마법사',
-  Tank: '탱커',
-  Support: '서포터',
+  Marksman: {
+    ko: '원거리 딜러',
+    en: 'Marksman',
+  },
+  Assassin: {
+    ko: '암살자',
+    en: 'Assassin',
+  },
+  Fighter: {
+    ko: '전사',
+    en: 'Fighter',
+  },
+  Mage: {
+    ko: '마법사',
+    en: 'Mage',
+  },
+  Tank: {
+    ko: '탱커',
+    en: 'Tank',
+  },
+  Support: {
+    ko: '서포터',
+    en: 'Support',
+  },
 };
 
 export const GAME_TYPE_QUEUEID = {
@@ -229,13 +247,24 @@ export const GAME_TYPE_QUEUEID = {
   ARAM: 450,
 };
 
-export const QUEUEID_KR_TYPE: { [key: number]: string } = {
-  450: '무작위 총력전',
-  490: '빠른 대전',
-  420: '솔랭',
-  440: '자랭',
+export const QUEUEID_KR_TYPE: { [key: number]: { ko: string; en: string } } = {
+  450: {
+    ko: '무작위 총력전',
+    en: 'ARAM',
+  },
+  490: {
+    ko: '빠른 대전',
+    en: 'Normal Game',
+  },
+  420: {
+    ko: '솔랭',
+    en: 'Solo/Duo Ranked',
+  },
+  440: {
+    ko: '자랭',
+    en: 'Flex Ranked',
+  },
 };
-
 export const LOL_WORLDS_INFO = [
   {
     title: 'Warriors',
@@ -279,4 +308,4 @@ export const LOL_WORLDS_INFO = [
   },
 ];
 
-export const LOL_CINEMATIC_INFO = ['Awaken', 'Warriors', '대몰락', 'The Call', '영겁의 귀로', 'STILL HERE'];
+export const LOL_CINEMATIC_INFO = ['Awaken', 'Warriors', 'The Ruination', 'The Call', 'The Everfrost', 'STILL HERE'];

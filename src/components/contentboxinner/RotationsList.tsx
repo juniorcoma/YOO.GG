@@ -1,11 +1,16 @@
 import { getChampionsData, getRotationsChampionsData, getVersionsData } from '@/service/requestJsonData.api';
+import { LanguageParamsType } from '@/types';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default async function RotationsList() {
-  const championsData = await getChampionsData();
+interface RotationsListProps {
+  language: LanguageParamsType;
+}
+
+export default async function RotationsList({ language }: RotationsListProps) {
+  const championsData = await getChampionsData(language);
   const rotationsData = await getRotationsChampionsData();
   const [latestVersion] = await getVersionsData();
   const renderItemArr = rotationsData.freeChampionIds.map(ids => {
@@ -15,7 +20,7 @@ export default async function RotationsList() {
     <ul className="px-[1.6rem] py-[1.2rem] flex flex-wrap gap-[1.2rem] justify-center">
       {renderItemArr.map((champ: any) => (
         <li key={champ.key} className="relative ">
-          <Link href={`/champions/${champ.id}/info`}>
+          <Link href={`${language}/champions/${champ.id}/info`}>
             <img
               src={`${imgSrcVersionLoader(latestVersion, 'CHAMPION_SQUARE')}${champ.image.full}`}
               width={64}

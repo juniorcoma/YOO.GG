@@ -17,6 +17,7 @@ import Loading from '@/assets/icons/loading.svg';
 import useGetSummonerRecordList from '@/hook/query/useGetSummonerRecordList';
 import { GameType } from '@/types';
 import SsummonerRecordListContainer from './skeleton/SummonerRecordListContainer.skeleton';
+import { useTranslations } from 'next-intl';
 interface SummonerRecordClientContainerProps {
   data: {
     champions: ChampionsDataType[];
@@ -43,7 +44,7 @@ export default function SummonerRecordClientContainer({
     hasNextPage,
     fetchNextPage,
   } = useGetSummonerRecordList(puuid, gameType);
-
+  const t = useTranslations('summonerRecordContainer');
   if (isPending) {
     return <SsummonerRecordListContainer />;
   }
@@ -51,11 +52,11 @@ export default function SummonerRecordClientContainer({
   const recordListData = summonerRecordList?.pages.flat();
   if (!recordListData?.length) {
     return (
-      <ContentBox titleText="최근 게임">
+      <ContentBox titleText={t('recordSummaryText')}>
         <div className="px-[1.6rem] flex justify-center items-center pt-[3.2rem] pb-[6.4rem]">
           <div className="flex flex-col items-center gap-[1.6rem]">
             <Image src={'/images/em_bee_sad.png'} width={128} height={128} alt="슬픈 벌꿀 이미지" />
-            <div className="text-[1.6rem]">최근 기록된 전적이 없습니다.</div>
+            <div className="text-[1.6rem]">{t('noRecordBoxText')}</div>
           </div>
         </div>
       </ContentBox>
@@ -64,7 +65,7 @@ export default function SummonerRecordClientContainer({
   const recordSummaryData = totalRecordSummary(recordListData, puuid);
   return (
     <>
-      <ContentBox titleText="최근 게임" css="mb-[2.4rem]">
+      <ContentBox titleText={t('recordSummaryText')} css="mb-[2.4rem]">
         <div className="py-[1.2rem] px-[1.6rem] flex gap-[4.8rem] text-[1.4rem] text-color-gray-500">
           <DoughnutChartBox win={recordSummaryData.win} lose={recordSummaryData.lose} />
           <div className="self-center">
@@ -78,7 +79,10 @@ export default function SummonerRecordClientContainer({
             </div>
           </div>
           <div>
-            <div className="mb-[1.6rem]">많이 플레이한 챔피언 TOP 3 ({recordListData.length}게임)</div>
+            <div className="mb-[1.6rem]">
+              {t('manyPlayChampText')} ({recordListData.length}
+              {t('gameCount')})
+            </div>
             <PlayChampionList
               filterData={filterMatchData(recordListData, puuid)}
               championsData={champions}
@@ -133,15 +137,14 @@ export default function SummonerRecordClientContainer({
               <Loading />
             </div>
           ) : (
-            '더보기'
+            t('moreBtnText')
           )}
         </button>
       ) : (
         <div className="text-[1.6rem] text-center">
-          마지막 전적입니다. <br />
-          <span className="text-[1.4rem] text-color-gray-400">
-            (YOO.GG는 LOL최신 버전에서 이전5버전까지 제공합니다 )
-          </span>
+          {t('lastRecordText1')}
+          <br />
+          <span className="text-[1.4rem] text-color-gray-400">{t('lastRecordText2')}</span>
         </div>
       )}
     </>
