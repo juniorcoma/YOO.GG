@@ -89,5 +89,54 @@
     "description1": "요청하신 페이지를 처리 중에 오류가 발생했습니다.",
     "description2": "서비스 이용에 불편을 드려 죄송합니다. 잠시후 다시 시도해주세요.",
     "homeBtn": "홈으로 돌아가기"
+  },
+  "champStatContainer": {
+    "atteck": "공격",
+    "defense": "방어",
+    "magic": "마법",
+    "difficulty": "난이도"
+  },
+  "ingamePage": {
+    "title": "현재 인게임 기능을 사용할 수 없습니다."
+  },
+  "recordSummaryBox": {
+    "count": "전",
+    "win": "승",
+    "lose": "패",
+    "percent": "승률"
+  },
+  "recordCard": {
+    "kda": "평점",
+    "skillCount": "스킬 사용횟수",
+    "count": "번"
+  },
+  "recordDetailBox": {
+    "title": "룬 정보",
+    "main": "메인 룬",
+    "sub": "서브 룬"
+  },
+  "itemTooltip": {
+    "price": "가격",
+    "sell": "판매 가격"
+  },
+  "spellTooltip": {
+    "cooldown": "쿨타임",
+    "unit": "초"
+  },
+  "favoriteBox": {
+    "emptyMessage": "즐겨찾기 한 챔피언이 없어요!"
+  },
+  "skillVideoBox": {
+    "notVideo": "관련 스킬 영상이 없습니다",
+    "closeBtn": "닫기",
+    "cooldonw": "쿨타임",
+    "cost": "소모값",
+    "range": "스킬 범위",
+    "emptyCool": "알 수 없음",
+    "unit": "초",
+    "nodata": "없음"
+  },
+  "footer": {
+    "developerName": "박현우"
   }
 }

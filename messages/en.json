@@ -84,5 +84,54 @@
     "description1": "An error occurred while processing the page you requested.",
     "description2": "We apologize for the inconvenience. Please try again later.",
     "homeBtn": "Return to Home"
+  },
+  "champStatContainer": {
+    "atteck": "Atteck",
+    "defense": "Defense",
+    "magic": "Magic",
+    "difficulty": "Difficulty"
+  },
+  "ingamePage": {
+    "title": "The in-game features are currently unavailable."
+  },
+  "recordSummaryBox": {
+    "count": "G",
+    "win": "W",
+    "lose": "L",
+    "percent": "Win Rate"
+  },
+  "recordCard": {
+    "kda": "KDA",
+    "skillCount": "Skill Usage Count",
+    "count": "times"
+  },
+  "recordDetailBox": {
+    "title": "Rune Information",
+    "main": "Main Rune",
+    "sub": "Sub Rune"
+  },
+  "itemTooltip": {
+    "price": "Price",
+    "sell": "Selling Price"
+  },
+  "spellTooltip": {
+    "cooldown": "Cooldown",
+    "unit": "seconds"
+  },
+  "favoriteBox": {
+    "emptyMessage": "You have no favorite champions!"
+  },
+  "skillVideoBox": {
+    "notVideo": "No related skill video available",
+    "closeBtn": "Close",
+    "cooldown": "Cooldown",
+    "cost": "Cost",
+    "range": "Skill Range",
+    "emptyCool": "Unknown",
+    "unit": "seconds",
+    "nodata": "None"
+  },
+  "footer": {
+    "developerName": "Hyeon Woo Park"
   }
 }
