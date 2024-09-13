@@ -23,7 +23,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           <br /> {t('description2')}
         </p>
         <button
-          className="text-[1.6rem] text-color-gray-00 bg-color-primary-500 py-[0.8rem] w-[39.3rem] rounded-[0.4rem]"
+          className="text-[1.6rem] text-[#fff] bg-color-primary-500 py-[0.8rem] w-[39.3rem] rounded-[0.4rem]"
           type="button"
           onClick={() => {
             router.push(`/${locale}`);

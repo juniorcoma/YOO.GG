@@ -18,6 +18,7 @@ import LanguageModuleContainer from '@/components/modulecontent/LanguageModuleCo
 import ModuleStateProviders from '@/components/providers/ModuleStateProviders';
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
+import { LanguageParamsType } from '@/types';
 
 const AppleSDGOdicNeo = localFont({
   src: [
@@ -58,12 +59,12 @@ export default async function RootLayout({
   params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: LanguageParamsType };
 }>) {
-  await getChampionsData();
+  await getChampionsData(locale);
   await getVersionsData();
-  await getItemsData();
-  await getSummonerSpellsData();
+  await getItemsData(locale);
+  await getSummonerSpellsData(locale);
 
   const messages = await getMessages();
   return (

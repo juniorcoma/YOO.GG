@@ -1,6 +1,6 @@
 import SummonerContentContainer from '@/components/SummonerContentContainer';
 
-import { GameType } from '@/types';
+import { GameType, LanguageParamsType } from '@/types';
 import { Suspense } from 'react';
 
 export async function generateMetadata({ params }: { params: { summoner: string } }) {
@@ -12,13 +12,15 @@ export async function generateMetadata({ params }: { params: { summoner: string 
 }
 
 export default async function SummonerPage({
-  params,
+  params: { summoner, locale },
   searchParams,
 }: {
-  params: { summoner: string };
+  params: { summoner: string; locale: LanguageParamsType };
   searchParams: { [key: string]: GameType };
 }) {
   const { queue_type } = searchParams;
 
-  return <SummonerContentContainer summonerName={decodeURIComponent(params.summoner)} gameType={queue_type} />;
+  return (
+    <SummonerContentContainer summonerName={decodeURIComponent(summoner)} gameType={queue_type} language={locale} />
+  );
 }

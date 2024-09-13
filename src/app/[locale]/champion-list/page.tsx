@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   title: '챔피언 리스트',
 };
 
-export default async function ChmapionListPage({ params }: { params: { locale: LanguageParamsType } }) {
-  const championsData = await getChampionsData();
+export default async function ChmapionListPage({ params: { locale } }: { params: { locale: LanguageParamsType } }) {
+  const championsData = await getChampionsData(locale);
   const positionChampData = championsData.map(champ => ({
     ...champ,
     position: CHAMPION_POSITION_DATA[champ.id],
@@ -33,7 +33,7 @@ export default async function ChmapionListPage({ params }: { params: { locale: L
       </div>
       <div className="w-[108rem] pt-[3.2rem] m-auto flex gap-[1.6rem]">
         <aside>
-          <ContentBox titleText={params.locale === 'ko' ? '즐겨찾기' : 'Favorite'} css="w-[36rem]">
+          <ContentBox titleText={locale === 'ko' ? '즐겨찾기' : 'Favorite'} css="w-[36rem]">
             <FavoriteChampionBox championsData={positionChampData} version={latestVersion} />
           </ContentBox>
         </aside>

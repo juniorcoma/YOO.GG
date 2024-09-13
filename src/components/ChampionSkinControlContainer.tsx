@@ -62,7 +62,7 @@ export default function ChampionSkinControlContainer({
                 alt={`${skin.name} 이미지`}
                 className="rounded-[0.8rem] scale-105"
               />
-              <div className="skin-name">{skin.name === 'default' ? '기본' : skin.name}</div>
+              <div className="skin-name">{skin.name === 'default' ? name : skin.name}</div>
             </div>
           ))}
         </div>

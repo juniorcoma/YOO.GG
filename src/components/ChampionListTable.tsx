@@ -61,7 +61,7 @@ export default function ChampionListTable({
                     unoptimized
                   />
                 </div>
-                <strong>{champ.name}</strong>
+                <span className="text-[1.4rem]">{champ.name}</span>
               </Link>
             </td>
             <td align="center">

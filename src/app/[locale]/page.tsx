@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 
 import Image from 'next/image';
 
-export default function Home({ params }: { params: { locale: 'en' | 'ko' } }) {
+export default function Home({ params: { locale } }: { params: { locale: 'en' | 'ko' } }) {
   const t = useTranslations('homePage');
   return (
     <div className="layout-container">
@@ -32,7 +32,7 @@ export default function Home({ params }: { params: { locale: 'en' | 'ko' } }) {
               </section>
               <section>
                 <ContentBox titleText={t('rotationsContentBox')} css="flex-1">
-                  <RotationsList language={params.locale} />
+                  <RotationsList language={locale} />
                 </ContentBox>
               </section>
             </div>

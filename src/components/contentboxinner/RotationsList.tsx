@@ -10,7 +10,7 @@ interface RotationsListProps {
 }
 
 export default async function RotationsList({ language }: RotationsListProps) {
-  const championsData = await getChampionsData();
+  const championsData = await getChampionsData(language);
   const rotationsData = await getRotationsChampionsData();
   const [latestVersion] = await getVersionsData();
   const renderItemArr = rotationsData.freeChampionIds.map(ids => {

@@ -23,7 +23,7 @@ export default function FullSkinContainer({ champName, skinNum, skinName }: Full
         className="p-[0.8rem] text-[3.2rem] z-50 text-[#fff] absolute
       bottom-[-3.6rem] left-[1.6rem] font-bold dark:text-effect"
       >
-        {skinName === 'default' ? '기본' : skinName}
+        {skinName === 'default' ? champName : skinName}
       </em>
     </div>
   );

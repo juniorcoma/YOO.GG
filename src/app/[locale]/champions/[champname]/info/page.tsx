@@ -13,9 +13,12 @@ import { getChampionData, getCommunityChampionData, getVersionsData } from '@/se
 import { LanguageParamsType } from '@/types';
 import { useTranslations } from 'next-intl';
 
-export async function generateMetadata({ params }: { params: { champname: string } }) {
-  const { champname } = params;
-  const champDetailData = await getChampionData(champname);
+export async function generateMetadata({
+  params: { champname, locale },
+}: {
+  params: { champname: string; locale: LanguageParamsType };
+}) {
+  const champDetailData = await getChampionData(champname, locale);
   return {
     title: {
       absolute: `챔피언 정보-${champDetailData.name}`,
@@ -23,9 +26,12 @@ export async function generateMetadata({ params }: { params: { champname: string
   };
 }
 
-export default async function ChampInfoPage({ params }: { params: { champname: string; locale: LanguageParamsType } }) {
-  const { champname, locale } = params;
-  const champDetailData = await getChampionData(champname);
+export default async function ChampInfoPage({
+  params: { locale, champname },
+}: {
+  params: { champname: string; locale: LanguageParamsType };
+}) {
+  const champDetailData = await getChampionData(champname, locale);
   const { passive, spells } = await getCommunityChampionData(champDetailData.key);
   const [latestVersion] = await getVersionsData();
 
@@ -41,6 +47,7 @@ export default async function ChampInfoPage({ params }: { params: { champname: s
               title={champDetailData.title}
               position={CHAMPION_POSITION_DATA[champDetailData.id]}
               tags={champDetailData.tags}
+              language={locale}
             />
             <ChampionStatContainer info={champDetailData.info} />
           </div>

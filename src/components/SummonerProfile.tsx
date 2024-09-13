@@ -3,12 +3,14 @@ import ChampionMasteryContainer from './ChampionMasteryContainer';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import { getVersionsData } from '@/service/requestJsonData.api';
 import { AccountType, SummonerDataType } from '@/types/response';
+import { LanguageParamsType } from '@/types';
 
 interface SummonerProfileProps {
   summonerData: AccountType & SummonerDataType;
+  language: LanguageParamsType;
 }
 
-export default async function SummonerProfile({ summonerData }: SummonerProfileProps) {
+export default async function SummonerProfile({ summonerData, language }: SummonerProfileProps) {
   const [lastestVersion] = await getVersionsData();
   return (
     <div className="flex justify-between">
@@ -30,7 +32,7 @@ export default async function SummonerProfile({ summonerData }: SummonerProfileP
           <span className="text-[2.4rem] text-color-gray-500">#{summonerData.tagLine}</span>
         </div>
       </div>
-      <ChampionMasteryContainer puuid={summonerData.puuid} />
+      <ChampionMasteryContainer puuid={summonerData.puuid} language={language} />
     </div>
   );
 }
