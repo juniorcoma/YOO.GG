@@ -19,9 +19,7 @@ import {
 } from '@/types/staticData';
 
 export async function getVersionsData(): Promise<string[]> {
-  const versionResponse = await fetch(`${DDRAGON_DATA_URL.VERSION}`, {
-    next: { revalidate: false, tags: ['versions'] },
-  });
+  const versionResponse = await fetch(`${DDRAGON_DATA_URL.VERSION}`);
 
   const versionsData = await versionResponse.json();
   return versionsData;
