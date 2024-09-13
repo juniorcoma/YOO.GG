@@ -27,10 +27,7 @@ export default function Footer() {
               />
             </Link>
           </strong>
-          <div className="ml-[0.8rem]">
-            <strong className="pb-[1.6rem] title">Developer</strong>
-            <div>{t('developerName')}</div>
-          </div>
+
           <div className="ml-[0.8rem]">
             <strong className="pb-[1.6rem] title">Email</strong>
             <div>pq120wal39@gmail.com</div>
