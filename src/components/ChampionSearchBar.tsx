@@ -3,7 +3,7 @@
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { ExtendedChampionDataType } from '@/types';
@@ -19,6 +19,7 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
   const [matchList, setMatchList] = useState<ExtendedChampionDataType[]>([]);
   const router = useRouter();
   const t = useTranslations('ChampionSearchBar');
+  const { locale } = useParams();
   useEffect(() => {
     if (value !== '') {
       const regexp = new RegExp(`^${value}`);
@@ -36,7 +37,7 @@ export default function ChampionSearchBar({ championsData, version }: ChampionSe
     e.preventDefault();
     if (matchList.length === 1) {
       const championData = matchList[0];
-      router.push(`/champions/${championData.id}/info`);
+      router.push(`/${locale}/champions/${championData.id}/info`);
     }
   };
 
