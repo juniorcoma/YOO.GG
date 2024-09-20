@@ -15,6 +15,7 @@ import SummonerSpellTooltip from '../tooltipcontent/SummonerSpellTooltip';
 import ItemTooltip from '../tooltipcontent/ItemTooltip';
 import RuneTooltip from '../tooltipcontent/RuneTooltip';
 import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
 
 interface MainContentProps {
   participant: ParticipantDtoType;
@@ -34,14 +35,14 @@ export default function MainContent({ participant, version, gameVersion, data }:
     champion => participant.championId === Number(champion.key),
   ) as ChampionsDataType;
   const t = useTranslations('recordCard');
-
+  const { locale } = useParams();
   return (
     <>
       <div className="flex flex-col gap-[0.8rem] flex-1">
         <div className="flex gap-[1.2rem]">
           <div className="flex gap-[0.4rem] h-[5.8rem] items-center">
             <Link
-              href={`/champions/${championData.id}/info`}
+              href={`/${locale}/champions/${championData.id}/info`}
               className="h-[4.8rem] w-[4.8rem] rounded-[50%] overflow-hidden relative block"
             >
               <img
