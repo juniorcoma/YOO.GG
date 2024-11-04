@@ -529,9 +529,13 @@ html.dark {
   }
 
   .skeleton {
-    background-color: var(--color-gray-700);
+    background-color: #d0d4d9;
     position: relative;
     overflow: hidden;
+  }
+
+  html.dark .skeleton {
+    background-color: #2f3338;
   }
 
   .skeleton::before {
@@ -542,6 +546,10 @@ html.dark {
     width: 100%;
     height: 100%;
     animation: skeleton-gradient 1.5s infinite ease-in-out;
+  }
+
+  html.dark .skeleton::before {
+    animation: skeleton-gradient-dark 1.5s infinite ease-in-out;
   }
 
   .loader svg path,
@@ -600,12 +608,24 @@ html.dark {
 
 @keyframes skeleton-gradient {
   0% {
-    background-color: rgba(165, 165, 165, 0.1);
+    background-color: rgba(200, 200, 200, 0.1); /* 라이트 모드 */
   }
   50% {
-    background-color: rgba(165, 165, 165, 0.3);
+    background-color: rgba(220, 220, 220, 0.3); /* 라이트 모드 */
   }
   100% {
-    background-color: rgba(165, 165, 165, 0.1);
+    background-color: rgba(200, 200, 200, 0.1); /* 라이트 모드 */
+  }
+}
+
+@keyframes skeleton-gradient-dark {
+  0% {
+    background-color: rgba(105, 105, 105, 0.1); /* 다크 모드 */
+  }
+  50% {
+    background-color: rgba(130, 130, 130, 0.3); /* 다크 모드 */
+  }
+  100% {
+    background-color: rgba(105, 105, 105, 0.1); /* 다크 모드 */
   }
 }

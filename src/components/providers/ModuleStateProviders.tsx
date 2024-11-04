@@ -20,7 +20,6 @@ interface ModuleStateProvidersProps {
 
 export default function ModuleStateProviders({ children }: ModuleStateProvidersProps) {
   const [moduleState, setModuleState] = useState(false);
-  console.log(moduleState);
   const handleOpenModule = () => {
     setModuleState(true);
   };

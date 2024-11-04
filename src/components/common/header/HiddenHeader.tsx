@@ -7,7 +7,7 @@ interface HiddenHeaderProps {
 
 export default function HiddenHeader({ open, path }: HiddenHeaderProps) {
   return (
-    <div className={`hidden-header ${open ? 'view' : ''} ${path === '/' ? 'hidden' : ''}`}>
+    <div className={`hidden-header ${open ? 'view' : ''} ${path === '/ko' || path === '/en' ? 'hidden' : ''}`}>
       <div>
         <SummonerSearchForm inputId="hidden-header-input" />
       </div>
