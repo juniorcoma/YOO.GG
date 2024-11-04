@@ -306,6 +306,10 @@ export const LOL_WORLDS_INFO = [
     title: 'GODS',
     artist: 'NewJeans',
   },
+  {
+    title: 'Heavy Is The Crown',
+    artist: 'Linkin Park',
+  },
 ];
 
 export const LOL_CINEMATIC_INFO = ['Awaken', 'Warriors', 'The Ruination', 'The Call', 'The Everfrost', 'STILL HERE'];
