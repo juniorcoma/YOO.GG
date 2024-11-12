@@ -12,6 +12,9 @@ interface ChampionMasteryContainerProps {
 export default async function ChampionMasteryContainer({ puuid, language }: ChampionMasteryContainerProps) {
   const championMasteryData = await getChampionMasteryData(puuid);
   const championsData = await getChampionsData(language);
+  if ('error' in championMasteryData) {
+    return;
+  }
   return (
     <ul className="flex gap-[3.2rem]">
       {championMasteryData.map(item => {
