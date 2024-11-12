@@ -1,7 +1,7 @@
 import GameTypeControlBar from '@/components/GameTypeControlBar';
 import SummonerProfile from '@/components/SummonerProfile';
 
-import { getItemsData, getRunesData, getSummonerData, getSummonerSpellsData } from '@/service/requestJsonData.api';
+import { getSummonerData } from '@/service/requestJsonData.api';
 import { LanguageParamsType } from '@/types';
 import { notFound } from 'next/navigation';
 

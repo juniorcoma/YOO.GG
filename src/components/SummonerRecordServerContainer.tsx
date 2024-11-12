@@ -1,8 +1,8 @@
 import {
   getChampionsData,
-  getInitialRecordData,
   getItemsData,
   getRunesData,
+  getSummonerGameRecordData,
   getSummonerSpellsData,
   getVersionsData,
 } from '@/service/requestJsonData.api';
@@ -23,12 +23,15 @@ export default async function SummonerRecordServerContainer({
   const runesDataArr = await getRunesData(language);
   const itemsData = await getItemsData(language);
   const summonerSpellsData = await getSummonerSpellsData(language);
+  const summonerGameRecordData = await getSummonerGameRecordData(puuid, gameType);
+
   return (
     <SummonerRecordClientContainer
       data={{ champions: championsData, runesArr: runesDataArr, summonerSpells: summonerSpellsData, items: itemsData }}
       puuid={puuid}
       latestVersion={latestVersion}
       gameType={gameType}
+      initialData={summonerGameRecordData}
     />
   );
 }
