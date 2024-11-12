@@ -16,8 +16,8 @@ import ParticipantsListContent from './recordcard/ParticipantsListContent';
 import Loading from '@/assets/icons/loading.svg';
 import useGetSummonerRecordList from '@/hook/query/useGetSummonerRecordList';
 import { GameType } from '@/types';
-import SsummonerRecordListContainer from './skeleton/SummonerRecordListContainer.skeleton';
 import { useTranslations } from 'next-intl';
+
 interface SummonerRecordClientContainerProps {
   data: {
     champions: ChampionsDataType[];
@@ -28,6 +28,7 @@ interface SummonerRecordClientContainerProps {
   puuid: string;
   latestVersion: string;
   gameType: GameType;
+  initialData: MatchDtoType[];
 }
 
 export default function SummonerRecordClientContainer({
@@ -35,20 +36,16 @@ export default function SummonerRecordClientContainer({
   puuid,
   latestVersion,
   gameType,
+  initialData,
 }: SummonerRecordClientContainerProps) {
   const { champions, runesArr } = data;
   const {
     data: summonerRecordList,
     isFetching,
-    isPending,
     hasNextPage,
     fetchNextPage,
-  } = useGetSummonerRecordList(puuid, gameType);
+  } = useGetSummonerRecordList(puuid, gameType, initialData);
   const t = useTranslations('summonerRecordContainer');
-  if (isPending) {
-    return <SsummonerRecordListContainer />;
-  }
-
   const recordListData = summonerRecordList?.pages.flat();
   if (!recordListData?.length) {
     return (
@@ -62,6 +59,7 @@ export default function SummonerRecordClientContainer({
       </ContentBox>
     );
   }
+
   const recordSummaryData = totalRecordSummary(recordListData, puuid);
   return (
     <>

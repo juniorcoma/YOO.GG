@@ -11,11 +11,6 @@ interface Params {
   puuid: string;
 }
 
-//요청 딜레이 함수
-async function requestDelay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export async function GET(request: Request, context: { params: Params }) {
   const searchParams = new URL(request.url).searchParams;
   const { puuid } = context.params;
@@ -35,7 +30,7 @@ export async function GET(request: Request, context: { params: Params }) {
     } else {
       const queueId = GAME_TYPE_QUEUEID[type];
       const { data } = await riotRequest.get(
-        `${RIOT_REGIONAL_HOST.ASIA}${RIOT_REQUEST_ENDPOINT.MATCH_ID_LIST}${puuid}/ids?count=20&start=${start}&queue=${queueId}`,
+        `${RIOT_REGIONAL_HOST.ASIA}${RIOT_REQUEST_ENDPOINT.MATCH_ID_LIST}${puuid}/ids?count=15&start=${start}&queue=${queueId}`,
       );
       const matchData: MatchDtoType[] = [];
 
@@ -44,7 +39,6 @@ export async function GET(request: Request, context: { params: Params }) {
           `${RIOT_REGIONAL_HOST.ASIA}${RIOT_REQUEST_ENDPOINT.MATCH_DETAIL_INFO}${matchId}`,
         );
         matchData.push(data);
-        await requestDelay(100);
       }
       dataArr = matchData.slice();
     }
@@ -75,7 +69,6 @@ async function filterResponseData(puuid: string, start: string) {
     if (queueId.includes(data.info.queueId)) {
       matchData.push(data);
     }
-    await requestDelay(100);
   }
   return matchData;
 }
