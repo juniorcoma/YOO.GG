@@ -1,5 +1,4 @@
 import { ChampPositionType, LanguageParamsType } from '@/types';
-import Image from 'next/image';
 
 import { CHAMPION_TAG_INFO } from '@/constant';
 import { getVersionsData } from '@/service/requestJsonData.api';
