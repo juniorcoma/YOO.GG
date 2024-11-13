@@ -5,7 +5,7 @@ import '../globals.css';
 import Header from '@/components/common/header/Header';
 import Footer from '@/components/common/footer/Footer';
 
-import { getChampionsData, getItemsData, getSummonerSpellsData, getVersionsData } from '@/service/requestJsonData.api';
+import { getChampionsData, getVersionsData } from '@/service/requestJsonData.api';
 
 import { ModalsProvider } from '@/components/providers/ModalProvider';
 import BackgroundProvider from '@/components/providers/BackgroundProvider';
@@ -63,8 +63,6 @@ export default async function RootLayout({
 }>) {
   await getChampionsData(locale);
   await getVersionsData();
-  await getItemsData(locale);
-  await getSummonerSpellsData(locale);
 
   const messages = await getMessages();
   return (

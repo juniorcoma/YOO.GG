@@ -9,13 +9,11 @@ export default function CardLayer({
   isWin,
   gameVersion,
   perks,
-  runesDataArr,
 }: {
   children: React.ReactNode;
   isWin: boolean;
   gameVersion: string;
   perks: PerksDtoType;
-  runesDataArr: RunesDataType[];
 }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -35,7 +33,7 @@ export default function CardLayer({
           </span>
         </button>
       </div>
-      <RecordDetailContainer isOpen={isOpen} gameVersion={gameVersion} perks={perks} runesDataArr={runesDataArr} />
+      <RecordDetailContainer isOpen={isOpen} gameVersion={gameVersion} perks={perks} />
     </>
   );
 }

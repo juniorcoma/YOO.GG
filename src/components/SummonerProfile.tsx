@@ -4,6 +4,7 @@ import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import { getVersionsData } from '@/service/requestJsonData.api';
 import { AccountType, SummonerDataType } from '@/types/response';
 import { LanguageParamsType } from '@/types';
+import RefetchRecordDataButton from './recordcard/RefetchRecordDataButton';
 
 interface SummonerProfileProps {
   summonerData: AccountType & SummonerDataType;
@@ -29,7 +30,8 @@ export default async function SummonerProfile({ summonerData, language }: Summon
         </div>
         <div>
           <h1 className="text-[2.8rem] font-bold">{summonerData.gameName}</h1>
-          <span className="text-[2.4rem] text-color-gray-500">#{summonerData.tagLine}</span>
+          <div className="text-[2.4rem] text-color-gray-500">#{summonerData.tagLine}</div>
+          <RefetchRecordDataButton puuid={summonerData.puuid} />
         </div>
       </div>
       <ChampionMasteryContainer puuid={summonerData.puuid} language={language} />
