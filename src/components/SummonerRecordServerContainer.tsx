@@ -13,5 +13,7 @@ export default async function SummonerRecordServerContainer({
 }) {
   const [latestVersion] = await getVersionsData();
 
-  return <SummonerRecordClientContainer puuid={puuid} latestVersion={latestVersion} gameType={gameType} />;
+  return (
+    <SummonerRecordClientContainer puuid={puuid} latestVersion={latestVersion} gameType={gameType} locale={language} />
+  );
 }

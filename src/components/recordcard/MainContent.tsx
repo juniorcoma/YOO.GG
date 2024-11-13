@@ -231,7 +231,6 @@ function ItemImgRender({
             src={`${imgSrcVersionLoader(itemData.version, 'ITEM')}${item.image.full}`}
             width={22}
             height={22}
-            unoptimized
             alt={`${item.name}`}
             className="rounded-[0.4rem]"
             onMouseOver={e => {

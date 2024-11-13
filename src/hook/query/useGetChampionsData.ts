@@ -10,7 +10,7 @@ export default function useGetChampionsData(version: string, lang: LanguageParam
   const requestUrl = DDRAGON_DATA_URL.CHAMPIONS.replace('{VERSION}', version).replace('{LANGUAGE}', language);
 
   return useSuspenseQuery<{ version: string; data: ChampionsDataType[] }>({
-    queryKey: ['champions', version],
+    queryKey: ['champions', version, lang],
     queryFn: async () => {
       const { data } = await axios.get(requestUrl);
       return {

@@ -1,3 +1,5 @@
+import useGetChampionsData from '@/hook/query/useGetChampionsData';
+import { LanguageParamsType } from '@/types';
 import { ParticipantDtoType } from '@/types/response';
 import { ChampionsDataType } from '@/types/staticData';
 import devideParticipants from '@/utils/devideParticipants';
@@ -10,22 +12,23 @@ interface ParticipantsListContentProps {
   participants: ParticipantDtoType[];
   puuid: string;
   version: string;
-  championsData: ChampionsDataType[];
+  locale: LanguageParamsType;
 }
 
 export default function ParticipantsListContent({
   participants,
   puuid,
   version,
-  championsData,
+  locale,
 }: ParticipantsListContentProps) {
   const { team1, team2 } = devideParticipants(participants);
-  const { locale } = useParams();
+  const { data: championsData } = useGetChampionsData(version, locale);
+
   return (
     <div className="flex gap-[0.4rem] text-[1.2rem] text-color-gray-500">
       <div className="participant-list">
         {team1.map(team => {
-          const championData = championsData.find(
+          const championData = championsData.data.find(
             champion => team.championId === Number(champion.key),
           ) as ChampionsDataType;
           return (
@@ -52,7 +55,7 @@ export default function ParticipantsListContent({
       </div>
       <div className="participant-list">
         {team2.map(team => {
-          const championData = championsData.find(
+          const championData = championsData.data.find(
             champion => team.championId === Number(champion.key),
           ) as ChampionsDataType;
           return (

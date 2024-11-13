@@ -1,5 +1,7 @@
+import useGetChampionsData from '@/hook/query/useGetChampionsData';
+import { LanguageParamsType } from '@/types';
 import { ParticipantDtoType } from '@/types/response';
-import { ChampionsDataType } from '@/types/staticData';
+
 import descPlayChampionList from '@/utils/descPlayChampionList';
 import imgSrcVersionLoader from '@/utils/imgSrcVersionLoader';
 import { useTranslations } from 'next-intl';
@@ -7,12 +9,13 @@ import Image from 'next/image';
 
 interface PlayChampionListProps {
   filterData: ParticipantDtoType[];
-  championsData: ChampionsDataType[];
+  locale: LanguageParamsType;
   version: string;
 }
 
-export default function PlayChampionList({ filterData, championsData, version }: PlayChampionListProps) {
-  const descPlayChampList = descPlayChampionList(filterData, championsData);
+export default function PlayChampionList({ filterData, version, locale }: PlayChampionListProps) {
+  const { data: championsData } = useGetChampionsData(version, locale);
+  const descPlayChampList = descPlayChampionList(filterData, championsData.data);
   const t = useTranslations('recordSummaryBox');
   return (
     <ul className="flex flex-col gap-[0.8rem]">
