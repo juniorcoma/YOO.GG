@@ -15,38 +15,38 @@ import MainContent from './recordcard/MainContent';
 import ParticipantsListContent from './recordcard/ParticipantsListContent';
 import Loading from '@/assets/icons/loading.svg';
 import useGetSummonerRecordList from '@/hook/query/useGetSummonerRecordList';
-import { GameType } from '@/types';
+import { GameType, LanguageParamsType } from '@/types';
 import { useTranslations } from 'next-intl';
+import SummonerRecordSkeleton from './skeleton/SummonerRecord.skeleton';
+import useGetChampionsData from '@/hook/query/useGetChampionsData';
+import { useParams } from 'next/navigation';
 
 interface SummonerRecordClientContainerProps {
-  data: {
-    champions: ChampionsDataType[];
-    summonerSpells: SummonerSpellDataType[];
-    runesArr: RunesDataType[];
-    items: ItemsDataType;
-  };
   puuid: string;
   latestVersion: string;
   gameType: GameType;
-  initialData: MatchDtoType[];
 }
 
 export default function SummonerRecordClientContainer({
-  data,
   puuid,
   latestVersion,
   gameType,
-  initialData,
 }: SummonerRecordClientContainerProps) {
-  const { champions, runesArr } = data;
   const {
     data: summonerRecordList,
     isFetching,
     hasNextPage,
     fetchNextPage,
-  } = useGetSummonerRecordList(puuid, gameType, initialData);
+    isPending,
+  } = useGetSummonerRecordList(puuid, gameType);
   const t = useTranslations('summonerRecordContainer');
   const recordListData = summonerRecordList?.pages.flat();
+  const { locale }: { locale: LanguageParamsType } = useParams();
+  const { data: championsData } = useGetChampionsData(latestVersion, locale);
+  if (isPending) {
+    return <SummonerRecordSkeleton />;
+  }
+
   if (!recordListData?.length) {
     return (
       <ContentBox titleText={t('recordSummaryText')}>
@@ -83,8 +83,8 @@ export default function SummonerRecordClientContainer({
             </div>
             <PlayChampionList
               filterData={filterMatchData(recordListData, puuid)}
-              championsData={champions}
               version={latestVersion}
+              championsData={championsData.data}
             />
           </div>
         </div>
@@ -100,7 +100,6 @@ export default function SummonerRecordClientContainer({
                 isWin={summonerGameInfo.win}
                 gameVersion={record.info.gameVersion}
                 perks={summonerGameInfo.perks}
-                runesDataArr={runesArr}
               >
                 <GameSummary
                   isWin={summonerGameInfo.win}
@@ -111,13 +110,12 @@ export default function SummonerRecordClientContainer({
                   participant={summonerGameInfo}
                   version={latestVersion}
                   gameVersion={record.info.gameVersion}
-                  data={data}
                 />
                 <ParticipantsListContent
                   participants={record.info.participants}
                   puuid={puuid}
-                  championsData={champions}
                   version={latestVersion}
+                  championsData={championsData.data}
                 />
               </CardLayer>
             </div>
