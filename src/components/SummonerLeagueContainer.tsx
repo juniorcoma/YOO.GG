@@ -21,6 +21,9 @@ export default async function SummonerLeagueContainer({ summonerId }: SummonerLe
 
 function SummonerLeague({ summonerLeagueData }: { summonerLeagueData: LeagueDataType[] }) {
   const t = useTranslations('summonerLeagueContent');
+  if ('error' in summonerLeagueData) {
+    return;
+  }
   return (
     <>
       <ContentBox titleText={t('contentBox1Title')}>
