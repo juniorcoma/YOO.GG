@@ -15,17 +15,13 @@ async function getSummonerRecordList({ pageParam = 1, puuid, type }: { pageParam
   return data;
 }
 
-export default function useGetSummonerRecordList(puuid: string, type: GameType, initialData: MatchDtoType[]) {
+export default function useGetSummonerRecordList(puuid: string, type: GameType) {
   const gameType = type || 'TOTAL';
 
   return useInfiniteQuery<MatchDtoType[]>({
     queryKey: ['summonerRecordInfo', puuid, gameType],
     queryFn: async ({ pageParam }) => await getSummonerRecordList({ pageParam, puuid, type: gameType }),
-    initialData: {
-      pages: [initialData],
-      pageParams: [0],
-    },
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, pages) => {
       if (!lastPage || lastPage.length === 0) {
         return undefined;

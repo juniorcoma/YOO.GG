@@ -1,27 +1,26 @@
 import { DDRAGON_IMG_URL } from '@/constant/API';
 import useTooltip from '@/hook/useTooltip';
 import { PerksDtoType } from '@/types/response';
-import { RuneDataType, RunesDataType } from '@/types/staticData';
+import { RuneDataType } from '@/types/staticData';
 
 import Image from 'next/image';
 import RuneTooltip from '../tooltipcontent/RuneTooltip';
 import { useTranslations } from 'next-intl';
+import { LanguageParamsType } from '@/types';
+import { useParams } from 'next/navigation';
+import useGetRuneData from '@/hook/query/useGetRuneData';
 
 interface RecordDetailContainerProps {
   isOpen: boolean;
   gameVersion: string;
   perks: PerksDtoType;
-  runesDataArr: RunesDataType[];
 }
 
-export default function RecordDetailContainer({
-  isOpen,
-  gameVersion,
-  perks,
-  runesDataArr,
-}: RecordDetailContainerProps) {
+export default function RecordDetailContainer({ isOpen, gameVersion, perks }: RecordDetailContainerProps) {
   const version = `${gameVersion.split('.').slice(0, 2).join('.')}.1`;
-  const { [version]: runeData } = runesDataArr.find(data => data[version]) as { [key: string]: RuneDataType[] };
+  const { locale }: { locale: LanguageParamsType } = useParams();
+
+  const { data: runeData } = useGetRuneData(version, locale);
 
   const { primaryStyle, subStyle } = checkingRune(runeData, perks);
   const t = useTranslations('recordDetailBox');
