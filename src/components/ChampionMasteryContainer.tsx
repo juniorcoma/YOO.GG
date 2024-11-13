@@ -23,10 +23,11 @@ export default async function ChampionMasteryContainer({ puuid, language }: Cham
         return (
           <li key={item.championId} className="flex flex-col gap-[0.4rem]">
             <div className="relative w-[6.8rem] h-[12rem] overflow-hidden rounded-[0.4rem]">
-              <img
+              <Image
                 src={`${DDRAGON_IMG_URL.CHAMPION_LOADING}${matchChampData.id}_0.jpg`}
                 alt={`${matchChampData.name} 로딩 이미지`}
                 className="scale-110"
+                fill
               />
             </div>
             <div className="text-center">
