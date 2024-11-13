@@ -25,7 +25,6 @@ export default function SummonerTierBox({ summonerLeagueData }: SummonerTierBoxP
           width={70}
           height={70}
           alt={`${summonerLeagueData ? summonerLeagueData?.tier : `unranked`} 이미지`}
-          unoptimized
         />
       </div>
       {summonerLeagueData ? (

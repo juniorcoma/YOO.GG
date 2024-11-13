@@ -1,7 +1,7 @@
 'use client';
 
-import { MatchDtoType, ParticipantDtoType } from '@/types/response';
-import { ChampionsDataType, ItemsDataType, RunesDataType, SummonerSpellDataType } from '@/types/staticData';
+import { ParticipantDtoType } from '@/types/response';
+
 import ContentBox from './common/ContentBox';
 import Image from 'next/image';
 
@@ -18,19 +18,19 @@ import useGetSummonerRecordList from '@/hook/query/useGetSummonerRecordList';
 import { GameType, LanguageParamsType } from '@/types';
 import { useTranslations } from 'next-intl';
 import SummonerRecordSkeleton from './skeleton/SummonerRecord.skeleton';
-import useGetChampionsData from '@/hook/query/useGetChampionsData';
-import { useParams } from 'next/navigation';
 
 interface SummonerRecordClientContainerProps {
   puuid: string;
   latestVersion: string;
   gameType: GameType;
+  locale: LanguageParamsType;
 }
 
 export default function SummonerRecordClientContainer({
   puuid,
   latestVersion,
   gameType,
+  locale,
 }: SummonerRecordClientContainerProps) {
   const {
     data: summonerRecordList,
@@ -41,8 +41,7 @@ export default function SummonerRecordClientContainer({
   } = useGetSummonerRecordList(puuid, gameType);
   const t = useTranslations('summonerRecordContainer');
   const recordListData = summonerRecordList?.pages.flat();
-  const { locale }: { locale: LanguageParamsType } = useParams();
-  const { data: championsData } = useGetChampionsData(latestVersion, locale);
+
   if (isPending) {
     return <SummonerRecordSkeleton />;
   }
@@ -84,7 +83,7 @@ export default function SummonerRecordClientContainer({
             <PlayChampionList
               filterData={filterMatchData(recordListData, puuid)}
               version={latestVersion}
-              championsData={championsData.data}
+              locale={locale}
             />
           </div>
         </div>
@@ -115,7 +114,7 @@ export default function SummonerRecordClientContainer({
                   participants={record.info.participants}
                   puuid={puuid}
                   version={latestVersion}
-                  championsData={championsData.data}
+                  locale={locale}
                 />
               </CardLayer>
             </div>
