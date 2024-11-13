@@ -4,10 +4,11 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 interface SummonerTierBoxProps {
-  summonerLeagueData?: LeagueDataType;
+  summonerLeagueData?: LeagueDataType | false;
 }
 
 export default function SummonerTierBox({ summonerLeagueData }: SummonerTierBoxProps) {
+  console.log(summonerLeagueData);
   const odds =
     summonerLeagueData &&
     Math.floor((summonerLeagueData.wins / (summonerLeagueData.wins + summonerLeagueData.losses)) * 100);
@@ -23,7 +24,7 @@ export default function SummonerTierBox({ summonerLeagueData }: SummonerTierBoxP
           }
           width={70}
           height={70}
-          alt={`${summonerLeagueData?.tier} 이미지`}
+          alt={`${summonerLeagueData ? summonerLeagueData?.tier : `unranked`} 이미지`}
         />
       </div>
       {summonerLeagueData ? (
