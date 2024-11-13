@@ -11,6 +11,7 @@ import {
   AccountType,
   ChampionMasteryDataType,
   LeagueDataType,
+  MatchDtoType,
   RotationsDataType,
   SummonerDataType,
 } from '@/types/response';
@@ -22,9 +23,10 @@ import {
   RunesDataType,
   SummonerSpellDataType,
 } from '@/types/staticData';
+import { revalidateTag } from 'next/cache';
 
 export async function getVersionsData(): Promise<string[]> {
-  const versionResponse = await fetch(`${DDRAGON_DATA_URL.VERSION}`);
+  const versionResponse = await fetch(`${DDRAGON_DATA_URL.VERSION}`, { next: { tags: ['version'] } });
 
   const versionsData = await versionResponse.json();
   return versionsData;
@@ -35,9 +37,7 @@ export async function getChampionsData(lang: LanguageParamsType): Promise<Champi
   const language = REQUEST_LANGUAGE_MATCHER[lang];
   const requestUrl = DDRAGON_DATA_URL.CHAMPIONS.replace('{VERSION}', latestVersion).replace('{LANGUAGE}', language);
 
-  const championsResponse = await fetch(requestUrl, {
-    next: { revalidate: false, tags: ['champions'] },
-  });
+  const championsResponse = await fetch(requestUrl);
   const championsData = await championsResponse.json();
 
   return Object.values(championsData.data);
@@ -51,9 +51,7 @@ export async function getSummonerSpellsData(lang: LanguageParamsType): Promise<S
     language,
   );
 
-  const summonerSpellsResponse = await fetch(requestUrl, {
-    next: { revalidate: false, tags: ['summonerSpells'] },
-  });
+  const summonerSpellsResponse = await fetch(requestUrl);
 
   const { data } = await summonerSpellsResponse.json();
 
@@ -67,9 +65,7 @@ export async function getChampionData(champName: string, lang: LanguageParamsTyp
     .replace('{LANGUAGE}', language)
     .replace('{CHAMPNAME}', champName);
 
-  const championResponse = await fetch(requestUrl, {
-    cache: 'no-store',
-  });
+  const championResponse = await fetch(requestUrl);
 
   const { data } = await championResponse.json();
 
@@ -81,9 +77,7 @@ export async function getItemsData(lang: LanguageParamsType): Promise<ItemsDataT
   const language = REQUEST_LANGUAGE_MATCHER[lang];
   const requestUrl = DDRAGON_DATA_URL.ITEMS.replace('{VERSION}', latestVersion).replace('{LANGUAGE}', language);
 
-  const itemsResponse = await fetch(requestUrl, {
-    next: { revalidate: false, tags: ['items'] },
-  });
+  const itemsResponse = await fetch(requestUrl);
 
   const { data } = await itemsResponse.json();
 
@@ -93,9 +87,7 @@ export async function getItemsData(lang: LanguageParamsType): Promise<ItemsDataT
 export async function getCommunityChampionData(id: string): Promise<CommunityChampionDataType> {
   const requestUrl = COMMUNITY_DRAGON_DATA_URL.CHAMPION.replace('{CHAMPID}', id);
 
-  const championResponse = await fetch(requestUrl, {
-    cache: 'no-store',
-  });
+  const championResponse = await fetch(requestUrl);
 
   const championData = await championResponse.json();
 
@@ -103,7 +95,8 @@ export async function getCommunityChampionData(id: string): Promise<CommunityCha
 }
 
 export async function getRotationsChampionsData(): Promise<RotationsDataType> {
-  const rotationsResponse = await fetch(`${SERVER_REQUEST_URL.ROTATIONS}`);
+  const rotationsResponse = await fetch(`${SERVER_REQUEST_URL.ROTATIONS}`, { next: { tags: ['rotationChampData'] } });
+  revalidateTag('rotationChampData');
   const rotationsData = await rotationsResponse.json();
 
   return rotationsData;
@@ -112,9 +105,7 @@ export async function getRotationsChampionsData(): Promise<RotationsDataType> {
 export async function getSummonerData(name: string, tag: string): Promise<AccountType & SummonerDataType> {
   const requestUrl = `${SERVER_REQUEST_URL.SUMMONER}${name}/${tag}`;
 
-  const summonerResponse = await fetch(requestUrl, {
-    cache: 'no-store',
-  });
+  const summonerResponse = await fetch(requestUrl);
 
   const summonerData = await summonerResponse.json();
 
@@ -124,9 +115,7 @@ export async function getSummonerData(name: string, tag: string): Promise<Accoun
 export async function getChampionMasteryData(puuid: string): Promise<ChampionMasteryDataType[]> {
   const requestUrl = `${SERVER_REQUEST_URL.CHAMPION_MASTERY}${puuid}`;
 
-  const championMasteryResponse = await fetch(requestUrl, {
-    cache: 'no-store',
-  });
+  const championMasteryResponse = await fetch(requestUrl);
 
   const championMasteryData = await championMasteryResponse.json();
 
@@ -136,9 +125,7 @@ export async function getChampionMasteryData(puuid: string): Promise<ChampionMas
 export async function getSummonerLeagueData(summonerId: string): Promise<LeagueDataType[]> {
   const requestUrl = `${SERVER_REQUEST_URL.SUMMONER_LEAGUE}${summonerId}`;
 
-  const summonerLeagueResponse = await fetch(requestUrl, {
-    cache: 'no-cache',
-  });
+  const summonerLeagueResponse = await fetch(requestUrl);
 
   const summonerLeagueData = await summonerLeagueResponse.json();
 
@@ -160,12 +147,12 @@ export async function getRunesData(lang: LanguageParamsType): Promise<RunesDataT
   return runeDataArr;
 }
 
-export async function getInitialRecordData(puuid: string, type: GameType | undefined) {
-  const gameType = type || 'TOTAL';
-  const requestUrl = `${SERVER_REQUEST_URL.SUMMONER_RECORD_DATA}${puuid}?type=${gameType}`;
-  const initialRecordResponse = await fetch(requestUrl);
+export async function getSummonerGameRecordData(puuid: string, gameType?: GameType): Promise<MatchDtoType[]> {
+  const dataResponse = await fetch(
+    `${SERVER_REQUEST_URL.SUMMONER_RECORD_DATA}${puuid}${gameType ? `?type=${gameType}` : ''} `,
+    { next: { tags: ['record', puuid] } },
+  );
 
-  const initialRecordData = await initialRecordResponse.json();
-
-  return initialRecordData;
+  const recordData = await dataResponse.json();
+  return recordData;
 }

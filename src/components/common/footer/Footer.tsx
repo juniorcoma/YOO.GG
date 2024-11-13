@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation';
 
 export default function Footer() {
   const pathName = usePathname();
-  const t = useTranslations('footer');
   return (
     <footer id="footer" className={`${pathName === '/' ? 'footer-home' : 'footer-other'}`}>
       <div className="footer-inner">

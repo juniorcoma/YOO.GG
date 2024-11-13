@@ -17,6 +17,7 @@ export default async function SummonerContentContainer({
 }: SummonerContentContainerProps) {
   const [name, tag] = summonerName.split('-');
   const { id, puuid } = await getSummonerData(name, tag);
+
   return (
     <>
       <SummonerLeagueContainer summonerId={id} />
