@@ -1,3 +1,5 @@
+'use client';
+
 import { DDRAGON_IMG_URL } from '@/constant/API';
 import useTooltip from '@/hook/useTooltip';
 import { ParticipantDtoType, PerkStyleDtoType } from '@/types/response';
@@ -49,10 +51,11 @@ export default function MainContent({ participant, version, gameVersion }: MainC
               <SummonerSpellImgRender
                 summonerSpells={[participant.summoner1Id, participant.summoner2Id]}
                 gameVersion={gameVersion}
+                size={22}
               />
 
               <div className="flex flex-col gap-[0.2rem]">
-                <SummonerRunesImgRender summonerRunes={participant.perks.styles} gameVersion={gameVersion} />
+                <SummonerRunesImgRender size={22} summonerRunes={participant.perks.styles} gameVersion={gameVersion} />
               </div>
             </div>
           </div>
@@ -115,12 +118,14 @@ export default function MainContent({ participant, version, gameVersion }: MainC
   );
 }
 
-function SummonerSpellImgRender({
+export function SummonerSpellImgRender({
   summonerSpells,
   gameVersion,
+  size,
 }: {
   summonerSpells: [number, number];
   gameVersion: string;
+  size: number;
 }) {
   const { locale }: { locale: LanguageParamsType } = useParams();
   const { data: summonerSpellData } = useGetSummonerSpellData(gameVersion, locale);
@@ -134,13 +139,14 @@ function SummonerSpellImgRender({
   return (
     <div className="flex flex-col gap-[0.2rem]">
       {renderImgList.map(spell => (
-        <img
+        <Image
           key={spell.key}
           src={`${imgSrcVersionLoader(summonerSpellData.version, 'SPELL')}${spell.image.full}`}
-          width={22}
-          height={22}
+          width={size}
+          height={size}
           alt={`${spell.name} 스펠 이미지`}
           className="rounded-[0.4rem]"
+          unoptimized
           onMouseOver={e => {
             openTooltip({ component: SummonerSpellTooltip, props: { data: spell }, target: e.target as HTMLElement });
           }}
@@ -151,37 +157,56 @@ function SummonerSpellImgRender({
   );
 }
 
-function SummonerRunesImgRender({
+export function SummonerRunesImgRender({
   summonerRunes,
   gameVersion,
+  size,
+  inGameSummonerRune,
 }: {
-  summonerRunes: PerkStyleDtoType[];
+  summonerRunes?: PerkStyleDtoType[];
+  inGameSummonerRune?: [[number, number], [number]];
   gameVersion: string;
+  size: number;
 }) {
   const { locale }: { locale: LanguageParamsType } = useParams();
   const { data: runeData } = useGetRuneData(gameVersion, locale);
   const { openTooltip, closeTooltip } = useTooltip();
+  let runeImgUrlList;
 
-  const runeImgUrlList = summonerRunes.map((rune, index) => {
-    const matchRuneStyle = runeData.find((data: any) => data.id === rune.style);
-    if (index === 0) {
-      const mainRune = matchRuneStyle?.slots[0].runes?.find((data: any) => data.id === rune.selections[0].perk);
-      return mainRune;
-    }
-    return matchRuneStyle;
-  });
+  if (summonerRunes) {
+    runeImgUrlList = summonerRunes.map((rune, index) => {
+      const matchRuneStyle = runeData.find((data: any) => data.id === rune.style);
+      if (index === 0) {
+        const mainRune = matchRuneStyle?.slots[0].runes?.find((data: any) => data.id === rune.selections[0].perk);
+        return mainRune;
+      }
+      return matchRuneStyle;
+    });
+  }
+
+  if (inGameSummonerRune) {
+    runeImgUrlList = inGameSummonerRune.map((rune: any, index) => {
+      const matchRuneStyle = runeData.find((data: any) => data.id === rune[0]);
+      if (index === 0) {
+        const mainRune = matchRuneStyle?.slots[0].runes?.find((data: any) => data.id === rune[1]);
+        return mainRune;
+      }
+      return matchRuneStyle;
+    });
+  }
 
   return (
     <>
-      {runeImgUrlList.map((rune, index) => {
+      {runeImgUrlList?.map((rune, index) => {
         if (!rune) return <span key={index} className="w-[2.2rem] h-[2.2rem]"></span>;
 
         return (
-          <img
+          <Image
+            unoptimized
             key={rune.id}
             src={`${DDRAGON_IMG_URL.RUNE}${rune?.icon}`}
-            width={22}
-            height={22}
+            width={size}
+            height={size}
             alt={`룬 이미지`}
             className={`${!index ? 'rounded-[50%] bg-color-gray-600' : ''}`}
             onMouseOver={e => {

@@ -11,7 +11,7 @@ interface SummonerLeagueContainerProps {
 
 export default async function SummonerLeagueContainer({ summonerId }: SummonerLeagueContainerProps) {
   const summonerLeagueData = await getSummonerLeagueData(summonerId);
-  console.log(summonerLeagueData);
+
   return (
     <section className="flex flex-col gap-[1.6rem] w-[38.1rem]">
       <SummonerLeague summonerLeagueData={summonerLeagueData} />

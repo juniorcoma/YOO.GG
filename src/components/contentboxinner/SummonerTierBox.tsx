@@ -8,7 +8,6 @@ interface SummonerTierBoxProps {
 }
 
 export default function SummonerTierBox({ summonerLeagueData }: SummonerTierBoxProps) {
-  console.log(summonerLeagueData);
   const odds =
     summonerLeagueData &&
     Math.floor((summonerLeagueData.wins / (summonerLeagueData.wins + summonerLeagueData.losses)) * 100);
