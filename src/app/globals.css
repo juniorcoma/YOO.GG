@@ -394,6 +394,22 @@ html.dark {
   .language-btn:hover {
     background-color: var(--color-gray-200);
   }
+
+  .ingame-table {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  .ingame-table th {
+    padding: 0.8rem 0;
+    font-weight: 400;
+    border-bottom: 2px solid var(--color-gray-200);
+    font-size: 1.2rem;
+  }
+
+  .ingame-table .participant {
+    border-bottom: 1px solid var(--color-gray-200);
+  }
 }
 
 @layer utilities {
@@ -479,7 +495,7 @@ html.dark {
     padding: 0.8rem;
     padding-left: 1.6rem;
   }
-  tr td:first-of-type {
+  .table tr td:first-of-type {
     padding-left: 1.6rem;
   }
   .partype {
@@ -596,6 +612,16 @@ html.dark {
     background: linear-gradient(90deg, #5177f0, #a46dc5 33.5%, #fb5a90 67.5%, #ff3478);
     background-clip: text;
   }
+
+  .ingame {
+    animation: opacity 3s infinite forwards;
+  }
+
+  .divider {
+    width: 1px;
+    height: 16px;
+    background-color: var(--color-gray-400);
+  }
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -627,5 +653,17 @@ html.dark {
   }
   100% {
     background-color: rgba(105, 105, 105, 0.1); /* 다크 모드 */
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
   }
 }
