@@ -32,9 +32,9 @@ export async function getVersionsData(): Promise<string[]> {
   return versionsData;
 }
 
-export async function getChampionsData(lang: LanguageParamsType): Promise<ChampionsDataType[]> {
+export async function getChampionsData(lang?: LanguageParamsType): Promise<ChampionsDataType[]> {
   const [latestVersion] = await getVersionsData();
-  const language = REQUEST_LANGUAGE_MATCHER[lang];
+  const language = lang ? REQUEST_LANGUAGE_MATCHER[lang] : REQUEST_LANGUAGE_MATCHER['ko'];
   const requestUrl = DDRAGON_DATA_URL.CHAMPIONS.replace('{VERSION}', latestVersion).replace('{LANGUAGE}', language);
 
   const championsResponse = await fetch(requestUrl);
@@ -78,7 +78,7 @@ export async function getRotationsChampionsData(): Promise<RotationsDataType> {
 export async function getSummonerData(name: string, tag: string): Promise<AccountType & SummonerDataType> {
   const requestUrl = `${SERVER_REQUEST_URL.SUMMONER}${name}/${tag}`;
 
-  const summonerResponse = await fetch(requestUrl);
+  const summonerResponse = await fetch(requestUrl, { cache: 'no-store' });
 
   const summonerData = await summonerResponse.json();
 
@@ -103,4 +103,14 @@ export async function getSummonerLeagueData(summonerId: string): Promise<LeagueD
   const summonerLeagueData = await summonerLeagueResponse.json();
 
   return summonerLeagueData;
+}
+
+export async function getInGameData(summonerName: string, tag: string): Promise<{ ingame: boolean; data?: any }> {
+  const { puuid } = await getSummonerData(summonerName, tag);
+
+  const responseData = await fetch(`${SERVER_REQUEST_URL.SPECTATOR}${puuid}`);
+
+  const inGameData = await responseData.json();
+
+  return inGameData;
 }

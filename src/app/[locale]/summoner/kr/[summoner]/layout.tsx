@@ -21,7 +21,7 @@ export default async function SummonerLayout({
           <SummonerProfile summonerData={summonerData} language={locale} />
         </div>
       </div>
-      <GameTypeControlBar />
+      <GameTypeControlBar puuid={summonerData.puuid} />
       <main className="w-[108rem] m-auto pt-[3.2rem] flex gap-[1.6rem]">{children}</main>
     </>
   );

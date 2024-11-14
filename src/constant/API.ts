@@ -71,6 +71,7 @@ export const COMMUNITY_DRAGON_DATA_URL = {
 
 export const COMMUNITY_DRAGON_IMG_URL = {
   TIER: `${REQUEST_DATA_HOST.COMMUNITY_DRAGON}latest/plugins/rcp-fe-lol-shared-components/global/default/`,
+  MINI_TIER: `${REQUEST_DATA_HOST.COMMUNITY_DRAGON}latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/`,
 };
 
 export const SERVER_REQUEST_URL = {
@@ -79,6 +80,7 @@ export const SERVER_REQUEST_URL = {
   CHAMPION_MASTERY: `${REQUEST_DATA_HOST.SERVER}champion/mastery/`,
   SUMMONER_LEAGUE: `${REQUEST_DATA_HOST.SERVER}summoner/league/`,
   SUMMONER_RECORD_DATA: `${REQUEST_DATA_HOST.SERVER}match/`,
+  SPECTATOR: `${REQUEST_DATA_HOST.SERVER}spectator/`,
 };
 
 export const LOL_WORLDS_MUSIC = {
