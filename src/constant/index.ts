@@ -257,7 +257,7 @@ export const QUEUEID_KR_TYPE: { [key: number]: { ko: string; en: string } } = {
     en: 'Normal Game',
   },
   420: {
-    ko: '솔랭',
+    ko: '개인/2인 랭크 게임',
     en: 'Solo/Duo Ranked',
   },
   440: {
