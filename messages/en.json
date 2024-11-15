@@ -130,5 +130,14 @@
     "emptyCool": "Unknown",
     "unit": "seconds",
     "nodata": "None"
+  },
+
+  "inGameTable": {
+    "header_ban": "Ban",
+    "header_tier": "Tier",
+    "header_rank": "Rank Rate",
+    "header_team_blue": "Blue",
+    "header_team_red": "Red",
+    "not_game": "The game is not currently active."
   }
 }
