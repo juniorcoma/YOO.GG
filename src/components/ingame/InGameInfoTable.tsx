@@ -1,30 +1,32 @@
 import Image from 'next/image';
 import { SummonerRunesImgRender, SummonerSpellImgRender } from '../recordcard/MainContent';
-import { getVersionsData } from '@/service/requestJsonData.api';
+
 import { Suspense } from 'react';
 import ChampionsImgRender from './ChampionImgRender';
 
 import { LanguageParamsType } from '@/types';
 import ParticipantInfo from './ParticipantInfo';
 import ParticipantLeagueInfo from './ParticipantLeagueInfo';
+import { useTranslations } from 'next-intl';
 
 interface InGameInfoTableProps {
   participantList: any[];
   locale: LanguageParamsType;
   queueId: number;
   bannedChampionList: { championId: number; teamId: number; pickTurn: number }[];
+  gameVersion: string;
 }
 
-export default async function InGameInfoTable({
+export default function InGameInfoTable({
   participantList,
   locale,
   queueId,
   bannedChampionList,
+  gameVersion,
 }: InGameInfoTableProps) {
-  const [gameVersion] = await getVersionsData();
   const teamId = participantList[0].teamId;
   const filterBannedChampionList = bannedChampionList && bannedChampionList.filter(item => item.teamId === teamId);
-
+  const t = useTranslations('inGameTable');
   return (
     <table className="ingame-table">
       <caption className="text-[0rem]">InGame</caption>
@@ -43,8 +45,8 @@ export default async function InGameInfoTable({
             className={`${teamId === 100 && 'text-color-primary-500'} ${teamId === 200 && 'text-color-red-500'}`}
             colSpan={3}
           >
-            {teamId === 100 && '블루팀'}
-            {teamId === 200 && '레드팀'}
+            {teamId === 100 && t('header_team_blue')}
+            {teamId === 200 && t('header_team_red')}
           </th>
           <th
             align="left"
@@ -52,7 +54,7 @@ export default async function InGameInfoTable({
           >
             {filterBannedChampionList && (
               <div className="flex items-center gap-[0.8rem]">
-                <span>밴</span>
+                <span>{t('header_ban')}</span>
                 <div className="inline-flex gap-[0.4rem]">
                   {filterBannedChampionList.map((champ, index) => (
                     <Suspense fallback={null} key={index}>
@@ -69,8 +71,8 @@ export default async function InGameInfoTable({
             )}
           </th>
           <th></th>
-          <th>티어</th>
-          <th>랭크승률</th>
+          <th>{t('header_tier')}</th>
+          <th>{t('header_rank')}</th>
         </tr>
       </thead>
       <tbody>

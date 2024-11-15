@@ -20,7 +20,7 @@ export default function ChampionsImgRender({ size, version, championId, locale }
   const matchChapion = championsData.data.find(champ => Number(champ.key) === Number(championId)) as ChampionsDataType;
 
   if (!matchChapion) {
-    return <div style={{ width: `${size}px`, aspectRatio: `1/1` }} className="bg-color-gray-400 rounded-[0.8rem]" />;
+    return <div style={{ width: `${size}px`, aspectRatio: `1/1` }} className="bg-color-gray-300 rounded-[0.8rem]" />;
   }
 
   return (
