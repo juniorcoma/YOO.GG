@@ -135,5 +135,14 @@
     "emptyCool": "알 수 없음",
     "unit": "초",
     "nodata": "없음"
+  },
+
+  "inGameTable": {
+    "header_ban": "밴",
+    "header_tier": "티어",
+    "header_rank": "랭크승률",
+    "header_team_blue": "블루팀",
+    "header_team_red": "레드팀",
+    "not_game": "현재 게임 중이 아닙니다."
   }
 }

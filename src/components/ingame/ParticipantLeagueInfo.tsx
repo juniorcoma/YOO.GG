@@ -2,6 +2,8 @@ import { getSummonerLeagueData } from '@/service/requestJsonData.api';
 import { LeagueDataType } from '@/types/response';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 import RankMiniIconRender from './RankMiniIconRender';
+import calculateRankRate from '@/utils/calculateRankRate';
+import rankRateColor from '@/utils/rankRateColor';
 
 interface ParticipantLeagueInfoProps {
   summonerId: string;
@@ -28,6 +30,11 @@ export default async function ParticipantLeagueInfo({ summonerId, queueId }: Par
     const leagueType = QUEUET_TYPE[queueId] || 'RANKED_SOLO_5x5';
     return league.queueType === leagueType;
   }) as LeagueDataType;
+
+  const winRate = calculateRankRate(matchLeagueData.wins, matchLeagueData.losses);
+
+  const rateColor = rankRateColor(winRate);
+
   return (
     <>
       <td>
@@ -39,11 +46,9 @@ export default async function ParticipantLeagueInfo({ summonerId, queueId }: Par
       </td>
       <td align="center">
         <div>
-          <span>
-            {Math.floor((matchLeagueData?.wins / (matchLeagueData?.wins + matchLeagueData?.losses)) * 100)}%승률
-          </span>
+          <span style={{ color: rateColor }}>{winRate}%</span>
           <span className="text-color-gray-600 ml-[0.4rem]">
-            ({matchLeagueData?.wins + matchLeagueData?.losses}게임)
+            ({matchLeagueData?.wins + matchLeagueData?.losses}Game)
           </span>
         </div>
         <div className="w-[15rem] h-[1rem] bg-color-gray-300 relative">
@@ -52,8 +57,9 @@ export default async function ParticipantLeagueInfo({ summonerId, queueId }: Par
               width: `${Math.floor(
                 15 * (matchLeagueData?.wins / (matchLeagueData?.wins + matchLeagueData?.losses)),
               )}rem`,
+              background: rateColor,
             }}
-            className="absolute h-full left-0 top-0 bg-color-primary-400"
+            className={`absolute h-full left-0 top-0`}
           />
         </div>
       </td>

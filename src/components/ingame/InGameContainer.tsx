@@ -2,6 +2,7 @@ import Image from 'next/image';
 import InGameHeader from './InGameHeader';
 import { LanguageParamsType } from '@/types';
 import InGameInfoTable from './InGameInfoTable';
+import { useTranslations } from 'next-intl';
 
 interface InGameContainerProps {
   inGameData: {
@@ -9,16 +10,18 @@ interface InGameContainerProps {
     data?: any;
   };
   locale: LanguageParamsType;
+  gameVersion: string;
 }
 
-export default function InGameContainer({ inGameData, locale }: InGameContainerProps) {
+export default function InGameContainer({ inGameData, locale, gameVersion }: InGameContainerProps) {
+  const t = useTranslations('inGameTable');
   if (!inGameData.ingame) {
     return (
       <div className="flex flex-col gap-[1.6rem] text-[2.4rem] items-center">
         <div className="w-[12.8rem] aspect-square relative">
           <Image src={'/images/em_bee_sad.png'} fill alt="벌꿀 이미지" />
         </div>
-        <p></p>
+        <p>{t('not_game')}</p>
       </div>
     );
   }
@@ -34,6 +37,7 @@ export default function InGameContainer({ inGameData, locale }: InGameContainerP
           locale={locale}
           queueId={inGameData.data.gameQueueConfigId}
           bannedChampionList={inGameData.data.bannedChampions}
+          gameVersion={gameVersion}
         />
       ))}
     </div>
