@@ -262,6 +262,7 @@ function ItemImgRender({
               openTooltip({ component: ItemTooltip, props: { data: item }, target: e.target as HTMLElement });
             }}
             onMouseLeave={closeTooltip}
+            unoptimized
           />
         );
       })}
